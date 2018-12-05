@@ -7,6 +7,7 @@ Avro schemas are available for interfacing with the Kafka topics in the PSI proj
 
 
 ## JSON Schema
-JSON Schema documents are available to document interfaces with both PSI and CEDAR Search projects, as well as a single geometry GeoJSON. In addition to details provided both here and in the Avro schemas, field value verification is possible using JSON Schemas (see the )
+JSON Schema documents are available to document interfaces with both PSI and CEDAR Search projects, as well as a single geometry GeoJSON. In addition to details provided both here and in the Avro schemas, field value verification is possible using JSON Schemas (see the GeoJSONAvroSpec for an example).
 
 ## JSON-LD
+Coming soon.
