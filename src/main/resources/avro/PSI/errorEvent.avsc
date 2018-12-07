@@ -1,7 +1,7 @@
 {
   "type": "record",
   "name": "ErrorEvent",
-  "namespace": "org.cedar.psi.common.avro",
+  "namespace": "org.cedar.schemas.avro.psi",
   "doc": "Contains information about errors encountered while performing an operation",
   "fields": [
     {

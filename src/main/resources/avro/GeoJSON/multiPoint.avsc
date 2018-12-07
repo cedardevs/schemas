@@ -2,7 +2,7 @@
   "type": "record",
   "name": "MultiPoint",
   "doc": "An array of UNCONNECTED positions, each described with two values: longitude then latitude. A third (optional) value for elevation is allowed per position.",
-  "namespace": "org.cedar.psi.common.avro",
+  "namespace": "org.cedar.schemas.avro.geojson",
   "fields": [
     {
       "name": "type",

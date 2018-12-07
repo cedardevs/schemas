@@ -6,6 +6,7 @@ plugins {
 repositories {
     mavenCentral()
     maven { url "https://jitpack.io" }
+    maven { url 'https://packages.confluent.io/maven/' }
 }
 
 dependencies {

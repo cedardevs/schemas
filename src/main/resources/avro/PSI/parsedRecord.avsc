@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "namespace": "org.cedar.psi.common.avro",
+  "namespace": "org.cedar.schemas.avro.psi",
   "name": "ParsedRecord",
   "doc": "",
   "fields": [

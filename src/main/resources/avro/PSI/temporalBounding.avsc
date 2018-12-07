@@ -1,7 +1,7 @@
   {
     "type": "record",
     "name": "TemporalBounding",
-    "namespace": "org.cedar.psi.common.avro",
+    "namespace": "org.cedar.schemas.avro.psi",
     "fields": [
       {
         "name": "beginDate",

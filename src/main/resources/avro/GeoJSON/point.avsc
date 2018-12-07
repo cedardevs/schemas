@@ -2,7 +2,7 @@
   "type": "record",
   "name": "Point",
   "doc": "A single position described with two values: longitude then latitude. A third (optional) value for elevation is allowed.",
-  "namespace": "org.cedar.psi.common.avro",
+  "namespace": "org.cedar.schemas.avro.geojson",
   "fields": [
     {
       "name": "type",

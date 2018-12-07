@@ -1,8 +1,8 @@
 package org.cedar.schemas.util
 
-import org.cedar.psi.common.avro.Input
-import org.cedar.psi.common.avro.Method
-import org.cedar.psi.common.avro.ParsedRecord
+import org.cedar.schemas.avro.psi.Input
+import org.cedar.schemas.avro.psi.Method
+import org.cedar.schemas.avro.psi.ParsedRecord
 import spock.lang.Specification
 
 class AvroUtilsSpec extends Specification {

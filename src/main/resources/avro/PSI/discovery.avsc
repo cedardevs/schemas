@@ -1,7 +1,7 @@
 [
   {
     "name": "Link",
-    "namespace": "org.cedar.psi.common.avro",
+    "namespace": "org.cedar.schemas.avro.psi",
     "type": "record",
     "fields": [
       {
@@ -48,7 +48,7 @@
   },
   {
     "name": "Reference",
-    "namespace": "org.cedar.psi.common.avro",
+    "namespace": "org.cedar.schemas.avro.psi",
     "type": "record",
     "fields": [
       {
@@ -79,7 +79,7 @@
   },
   {
     "name": "ResponsibleParty",
-    "namespace": "org.cedar.psi.common.avro",
+    "namespace": "org.cedar.schemas.avro.psi",
     "type": "record",
     "fields": [
       {
@@ -134,7 +134,7 @@
   },
   {
     "type": "record",
-    "namespace": "org.cedar.psi.common.avro",
+    "namespace": "org.cedar.schemas.avro.psi",
     "name": "Discovery",
     "doc": "The shape of the discovery object generated within Inventory Manager for a successfully parsed metadata document. This is the internal metadata format used within the system and ultimately sent downstream to OneStop.",
     "fields": [
@@ -275,12 +275,12 @@
         "name": "spatialBounding",
         "type": [
           "null",
-          "Point",
-          "MultiPoint",
-          "LineString",
-          "MultiLineString",
-          "Polygon",
-          "MultiPolygon"
+          "org.cedar.schemas.avro.geojson.Point",
+          "org.cedar.schemas.avro.geojson.MultiPoint",
+          "org.cedar.schemas.avro.geojson.LineString",
+          "org.cedar.schemas.avro.geojson.MultiLineString",
+          "org.cedar.schemas.avro.geojson.Polygon",
+          "org.cedar.schemas.avro.geojson.MultiPolygon"
         ],
         "default": null
       },

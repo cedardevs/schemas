@@ -1,6 +1,6 @@
 {
   "type": "enum",
-  "namespace": "org.cedar.psi.common.avro",
+  "namespace": "org.cedar.schemas.avro.psi",
   "name": "Method",
   "doc": "An HTTP request method",
   "symbols": [
