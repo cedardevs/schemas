@@ -2,7 +2,10 @@ plugins {
   groovy
   jacoco
   id("com.commercehub.gradle.plugin.avro") version "0.9.1"
+  maven
 }
+
+group = "com.github.cedardevs"
 
 repositories {
   mavenCentral()
