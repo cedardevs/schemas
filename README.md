@@ -11,3 +11,16 @@ JSON Schema documents are available to document interfaces with both PSI and CED
 
 ## JSON-LD
 Coming soon.
+
+## Adding The Schemas Repo as a Dependency
+In a gradle build project, add the following to your `build.gradle` file to include schemas in your dependencies:
+```
+   repositories {
+        // Add the jitpack repo to the end of your list of repositories
+        maven { url "https://jitpack.io" }
+   }
+   dependencies {
+         implementation 'com.github.cedardevs:schemas:{tag}'
+   }
+```
+When using schemas in development, you can use the `master-SNAPSHOT` tag to pull the latest version from the master branch. This snapshot tag will work with any branch, however.
