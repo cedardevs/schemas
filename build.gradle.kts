@@ -2,7 +2,7 @@ plugins {
   groovy
   jacoco
   id("com.commercehub.gradle.plugin.avro") version "0.9.1"
-  maven
+  `maven-publish`
 }
 
 group = "com.github.cedardevs"
@@ -50,9 +50,17 @@ tasks.register<Jar>("testArtifactsJar") {
   from(sourceSets.test.get().output)
 }
 
-configurations.create("testArtifacts")
-
-artifacts.add("testArtifacts", tasks.named<Jar>("testArtifactsJar"))
+publishing {
+  publications {
+    create<MavenPublication>("main") {
+      artifact(tasks["jar"])
+      artifact(tasks["sourceJar"])
+    }
+    create<MavenPublication>("test") {
+      artifact(tasks["testArtifactsJar"])
+    }
+  }
+}
 
 avro {
   fieldVisibility = "PRIVATE"
