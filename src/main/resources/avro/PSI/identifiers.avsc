@@ -1,9 +1,0 @@
-  {
-    "type": "record",
-    "namespace": "org.cedar.schemas.avro.psi",
-    "name": "Identifiers",
-    "doc": "TBD",
-    "fields": [
-
-    ]
-  }
