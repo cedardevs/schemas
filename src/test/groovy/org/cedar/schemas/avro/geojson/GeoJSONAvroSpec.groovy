@@ -1,7 +1,7 @@
 package org.cedar.schemas.avro.geojson
 
 import org.apache.kafka.common.errors.SerializationException
-import org.cedar.schemas.util.MockSchemaRegistrySerde
+import org.cedar.schemas.avro.util.MockSchemaRegistrySerde
 import org.everit.json.schema.loader.SchemaLoader
 import org.json.JSONObject
 import org.json.JSONTokener
@@ -105,7 +105,7 @@ class GeoJSONAvroSpec extends Specification {
   def "#testType represents valid corresponding GeoJSON"() {
     when:
     // Setup schema for validation
-    InputStream input = ClassLoader.systemClassLoader.getResourceAsStream('json-schema/GeoJSON/geometry-schema.json')
+    InputStream input = ClassLoader.systemClassLoader.getResourceAsStream('json-schema/geojson/geometry-schema.json')
     def rawSchema = new JSONObject(new JSONTokener(input))
     def geoSchema = SchemaLoader.load(rawSchema)
 

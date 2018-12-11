@@ -16,10 +16,7 @@ repositories {
 dependencies {
   implementation("org.codehaus.groovy:groovy:2.4.13")
   implementation("org.codehaus.groovy:groovy-json:2.4.13")
-  implementation("org.apache.kafka:kafka-streams:2.0.1")
   implementation("org.apache.avro:avro:1.8.2")
-  implementation("org.slf4j:slf4j-api:1.7.25")
-  implementation("ch.qos.logback:logback-classic:1.2.3")
 
   testImplementation("org.spockframework:spock-core:1.1-groovy-2.4")
   testImplementation("org.apache.kafka:kafka-streams-test-utils:2.0.1")

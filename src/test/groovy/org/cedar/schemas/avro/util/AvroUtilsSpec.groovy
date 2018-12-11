@@ -1,4 +1,4 @@
-package org.cedar.schemas.util
+package org.cedar.schemas.avro.util
 
 import org.cedar.schemas.avro.psi.Input
 import org.cedar.schemas.avro.psi.Method

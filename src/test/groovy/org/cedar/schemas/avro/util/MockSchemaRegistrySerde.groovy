@@ -1,4 +1,4 @@
-package org.cedar.schemas.util
+package org.cedar.schemas.avro.util
 
 import io.confluent.kafka.schemaregistry.client.MockSchemaRegistryClient
 import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient

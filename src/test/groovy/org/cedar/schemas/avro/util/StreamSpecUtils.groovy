@@ -1,4 +1,4 @@
-package org.cedar.schemas.util
+package org.cedar.schemas.avro.util
 
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.serialization.Deserializer
