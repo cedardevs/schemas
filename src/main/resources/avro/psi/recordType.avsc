@@ -1,6 +1,6 @@
 {
   "name": "RecordType",
-  "namespace": "org.cedar.psi.common.avro",
+  "namespace": "org.cedar.schemas.avro.psi",
   "type": "enum",
   "doc": "The types of metadata records which can be represented in the PSI system",
   "symbols": [

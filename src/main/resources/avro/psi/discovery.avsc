@@ -275,12 +275,12 @@
         "name": "spatialBounding",
         "type": [
           "null",
-          "Point",
-          "MultiPoint",
-          "LineString",
-          "MultiLineString",
-          "Polygon",
-          "MultiPolygon"
+          "org.cedar.schemas.avro.geojson.Point",
+          "org.cedar.schemas.avro.geojson.MultiPoint",
+          "org.cedar.schemas.avro.geojson.LineString",
+          "org.cedar.schemas.avro.geojson.MultiLineString",
+          "org.cedar.schemas.avro.geojson.Polygon",
+          "org.cedar.schemas.avro.geojson.MultiPolygon"
         ],
         "default": null
       },
