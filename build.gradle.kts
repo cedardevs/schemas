@@ -2,6 +2,7 @@ plugins {
   groovy
   jacoco
   id("com.commercehub.gradle.plugin.avro") version "0.9.1"
+  `java-library`
   `maven-publish`
 }
 
@@ -14,10 +15,9 @@ repositories {
 }
 
 dependencies {
-  implementation("org.codehaus.groovy:groovy:2.4.13")
-  implementation("org.codehaus.groovy:groovy-json:2.4.13")
-  implementation("org.apache.avro:avro:1.8.2")
+  api("org.apache.avro:avro:1.8.2")
 
+  testImplementation("org.codehaus.groovy:groovy:2.4.13")
   testImplementation("org.spockframework:spock-core:1.1-groovy-2.4")
   testImplementation("org.apache.kafka:kafka-streams-test-utils:2.0.1")
   testImplementation("org.apache.kafka:kafka-clients:2.0.1")
