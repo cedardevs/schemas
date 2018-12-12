@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 
 public class AvroUtils {
 
-  static Map<String, Object> avroToMap(GenericRecord record) {
+  public static Map<String, Object> avroToMap(GenericRecord record) {
     return avroToMap(record, false);
   }
 
-  static Map<String, Object> avroToMap(GenericRecord record, boolean recurse) {
+  public static Map<String, Object> avroToMap(GenericRecord record, boolean recurse) {
     List<Schema.Field> fields = record.getSchema().getFields();
     Map<String, Object> result = new LinkedHashMap<>(fields.size());
     fields.forEach((field) -> {
@@ -34,11 +34,11 @@ public class AvroUtils {
     return result;
   }
 
-  static List<Object> avroCollectionToList(Collection<Object> collection) {
+  public static List<Object> avroCollectionToList(Collection<Object> collection) {
     return avroCollectionToList(collection, false);
   }
 
-  static List<Object> avroCollectionToList(Collection<Object> collection, boolean recurse) {
+  public static List<Object> avroCollectionToList(Collection<Object> collection, boolean recurse) {
     return collection
         .stream()
         .map((it) -> it instanceof GenericRecord ? avroToMap((GenericRecord) it, recurse) : it)
