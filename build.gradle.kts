@@ -7,6 +7,7 @@ plugins {
 }
 
 group = "com.github.cedardevs"
+version = "master-SNAPSHOT"
 
 repositories {
   mavenCentral()
@@ -31,30 +32,32 @@ dependencies {
   testImplementation("org.json:json:20180813")
 }
 
-tasks.jar {
-  baseName = "${rootProject.name}-${project.name}"
-}
+tasks {
+  val sourceJar = register<Jar>("sourceJar") {
+    classifier = "sources"
+    from(sourceSets.main.get().allJava)
+  }
+  val javadocJar = register<Jar>("javadocJar") {
+    classifier = "javadoc"
+    from(javadoc.get().destinationDir)
+  }
+  val testJar = register<Jar>("testJar") {
+    classifier = "test"
+    from(sourceSets.test.get().output)
+  }
 
-tasks.register<Jar>("sourceJar") {
-  classifier = "sources"
-  baseName = "${rootProject.name}-${project.name}"
-  from("$projectDir/src")
-}
-
-tasks.register<Jar>("testArtifactsJar") {
-  classifier = "test"
-  baseName = "${rootProject.name}-${project.name}"
-  from(sourceSets.test.get().output)
+  build {
+    dependsOn(sourceJar, javadocJar, testJar)
+  }
 }
 
 publishing {
   publications {
     create<MavenPublication>("main") {
-      artifact(tasks["jar"])
+      from(components["java"])
       artifact(tasks["sourceJar"])
-    }
-    create<MavenPublication>("test") {
-      artifact(tasks["testArtifactsJar"])
+      artifact(tasks["javadocJar"])
+      artifact(tasks["testJar"])
     }
   }
 }
