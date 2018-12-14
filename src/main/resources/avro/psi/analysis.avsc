@@ -228,11 +228,11 @@
               "type": "enum",
               "name": "TimeRangeDescriptor",
               "symbols": [
-                "bounded",
-                "ongoing",
-                "instant",
-                "undefined",
-                "invalid"
+                "BOUNDED",
+                "ONGOING",
+                "INSTANT",
+                "UNDEFINED",
+                "INVALID"
               ]
             },
             "doc": "A label describing the nature of the time range in the analyzed temporal bounding"
