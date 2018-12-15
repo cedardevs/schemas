@@ -7,260 +7,288 @@
     {
       "name": "identification",
       "doc": "Assessment of the identifying elements of the metadata.",
-      "type": {
-        "type": "record",
-        "name": "IdentificationAnalysis",
-        "fields": [
-          {
-            "name": "fileIdentifierExists",
-            "type": "boolean",
-            "doc": "Indicates if the analyzed record has a file identifier"
-          },
-          {
-            "name": "fileIdentifierString",
-            "type": [
-              "null",
-              "string"
-            ],
-            "doc": "The value of the analyzed record's file identifier, if present"
-          },
-          {
-            "name": "doiExists",
-            "type": "boolean",
-            "doc": "Indicates if the analyzed record has a Digital Object Identifier"
-          },
-          {
-            "name": "doiString",
-            "type": [
-              "null",
-              "string"
-            ],
-            "doc": "The value of the analyzed record's Digital Object Identifier, if present"
-          },
-          {
-            "name": "parentIdentifierExists",
-            "type": "boolean",
-            "doc": "Indicates if the analyzed record has a parent identifier"
-          },
-          {
-            "name": "parentIdentifierString",
-            "type": [
-              "null",
-              "string"
-            ],
-            "doc": "The value of the analyzed record's parent identifier, if present"
-          },
-          {
-            "name": "hierarchyLevelNameExists",
-            "type": "boolean",
-            "doc": "Indicates if the analyzed record has a hierarchy level name"
-          },
-          {
-            "name": "matchesIdentifiers",
-            "type": "boolean",
-            "doc": "Resolves to true if 'granule' specified as hierarchy level and both fileId & parentId provided OR if no hierarchy level specified."
-          }
-        ]
-      }
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "IdentificationAnalysis",
+          "fields": [
+            {
+              "name": "fileIdentifierExists",
+              "type": "boolean",
+              "doc": "Indicates if the analyzed record has a file identifier"
+            },
+            {
+              "name": "fileIdentifierString",
+              "type": [
+                "null",
+                "string"
+              ],
+              "doc": "The value of the analyzed record's file identifier, if present"
+            },
+            {
+              "name": "doiExists",
+              "type": "boolean",
+              "doc": "Indicates if the analyzed record has a Digital Object Identifier"
+            },
+            {
+              "name": "doiString",
+              "type": [
+                "null",
+                "string"
+              ],
+              "doc": "The value of the analyzed record's Digital Object Identifier, if present"
+            },
+            {
+              "name": "parentIdentifierExists",
+              "type": "boolean",
+              "doc": "Indicates if the analyzed record has a parent identifier"
+            },
+            {
+              "name": "parentIdentifierString",
+              "type": [
+                "null",
+                "string"
+              ],
+              "doc": "The value of the analyzed record's parent identifier, if present"
+            },
+            {
+              "name": "hierarchyLevelNameExists",
+              "type": "boolean",
+              "doc": "Indicates if the analyzed record has a hierarchy level name"
+            },
+            {
+              "name": "matchesIdentifiers",
+              "type": "boolean",
+              "doc": "Resolves to true if 'granule' specified as hierarchy level and both fileId & parentId provided OR if no hierarchy level specified."
+            }
+          ]
+        }
+      ],
+      "default": null
     },
     {
       "name": "titles",
       "doc": "Assessment of the titles in the metadata.",
-      "type": {
-        "type": "record",
-        "name": "TitleAnalysis",
-        "fields": [
-          {
-            "name": "titleExists",
-            "type": "boolean",
-            "doc": "Indicates if the analyzed record has a title"
-          },
-          {
-            "name": "titleCharacters",
-            "type": "int",
-            "doc": "The number of characters in the analyzed record's title"
-          },
-          {
-            "name": "alternateTitleExists",
-            "type": "boolean",
-            "doc": "Indicates if the analyzed record has an alternate title"
-          },
-          {
-            "name": "alternateTitleCharacters",
-            "type": "int",
-            "doc": "The number of characters in the analyzed record's alternate title"
-          }
-        ]
-      }
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "TitleAnalysis",
+          "fields": [
+            {
+              "name": "titleExists",
+              "type": "boolean",
+              "doc": "Indicates if the analyzed record has a title"
+            },
+            {
+              "name": "titleCharacters",
+              "type": "int",
+              "doc": "The number of characters in the analyzed record's title"
+            },
+            {
+              "name": "alternateTitleExists",
+              "type": "boolean",
+              "doc": "Indicates if the analyzed record has an alternate title"
+            },
+            {
+              "name": "alternateTitleCharacters",
+              "type": "int",
+              "doc": "The number of characters in the analyzed record's alternate title"
+            }
+          ]
+        }
+      ],
+      "default": null
     },
     {
       "name": "description",
       "doc": "Assessment of the titles in the metadata.",
-      "type": {
-        "type": "record",
-        "name": "DescriptionAnalysis",
-        "fields": [
-          {
-            "name": "descriptionExists",
-            "type": "boolean",
-            "doc": "Indicates if the analyzed record has a description"
-          },
-          {
-            "name": "descriptionCharacters",
-            "type": "int",
-            "doc": "The number of characters in the analyzed record's description"
-          }
-        ]
-      }
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "DescriptionAnalysis",
+          "fields": [
+            {
+              "name": "descriptionExists",
+              "type": "boolean",
+              "doc": "Indicates if the analyzed record has a description"
+            },
+            {
+              "name": "descriptionCharacters",
+              "type": "int",
+              "doc": "The number of characters in the analyzed record's description"
+            }
+          ]
+        }
+      ],
+      "default": null
     },
     {
       "name": "dataAccess",
-      "type": {
-        "type": "record",
-        "name": "DataAccessAnalysis",
-        "fields": [
-          {
-            "name": "dataAccessExists",
-            "type": "boolean",
-            "doc": "Indicates if the analyzed record includes any data access information"
-          }
-        ]
-      }
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "DataAccessAnalysis",
+          "fields": [
+            {
+              "name": "dataAccessExists",
+              "type": "boolean",
+              "doc": "Indicates if the analyzed record includes any data access information"
+            }
+          ]
+        }
+      ],
+      "default": null
     },
     {
       "name": "thumbnail",
-      "type": {
-        "type": "record",
-        "name": "ThumbnailAnalysis",
-        "fields": [
-          {
-            "name": "thumbnailExists",
-            "type": "boolean",
-            "doc": "Indicates if the analyzed record has a thumbnail"
-          }
-        ]
-      }
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "ThumbnailAnalysis",
+          "fields": [
+            {
+              "name": "thumbnailExists",
+              "type": "boolean",
+              "doc": "Indicates if the analyzed record has a thumbnail"
+            }
+          ]
+        }
+      ],
+      "default": null
     },
     {
       "name": "temporalBounding",
-      "type": {
-        "type": "record",
-        "name": "TemporalBoundingAnalysis",
-        "fields": [
-          {
-            "name": "beginExists",
-            "type": "boolean",
-            "doc": "Indicates whether or not the analyzed temporal bounding has a beginning"
-          },
-          {
-            "name": "beginPrecision",
-            "type": "string",
-            "doc": "The precision of the beginning of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit"
-          },
-          {
-            "name": "beginIndexable",
-            "type": "boolean",
-            "doc": "Indicates whether or not the beginning can be indexed for searching"
-          },
-          {
-            "name": "beginZoneSpecified",
-            "type": "string",
-            "doc": "The time zone indicated for the beginning of the analyzed temporal bounding with the format (+/-)hh:mm[:ss], or Z for UTC. See java.lang.ZoneOffset."
-          },
-          {
-            "name": "beginUtcDateTimeString",
-            "type": "string",
-            "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed beginning value"
-          },
-          {
-            "name": "endExists",
-            "type": "boolean",
-            "doc": "Indicates whether or not the analyzed temporal bounding has an end"
-          },
-          {
-            "name": "endPrecision",
-            "type": "string",
-            "doc": "The precision of the end of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit"
-          },
-          {
-            "name": "endIndexable",
-            "type": "boolean",
-            "doc": "Indicates whether or not the ending can be indexed for searching"
-          },
-          {
-            "name": "endZoneSpecified",
-            "type": "string",
-            "doc": "The time zone indicated for the end of the analyzed temporal bounding with the format (+/-)hh:mm[:ss], or Z for UTC. See java.lang.ZoneOffset."
-          },
-          {
-            "name": "endUtcDateTimeString",
-            "type": "string",
-            "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed end value"
-          },
-          {
-            "name": "instantExists",
-            "type": "boolean",
-            "doc": "Indicates whether or not the analyzed temporal bounding is an instant"
-          },
-          {
-            "name": "instantPrecision",
-            "type": "string",
-            "doc": "The precision of the instant of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit"
-          },
-          {
-            "name": "instantIndexable",
-            "type": "boolean",
-            "doc": "Indicates whether or not the instant can be indexed for searching"
-          },
-          {
-            "name": "instantZoneSpecified",
-            "type": "string",
-            "doc": "The time zone indicated for the instant of the analyzed temporal bounding with the format (+/-)hh:mm[:ss], or Z for UTC. See java.lang.ZoneOffset."
-          },
-          {
-            "name": "instantUtcDateTimeString",
-            "type": "string",
-            "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed instant value"
-          },
-          {
-            "name": "rangeDescriptor",
-            "type": {
-              "type": "enum",
-              "name": "TimeRangeDescriptor",
-              "symbols": [
-                "BOUNDED",
-                "ONGOING",
-                "INSTANT",
-                "UNDEFINED",
-                "INVALID"
-              ]
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "TemporalBoundingAnalysis",
+          "fields": [
+            {
+              "name": "beginExists",
+              "type": "boolean",
+              "doc": "Indicates whether or not the analyzed temporal bounding has a beginning"
             },
-            "doc": "A label describing the nature of the time range in the analyzed temporal bounding"
-          },
-          {
-            "name": "rangeBeginLTEEnd",
-            "type": [
-              "null",
-              "boolean"
-            ],
-            "doc": "If the analyzed temporal bounding represents a time range, indicates whether the beginning is less than or equal to the end, else this field is null if inapplicable, e.g. the bounding is an instant, invalid, or undefined"
-          }
-        ]
-      }
+            {
+              "name": "beginPrecision",
+              "type": "string",
+              "doc": "The precision of the beginning of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit"
+            },
+            {
+              "name": "beginIndexable",
+              "type": "boolean",
+              "doc": "Indicates whether or not the beginning can be indexed for searching"
+            },
+            {
+              "name": "beginZoneSpecified",
+              "type": "string",
+              "doc": "The time zone indicated for the beginning of the analyzed temporal bounding with the format (+/-)hh:mm[:ss], or Z for UTC. See java.lang.ZoneOffset."
+            },
+            {
+              "name": "beginUtcDateTimeString",
+              "type": "string",
+              "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed beginning value"
+            },
+            {
+              "name": "endExists",
+              "type": "boolean",
+              "doc": "Indicates whether or not the analyzed temporal bounding has an end"
+            },
+            {
+              "name": "endPrecision",
+              "type": "string",
+              "doc": "The precision of the end of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit"
+            },
+            {
+              "name": "endIndexable",
+              "type": "boolean",
+              "doc": "Indicates whether or not the ending can be indexed for searching"
+            },
+            {
+              "name": "endZoneSpecified",
+              "type": "string",
+              "doc": "The time zone indicated for the end of the analyzed temporal bounding with the format (+/-)hh:mm[:ss], or Z for UTC. See java.lang.ZoneOffset."
+            },
+            {
+              "name": "endUtcDateTimeString",
+              "type": "string",
+              "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed end value"
+            },
+            {
+              "name": "instantExists",
+              "type": "boolean",
+              "doc": "Indicates whether or not the analyzed temporal bounding is an instant"
+            },
+            {
+              "name": "instantPrecision",
+              "type": "string",
+              "doc": "The precision of the instant of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit"
+            },
+            {
+              "name": "instantIndexable",
+              "type": "boolean",
+              "doc": "Indicates whether or not the instant can be indexed for searching"
+            },
+            {
+              "name": "instantZoneSpecified",
+              "type": "string",
+              "doc": "The time zone indicated for the instant of the analyzed temporal bounding with the format (+/-)hh:mm[:ss], or Z for UTC. See java.lang.ZoneOffset."
+            },
+            {
+              "name": "instantUtcDateTimeString",
+              "type": "string",
+              "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed instant value"
+            },
+            {
+              "name": "rangeDescriptor",
+              "type": {
+                "type": "enum",
+                "name": "TimeRangeDescriptor",
+                "symbols": [
+                  "BOUNDED",
+                  "ONGOING",
+                  "INSTANT",
+                  "UNDEFINED",
+                  "INVALID"
+                ]
+              },
+              "doc": "A label describing the nature of the time range in the analyzed temporal bounding"
+            },
+            {
+              "name": "rangeBeginLTEEnd",
+              "type": [
+                "null",
+                "boolean"
+              ],
+              "doc": "If the analyzed temporal bounding represents a time range, indicates whether the beginning is less than or equal to the end, else this field is null if inapplicable, e.g. the bounding is an instant, invalid, or undefined"
+            }
+          ]
+        }
+      ],
+      "default": null
     },
     {
       "name": "spatialBounding",
-      "type": {
-        "type": "record",
-        "name": "SpatialBoundingAnalysis",
-        "fields": [
-          {
-            "name": "spatialBoundingExists",
-            "type": "boolean",
-            "doc": "Indicates if the analyzed record has a spatial bounding"
-          }
-        ]
-      }
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "SpatialBoundingAnalysis",
+          "fields": [
+            {
+              "name": "spatialBoundingExists",
+              "type": "boolean",
+              "doc": "Indicates if the analyzed record has a spatial bounding"
+            }
+          ]
+        }
+      ],
+      "default": null
     }
   ]
 }
