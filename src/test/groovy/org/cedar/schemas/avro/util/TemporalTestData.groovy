@@ -143,7 +143,7 @@ class TemporalTestData {
               .setEndZoneSpecified(UNDEFINED)
               .setEndUtcDateTimeString(UNDEFINED)
               .setInstantExists(true)
-              .setInstantIndexable(true)
+              .setInstantIndexable(false)
               .setInstantPrecision(ChronoUnit.YEARS.toString())
               .setInstantZoneSpecified(UNDEFINED)
               .setInstantUtcDateTimeString('-1000000000-01-01T00:00:00Z')
