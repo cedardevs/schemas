@@ -1,6 +1,7 @@
 package org.cedar.schemas.avro.geojson
 
 import org.apache.kafka.common.errors.SerializationException
+import org.cedar.schemas.avro.util.AvroUtils
 import org.cedar.schemas.avro.util.MockSchemaRegistrySerde
 import org.everit.json.schema.loader.SchemaLoader
 import org.json.JSONObject
@@ -115,7 +116,7 @@ class GeoJSONAvroSpec extends Specification {
     builder.coordinates = testCoordinates
     def geometry = builder.build()
 
-    geoSchema.validate(new JSONObject(geometry.toString()))
+    geoSchema.validate(new JSONObject(AvroUtils.avroToJson(geometry)))
 
     then:
     noExceptionThrown()

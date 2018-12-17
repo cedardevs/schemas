@@ -1,8 +1,14 @@
 package org.cedar.schemas.avro.util;
 
 import org.apache.avro.Schema;
+import org.apache.avro.generic.GenericData;
 import org.apache.avro.generic.GenericRecord;
+import org.apache.avro.io.Decoder;
+import org.apache.avro.io.DecoderFactory;
+import org.apache.avro.specific.SpecificDatumReader;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -43,6 +49,20 @@ public class AvroUtils {
         .stream()
         .map((it) -> it instanceof GenericRecord ? avroToMap((GenericRecord) it, recurse) : it)
         .collect(Collectors.toList());
+  }
+
+  public static String avroToJson(GenericRecord record) {
+    return GenericData.get().toString(record);
+  }
+
+  public static <T extends GenericRecord> T jsonToAvro(String json, Schema schema) throws IOException {
+    Decoder decoder = DecoderFactory.get().jsonDecoder(schema, json);
+    return new SpecificDatumReader<T>(schema).read(null, decoder);
+  }
+
+  public static <T extends GenericRecord> T jsonToAvro(InputStream json, Schema schema) throws IOException {
+    Decoder decoder = DecoderFactory.get().jsonDecoder(schema, json);
+    return new SpecificDatumReader<T>(schema).read(null, decoder);
   }
 
 }

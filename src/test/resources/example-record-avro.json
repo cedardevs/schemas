@@ -1,0 +1,511 @@
+{
+  "type": "collection",
+  "discovery": {
+    "org.cedar.schemas.avro.psi.Discovery": {
+      "fileIdentifier": {
+        "string": "gov.noaa.nodc:GHRSST-AMSRE-REMSS-L2P"
+      },
+      "parentIdentifier": null,
+      "hierarchyLevelName": null,
+      "doi": null,
+      "purpose": {
+        "string": "Basic research"
+      },
+      "status": {
+        "string": "onGoing"
+      },
+      "credit": {
+        "string": "L2P data is sponsored by the National Oceanographic Partnership Program (NOPP)."
+      },
+      "title": {
+        "string": "GHRSST Level 2P Global Subskin Sea Surface Temperature from the Advanced Scanning Microwave Radiometer"
+      },
+      "alternateTitle": {
+        "string": "AMSRE 25km gridded SST data set"
+      },
+      "description": {
+        "string": "version 2 format specifications."
+      },
+      "keywords": [
+        {
+          "values": [
+            "SIO > Super Important Organization",
+            "OSIO > Other Super Important Organization",
+            "SSIO > Super SIO (Super Important Organization)"
+          ],
+          "type": {
+            "string": "dataCenter"
+          },
+          "namespace": {
+            "string": "Global Change Master Directory (GCMD) Data Center Keywords"
+          }
+        },
+        {
+          "values": [
+            "0003665",
+            "0003666",
+            "0003667",
+            "0003668",
+            "0003669"
+          ],
+          "type": null,
+          "namespace": {
+            "string": "NCEI ACCESSION NUMBER"
+          }
+        },
+        {
+          "values": [
+            "EARTH SCIENCE > OCEANS > OCEAN TEMPERATURE > SEA SURFACE TEMPERATURE"
+          ],
+          "type": {
+            "string": "theme"
+          },
+          "namespace": {
+            "string": "GCMD Keywords - Earth science services Keywords"
+          }
+        },
+        {
+          "values": [
+            "Atmosphere > Atmospheric Temperature > Surface Temperature > Dew Point Temperature",
+            "Oceans > Salinity/Density > Salinity",
+            "Volcanoes > This Keyword > Is Invalid",
+            "Spectral/Engineering > Microwave > Brightness Temperature",
+            "Spectral/Engineering > Microwave > Temperature Anomalies"
+          ],
+          "type": {
+            "string": "theme"
+          },
+          "namespace": {
+            "string": "GCMD Keywords - Earth Science Keywords"
+          }
+        },
+        {
+          "values": [
+            "Geographic Region > Arctic",
+            "Ocean > Atlantic Ocean > North Atlantic Ocean > Gulf Of Mexico",
+            "Liquid Earth > This Keyword > Is Invalid"
+          ],
+          "type": {
+            "string": "place"
+          },
+          "namespace": {
+            "string": "GCMD Keywords - Locations"
+          }
+        },
+        {
+          "values": [
+            "Seasonal"
+          ],
+          "type": {
+            "string": "dataResolution"
+          },
+          "namespace": {
+            "string": "Global Change Master Directory Keywords - Temporal Data Resolution"
+          }
+        },
+        {
+          "values": [
+            "> 1 Km"
+          ],
+          "type": {
+            "string": "dataResolution"
+          },
+          "namespace": {
+            "string": "GCMD Keywords - Vertical Data Resolution"
+          }
+        }
+      ],
+      "topicCategories": [
+        "environment",
+        "oceans",
+        "climatologyMeteorologyAtmosphere",
+        "biota"
+      ],
+      "temporalBounding": {
+        "org.cedar.schemas.avro.psi.TemporalBounding": {
+          "beginDate": {
+            "string": "2002-06-01"
+          },
+          "beginIndeterminate": null,
+          "endDate": {
+            "string": "2011-10-04"
+          },
+          "endIndeterminate": null,
+          "instant": null,
+          "instantIndeterminate": null,
+          "description": null
+        }
+      },
+      "spatialBounding": {
+        "org.cedar.schemas.avro.geojson.Polygon": {
+          "type": "Polygon",
+          "coordinates": [
+            {
+              "array": [
+                {
+                  "array": [
+                    -180.0,
+                    -90.0
+                  ]
+                },
+                {
+                  "array": [
+                    180.0,
+                    -90.0
+                  ]
+                },
+                {
+                  "array": [
+                    180.0,
+                    90.0
+                  ]
+                },
+                {
+                  "array": [
+                    -180.0,
+                    90.0
+                  ]
+                },
+                {
+                  "array": [
+                    -180.0,
+                    -90.0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "isGlobal": {
+        "boolean": true
+      },
+      "acquisitionInstruments": [
+        {
+          "instrumentIdentifier": {
+            "string": "AMSR-E > Advanced Microwave Scanning Radiometer-EOS"
+          },
+          "instrumentType": {
+            "string": "sensor"
+          },
+          "instrumentDescription": {
+            "string": "The Advanced Microwave Scann"
+          }
+        }
+      ],
+      "acquisitionOperations": [
+        {
+          "operationDescription": null,
+          "operationIdentifier": {
+            "string": "Super Important Project"
+          },
+          "operationStatus": null,
+          "operationType": null
+        }
+      ],
+      "acquisitionPlatforms": [
+        {
+          "platformIdentifier": {
+            "string": "AQUA > Earth Observing System, AQUA"
+          },
+          "platformDescription": {
+            "string": "Aqua is a NASA polar orbiting mission designed to collect information on the Earth's atmospheric"
+          },
+          "platformSponsor": [
+            "Remote Sensing Systems",
+            "NASA/JPL/PODAAC > Physical Oceanography Distributed Active Archive Center, Jet Propulsion Laboratory, NASA"
+          ]
+        }
+      ],
+      "dataFormats": [
+        {
+          "name": {
+            "string": "NETCDF"
+          },
+          "version": {
+            "string": "netCDF-4"
+          }
+        }
+      ],
+      "links": [
+        {
+          "linkName": {
+            "string": "Descriptive Information"
+          },
+          "linkProtocol": {
+            "string": "HTTPS"
+          },
+          "linkUrl": {
+            "string": "https://data.nodc.noaa.gov/cgi-bin/iso?id=gov.noaa.nodc:GHRSST-AMSRE-REMSS-L2P"
+          },
+          "linkDescription": {
+            "string": "Navigate directly to the URL for a descriptive web page with download links."
+          },
+          "linkFunction": {
+            "string": "information"
+          }
+        },
+        {
+          "linkName": {
+            "string": "FTP"
+          },
+          "linkProtocol": {
+            "string": "FTP"
+          },
+          "linkUrl": {
+            "string": "ftp://ftp.nodc.noaa.gov/pub/data.nodc/ghrsst/L2P/AMSRE/REMSS/"
+          },
+          "linkDescription": {
+            "string": "These data are available through the File Transfer Protocol (FTP). You may use any FTP client to download these data."
+          },
+          "linkFunction": {
+            "string": "download"
+          }
+        }
+      ],
+      "responsibleParties": [
+        {
+          "individualName": null,
+          "organizationName": {
+            "string": "Super Important Organization"
+          },
+          "positionName": null,
+          "role": {
+            "string": "publisher"
+          },
+          "email": {
+            "string": "email@sio.co"
+          },
+          "phone": {
+            "string": "555-123-4567"
+          }
+        },
+        {
+          "individualName": {
+            "string": "Edward M. Armstrong"
+          },
+          "organizationName": {
+            "string": "US NASA; Jet Propulsion Laboratory (JPL)"
+          },
+          "positionName": null,
+          "role": {
+            "string": "originator"
+          },
+          "email": {
+            "string": "edward.m.armstrong@jpl.nasa.gov"
+          },
+          "phone": {
+            "string": "555-555-5559"
+          }
+        },
+        {
+          "individualName": {
+            "string": "Jarianna Whackositz"
+          },
+          "organizationName": {
+            "string": "Secret Underground Society"
+          },
+          "positionName": {
+            "string": "Software Developer"
+          },
+          "role": {
+            "string": "resourceProvider"
+          },
+          "email": {
+            "string": "jw@mock-creator-email.org"
+          },
+          "phone": {
+            "string": "555-555-5558"
+          }
+        },
+        {
+          "individualName": {
+            "string": "John Smith"
+          },
+          "organizationName": {
+            "string": "University of Boulder"
+          },
+          "positionName": {
+            "string": "Chief Awesomeness Officer"
+          },
+          "role": {
+            "string": "pointOfContact"
+          },
+          "email": {
+            "string": "NCEI.Info@noaa.gov"
+          },
+          "phone": {
+            "string": "555-555-5555"
+          }
+        }
+      ],
+      "thumbnail": {
+        "string": "https://data.nodc.noaa.gov/cgi-bin/gfx?id=gov.noaa.nodc:GHRSST-AMSRE-REMSS-L2P"
+      },
+      "thumbnailDescription": {
+        "string": "Preview graphic"
+      },
+      "creationDate": null,
+      "revisionDate": {
+        "string": "2017-08-23"
+      },
+      "publicationDate": {
+        "string": "2010-11-09"
+      },
+      "citeAsStatements": [
+        "[CITE AS STATEMENT 2]",
+        "[CITE AS STATEMENT 1]"
+      ],
+      "crossReferences": [
+        {
+          "title": {
+            "string": "Full details of the AQUA mission"
+          },
+          "date": null,
+          "links": [
+            {
+              "linkName": {
+                "string": "Full details of the AQUA mission"
+              },
+              "linkProtocol": {
+                "string": "HTTP"
+              },
+              "linkUrl": {
+                "string": "http://aqua.nasa.gov/"
+              },
+              "linkDescription": {
+                "string": "Full details of the AQUA mission"
+              },
+              "linkFunction": null
+            }
+          ]
+        },
+        {
+          "title": {
+            "string": "Portal to the GHRSST Global Data Assembly Center and data access"
+          },
+          "date": null,
+          "links": [
+            {
+              "linkName": {
+                "string": "Portal to the GHRSST Global Data Assembly Center and data access"
+              },
+              "linkProtocol": {
+                "string": "HTTP"
+              },
+              "linkUrl": {
+                "string": "http://ghrsst.jpl.nasa.gov"
+              },
+              "linkDescription": {
+                "string": "Portal to the GHRSST Global Data Assembly Center and data access"
+              },
+              "linkFunction": null
+            }
+          ]
+        }
+      ],
+      "largerWorks": [
+        {
+          "title": {
+            "string": "[TITLE OF PROJECT]"
+          },
+          "date": {
+            "string": "9999-10-10"
+          },
+          "links": [
+          ]
+        }
+      ],
+      "useLimitation": {
+        "string": "accessLevel: Public"
+      },
+      "legalConstraints": [
+        "Cite as: Remote Sensing Systems (REMSS) (2002). GHRSST Level 2P Global Subskin Sea Surface Temperature from the Advanced Scanning Microwave Radiometer - Earth Observing System (AMSR-E) on the NASA Aqua Satellite (GDS versions 1 and 2). National Oceanographic Data Center, NOAA. Dataset. [access date]",
+        "NOAA and NCEI cannot provide any warranty as to the accuracy, reliability, or completeness of furnished data. Users assume responsibility to determine the usability of these data. The user is responsible for the results of any application of this data for other than its intended purpose."
+      ],
+      "accessFeeStatement": null,
+      "orderingInstructions": null,
+      "edition": {
+        "string": "7.0"
+      },
+      "dsmmAccessibility": 5,
+      "dsmmDataIntegrity": 3,
+      "dsmmDataQualityAssessment": 2,
+      "dsmmDataQualityAssurance": 3,
+      "dsmmDataQualityControlMonitoring": 1,
+      "dsmmPreservability": 5,
+      "dsmmProductionSustainability": 2,
+      "dsmmTransparencyTraceability": 2,
+      "dsmmUsability": 4,
+      "dsmmAverage": 3,
+      "updateFrequency": {
+        "string": "asNeeded"
+      },
+      "presentationForm": {
+        "string": "tableDigital"
+      },
+      "services": []
+    }
+  },
+  "analysis": {
+    "org.cedar.schemas.avro.psi.Analysis": {
+      "identification": {
+        "fileIdentifierExists": true,
+        "fileIdentifierString": {
+          "string": "gov.noaa.nodc:GHRSST-AMSRE-REMSS-L2P"
+        },
+        "doiExists": false,
+        "doiString": null,
+        "parentIdentifierExists": false,
+        "parentIdentifierString": null,
+        "hierarchyLevelNameExists": false,
+        "matchesIdentifiers": true
+      },
+      "titles": {
+        "titleExists": true,
+        "titleCharacters": 186,
+        "alternateTitleExists": true,
+        "alternateTitleCharacters": 31
+      },
+      "description": {
+        "descriptionExists": true,
+        "descriptionCharacters": 1538
+      },
+      "dataAccess": {
+        "dataAccessExists": true
+      },
+      "thumbnail": {
+        "thumbnailExists": true
+      },
+      "temporalBounding": {
+        "beginExists": true,
+        "beginPrecision": "Days",
+        "beginIndexable": true,
+        "beginZoneSpecified": "UNDEFINED",
+        "beginUtcDateTimeString": "2002-06-01T00:00:00Z",
+        "endExists": true,
+        "endPrecision": "Days",
+        "endIndexable": true,
+        "endZoneSpecified": "UNDEFINED",
+        "endUtcDateTimeString": "2011-10-04T23:59:59Z",
+        "instantExists": false,
+        "instantPrecision": "UNDEFINED",
+        "instantIndexable": true,
+        "instantZoneSpecified": "UNDEFINED",
+        "instantUtcDateTimeString": "UNDEFINED",
+        "rangeDescriptor": "BOUNDED",
+        "rangeBeginLTEEnd": {
+          "boolean": true
+        }
+      },
+      "spatialBounding": {
+        "spatialBoundingExists": true
+      }
+    }
+  },
+  "publishing": {
+    "isPrivate": false,
+    "until": null
+  },
+  "errors": []
+}
