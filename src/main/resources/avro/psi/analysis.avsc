@@ -176,7 +176,10 @@
             },
             {
               "name": "beginPrecision",
-              "type": "string",
+              "type": [
+                "string",
+                "NullDescriptor"
+              ],
               "doc": "The precision of the beginning of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit"
             },
             {
@@ -186,12 +189,18 @@
             },
             {
               "name": "beginZoneSpecified",
-              "type": "string",
+              "type": [
+                "string",
+                "NullDescriptor"
+              ],
               "doc": "The time zone indicated for the beginning of the analyzed temporal bounding with the format (+/-)hh:mm[:ss], or Z for UTC. See java.lang.ZoneOffset."
             },
             {
               "name": "beginUtcDateTimeString",
-              "type": "string",
+              "type": [
+                "string",
+                "NullDescriptor"
+              ],
               "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed beginning value"
             },
             {
@@ -201,7 +210,10 @@
             },
             {
               "name": "endPrecision",
-              "type": "string",
+              "type": [
+                "string",
+                "NullDescriptor"
+              ],
               "doc": "The precision of the end of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit"
             },
             {
@@ -211,12 +223,18 @@
             },
             {
               "name": "endZoneSpecified",
-              "type": "string",
+              "type": [
+                "string",
+                "NullDescriptor"
+              ],
               "doc": "The time zone indicated for the end of the analyzed temporal bounding with the format (+/-)hh:mm[:ss], or Z for UTC. See java.lang.ZoneOffset."
             },
             {
               "name": "endUtcDateTimeString",
-              "type": "string",
+              "type": [
+                "string",
+                "NullDescriptor"
+              ],
               "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed end value"
             },
             {
@@ -226,7 +244,10 @@
             },
             {
               "name": "instantPrecision",
-              "type": "string",
+              "type": [
+                "string",
+                "NullDescriptor"
+              ],
               "doc": "The precision of the instant of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit"
             },
             {
@@ -236,33 +257,40 @@
             },
             {
               "name": "instantZoneSpecified",
-              "type": "string",
+              "type": [
+                "string",
+                "NullDescriptor"
+              ],
               "doc": "The time zone indicated for the instant of the analyzed temporal bounding with the format (+/-)hh:mm[:ss], or Z for UTC. See java.lang.ZoneOffset."
             },
             {
               "name": "instantUtcDateTimeString",
-              "type": "string",
+              "type": [
+                "string",
+                "NullDescriptor"
+              ],
               "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed instant value"
             },
             {
               "name": "rangeDescriptor",
-              "type": {
-                "type": "enum",
-                "name": "TimeRangeDescriptor",
-                "symbols": [
-                  "BOUNDED",
-                  "ONGOING",
-                  "INSTANT",
-                  "UNDEFINED",
-                  "INVALID"
-                ]
-              },
+              "type": [
+                "NullDescriptor",
+                {
+                  "type": "enum",
+                  "name": "TimeRangeDescriptor",
+                  "symbols": [
+                    "BOUNDED",
+                    "ONGOING",
+                    "INSTANT"
+                  ]
+                }
+              ],
               "doc": "A label describing the nature of the time range in the analyzed temporal bounding"
             },
             {
               "name": "rangeBeginLTEEnd",
               "type": [
-                "null",
+                "NullDescriptor",
                 "boolean"
               ],
               "doc": "If the analyzed temporal bounding represents a time range, indicates whether the beginning is less than or equal to the end, else this field is null if inapplicable, e.g. the bounding is an instant, invalid, or undefined"

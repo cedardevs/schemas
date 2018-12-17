@@ -1,0 +1,9 @@
+{
+  "namespace": "org.cedar.schemas.avro.psi",
+  "name": "NullDescriptor",
+  "type": "enum",
+  "symbols": [
+    "INVALID",
+    "UNDEFINED"
+  ]
+}
