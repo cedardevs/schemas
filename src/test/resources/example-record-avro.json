@@ -450,56 +450,90 @@
   "analysis": {
     "org.cedar.schemas.avro.psi.Analysis": {
       "identification": {
-        "fileIdentifierExists": true,
-        "fileIdentifierString": {
-          "string": "gov.noaa.nodc:GHRSST-AMSRE-REMSS-L2P"
-        },
-        "doiExists": false,
-        "doiString": null,
-        "parentIdentifierExists": false,
-        "parentIdentifierString": null,
-        "hierarchyLevelNameExists": false,
-        "matchesIdentifiers": true
+        "org.cedar.schemas.avro.psi.IdentificationAnalysis": {
+          "fileIdentifierExists": true,
+          "fileIdentifierString": {
+            "string": "gov.noaa.nodc:GHRSST-AMSRE-REMSS-L2P"
+          },
+          "doiExists": false,
+          "doiString": null,
+          "parentIdentifierExists": false,
+          "parentIdentifierString": null,
+          "hierarchyLevelNameExists": false,
+          "matchesIdentifiers": true
+        }
       },
       "titles": {
-        "titleExists": true,
-        "titleCharacters": 186,
-        "alternateTitleExists": true,
-        "alternateTitleCharacters": 31
+        "org.cedar.schemas.avro.psi.TitleAnalysis": {
+          "titleExists": true,
+          "titleCharacters": 186,
+          "alternateTitleExists": true,
+          "alternateTitleCharacters": 31
+        }
       },
       "description": {
-        "descriptionExists": true,
-        "descriptionCharacters": 1538
+        "org.cedar.schemas.avro.psi.DescriptionAnalysis": {
+          "descriptionExists": true,
+          "descriptionCharacters": 1538
+        }
       },
       "dataAccess": {
-        "dataAccessExists": true
+        "org.cedar.schemas.avro.psi.DataAccessAnalysis": {
+          "dataAccessExists": true
+        }
       },
       "thumbnail": {
-        "thumbnailExists": true
+        "org.cedar.schemas.avro.psi.ThumbnailAnalysis": {
+          "thumbnailExists": true
+        }
       },
       "temporalBounding": {
-        "beginExists": true,
-        "beginPrecision": "Days",
-        "beginIndexable": true,
-        "beginZoneSpecified": "UNDEFINED",
-        "beginUtcDateTimeString": "2002-06-01T00:00:00Z",
-        "endExists": true,
-        "endPrecision": "Days",
-        "endIndexable": true,
-        "endZoneSpecified": "UNDEFINED",
-        "endUtcDateTimeString": "2011-10-04T23:59:59Z",
-        "instantExists": false,
-        "instantPrecision": "UNDEFINED",
-        "instantIndexable": true,
-        "instantZoneSpecified": "UNDEFINED",
-        "instantUtcDateTimeString": "UNDEFINED",
-        "rangeDescriptor": "BOUNDED",
-        "rangeBeginLTEEnd": {
-          "boolean": true
+        "org.cedar.schemas.avro.psi.TemporalBoundingAnalysis": {
+          "beginExists": true,
+          "beginPrecision": {
+            "string": "Days"
+          },
+          "beginIndexable": true,
+          "beginZoneSpecified": {
+            "org.cedar.schemas.avro.psi.NullDescriptor": "UNDEFINED"
+          },
+          "beginUtcDateTimeString": {
+            "string": "2002-06-01T00:00:00Z"
+          },
+          "endExists": true,
+          "endPrecision": {
+            "string": "Days"
+          },
+          "endIndexable": true,
+          "endZoneSpecified": {
+            "org.cedar.schemas.avro.psi.NullDescriptor": "UNDEFINED"
+          },
+          "endUtcDateTimeString": {
+            "string": "2011-10-04T23:59:59Z"
+          },
+          "instantExists": false,
+          "instantPrecision": {
+            "org.cedar.schemas.avro.psi.NullDescriptor": "UNDEFINED"
+          },
+          "instantIndexable": true,
+          "instantZoneSpecified": {
+            "org.cedar.schemas.avro.psi.NullDescriptor": "UNDEFINED"
+          },
+          "instantUtcDateTimeString": {
+            "org.cedar.schemas.avro.psi.NullDescriptor": "UNDEFINED"
+          },
+          "rangeDescriptor": {
+            "org.cedar.schemas.avro.psi.TimeRangeDescriptor": "BOUNDED"
+          },
+          "rangeBeginLTEEnd": {
+            "boolean": true
+          }
         }
       },
       "spatialBounding": {
-        "spatialBoundingExists": true
+        "org.cedar.schemas.avro.psi.SpatialBoundingAnalysis": {
+          "spatialBoundingExists": true
+        }
       }
     }
   },

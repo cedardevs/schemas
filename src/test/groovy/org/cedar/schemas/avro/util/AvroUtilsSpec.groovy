@@ -73,4 +73,13 @@ class AvroUtilsSpec extends Specification {
     inputType << ['string', 'stream']
   }
 
+  def 'reads the example record from json'() {
+    when:
+    def inputStream = ClassLoader.systemClassLoader.getResourceAsStream('example-record-avro.json')
+    def inputRecord = AvroUtils.<ParsedRecord>jsonToAvro(inputStream, ParsedRecord.classSchema)
+
+    then:
+    inputRecord instanceof ParsedRecord
+  }
+
 }
