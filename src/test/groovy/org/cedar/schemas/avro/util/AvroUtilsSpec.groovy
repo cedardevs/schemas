@@ -57,9 +57,6 @@ class AvroUtilsSpec extends Specification {
   }
 
   def 'builds avro objects from json #inputType'() {
-    def json = '{"isPrivate":true,"until":null}'
-    def input = inputType == 'stream' ? new ByteArrayInputStream(json.bytes) : json
-
     when:
     def record = AvroUtils.<Publishing>jsonToAvro(input, Publishing.classSchema)
 
@@ -70,7 +67,9 @@ class AvroUtilsSpec extends Specification {
     record.until == null
 
     where:
-    inputType << ['string', 'stream']
+    inputType | input
+    'string'  | '{"isPrivate":true,"until":null}'
+    'stream'  | new ByteArrayInputStream('{"isPrivate":true,"until":null}'.bytes)
   }
 
   def 'reads the example record from json'() {
