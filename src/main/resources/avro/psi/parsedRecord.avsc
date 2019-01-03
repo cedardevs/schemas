@@ -6,16 +6,26 @@
   "fields": [
     {
       "name": "type",
-      "type": "RecordType"
+      "type": [
+        "null",
+        "RecordType"
+      ],
+      "default": null
     },
     {
       "name": "discovery",
-      "type": ["null", "Discovery"],
+      "type": [
+        "null",
+        "Discovery"
+      ],
       "default": null
     },
     {
       "name": "analysis",
-      "type": ["null", "Analysis"],
+      "type": [
+        "null",
+        "Analysis"
+      ],
       "default": null
     },
     {

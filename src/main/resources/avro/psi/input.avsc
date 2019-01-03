@@ -6,28 +6,48 @@
   "fields": [
     {
       "name": "type",
-      "type": "RecordType",
-      "doc" : "The type of record represented by this input"
+      "type": [
+        "null",
+        "RecordType"
+      ],
+      "doc": "The type of record represented by this input",
+      "default": null
     },
     {
       "name": "content",
-      "type": "string",
-      "doc" : "The raw input content as a string"
+      "type": [
+        "null",
+        "string"
+      ],
+      "doc": "The raw input content as a string",
+      "default": null
     },
     {
       "name": "contentType",
-      "type": "string",
-      "doc" : "The MIME type associated with the value of the content field"
+      "type": [
+        "null",
+        "string"
+      ],
+      "doc": "The MIME type associated with the value of the content field",
+      "default": null
     },
     {
       "name": "method",
-      "type": "Method",
-      "doc" : "The HTTP method used to send the input or which describes the verb associated with the input in general"
+      "type": [
+        "null",
+        "Method"
+      ],
+      "doc": "The HTTP method used to send the input or which describes the verb associated with the input in general",
+      "default": null
     },
     {
       "name": "source",
-      "type": "string",
-      "doc" : "The source of the input, e.g. the name of an external system which produced this input record"
+      "type": [
+        "null",
+        "string"
+      ],
+      "doc": "The source of the input, e.g. the name of an external system which produced this input record",
+      "default": null
     }
   ]
 }

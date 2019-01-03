@@ -451,88 +451,115 @@
     "org.cedar.schemas.avro.psi.Analysis": {
       "identification": {
         "org.cedar.schemas.avro.psi.IdentificationAnalysis": {
-          "fileIdentifierExists": true,
+          "fileIdentifierExists": {
+            "boolean": true
+          },
           "fileIdentifierString": {
             "string": "gov.noaa.nodc:GHRSST-AMSRE-REMSS-L2P"
           },
-          "doiExists": false,
+          "doiExists": {
+            "boolean": false
+          },
           "doiString": null,
-          "parentIdentifierExists": false,
+          "parentIdentifierExists": {
+            "boolean": false
+          },
           "parentIdentifierString": null,
-          "hierarchyLevelNameExists": false,
-          "matchesIdentifiers": true
+          "hierarchyLevelNameExists": {
+            "boolean": false
+          },
+          "matchesIdentifiers": {
+            "boolean": true
+          }
         }
       },
       "titles": {
         "org.cedar.schemas.avro.psi.TitleAnalysis": {
-          "titleExists": true,
-          "titleCharacters": 186,
-          "alternateTitleExists": true,
-          "alternateTitleCharacters": 31
+          "titleExists": {
+            "boolean": true
+          },
+          "titleCharacters": {
+            "int": 186
+          },
+          "alternateTitleExists": {
+            "boolean": true
+          },
+          "alternateTitleCharacters": {
+            "int": 31
+          }
         }
       },
       "description": {
         "org.cedar.schemas.avro.psi.DescriptionAnalysis": {
-          "descriptionExists": true,
-          "descriptionCharacters": 1538
+          "descriptionExists": {
+            "boolean": true
+          },
+          "descriptionCharacters": {
+            "int": 1538
+          }
         }
       },
       "dataAccess": {
         "org.cedar.schemas.avro.psi.DataAccessAnalysis": {
-          "dataAccessExists": true
+          "dataAccessExists": {
+            "boolean": true
+          }
         }
       },
       "thumbnail": {
         "org.cedar.schemas.avro.psi.ThumbnailAnalysis": {
-          "thumbnailExists": true
+          "thumbnailExists": {
+            "boolean": true
+          }
         }
       },
       "temporalBounding": {
         "org.cedar.schemas.avro.psi.TemporalBoundingAnalysis": {
-          "beginExists": true,
+          "beginDescriptor": {
+            "org.cedar.schemas.avro.psi.ValidDescriptor": "VALID"
+          },
           "beginPrecision": {
             "string": "Days"
           },
-          "beginIndexable": true,
-          "beginZoneSpecified": {
-            "org.cedar.schemas.avro.psi.NullDescriptor": "UNDEFINED"
+          "beginIndexable": {
+            "boolean": true
           },
+          "beginZoneSpecified": null,
           "beginUtcDateTimeString": {
             "string": "2002-06-01T00:00:00Z"
           },
-          "endExists": true,
+          "endDescriptor": {
+            "org.cedar.schemas.avro.psi.ValidDescriptor": "VALID"
+          },
           "endPrecision": {
             "string": "Days"
           },
-          "endIndexable": true,
-          "endZoneSpecified": {
-            "org.cedar.schemas.avro.psi.NullDescriptor": "UNDEFINED"
+          "endIndexable": {
+            "boolean": true
           },
+          "endZoneSpecified": null,
           "endUtcDateTimeString": {
             "string": "2011-10-04T23:59:59Z"
           },
-          "instantExists": false,
-          "instantPrecision": {
-            "org.cedar.schemas.avro.psi.NullDescriptor": "UNDEFINED"
+          "instantDescriptor": {
+            "org.cedar.schemas.avro.psi.ValidDescriptor": "UNDEFINED"
           },
-          "instantIndexable": true,
-          "instantZoneSpecified": {
-            "org.cedar.schemas.avro.psi.NullDescriptor": "UNDEFINED"
+          "instantPrecision": null,
+          "instantIndexable": {
+            "boolean": true
           },
-          "instantUtcDateTimeString": {
-            "org.cedar.schemas.avro.psi.NullDescriptor": "UNDEFINED"
-          },
+          "instantZoneSpecified": null,
+          "instantUtcDateTimeString": null,
           "rangeDescriptor": {
             "org.cedar.schemas.avro.psi.TimeRangeDescriptor": "BOUNDED"
-          },
-          "rangeBeginLTEEnd": {
-            "boolean": true
           }
         }
       },
       "spatialBounding": {
         "org.cedar.schemas.avro.psi.SpatialBoundingAnalysis": {
-          "spatialBoundingExists": true
+          "spatialBoundingExists": {
+            "boolean": true
+          }
         }
       }
     }

@@ -11,7 +11,10 @@
     },
     {
       "name": "until",
-      "type": ["null", "long"],
+      "type": [
+        "null",
+        "long"
+      ],
       "logicalType": "timestamp-millis",
       "default": null
     }
