@@ -1,5 +1,7 @@
 {
-  "type": "collection",
+  "type": {
+    "org.cedar.schemas.avro.psi.RecordType": "collection"
+  },
   "discovery": {
     "org.cedar.schemas.avro.psi.Discovery": {
       "fileIdentifier": {
