@@ -83,7 +83,7 @@
                 "boolean"
               ],
               "default": null,
-              "doc": "Resolves to true if 'granule' specified as hierarchy level and both fileId & parentId provided OR if no hierarchy level specified."
+              "doc": "Resolves to true if 'granule' specified as hierarchy level and both fileId and parentId provided OR if no hierarchy level specified."
             }
           ]
         }

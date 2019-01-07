@@ -39,6 +39,7 @@ tasks {
   }
   val javadocJar = register<Jar>("javadocJar") {
     classifier = "javadoc"
+    dependsOn(javadoc)
     from(javadoc.get().destinationDir)
   }
   val testJar = register<Jar>("testJar") {
