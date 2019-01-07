@@ -21,7 +21,7 @@ class TemporalTestData {
     String toString() { description }
   }
 
-  static Map<String, TemporalSituation> situtations = [
+  static Map<String, TemporalSituation> situations = [
       empty  : new TemporalSituation('undefined range',
           TemporalBounding.newBuilder().build(),
           TemporalBoundingAnalysis.newBuilder()

@@ -15,7 +15,7 @@ class TemporalTestDataSanitySpec extends Specification {
     situation.analysis instanceof TemporalBoundingAnalysis
 
     where:
-    situation << TemporalTestData.situtations.values()
+    situation << TemporalTestData.situations.values()
   }
 
 }
