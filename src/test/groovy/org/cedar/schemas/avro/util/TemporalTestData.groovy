@@ -1,6 +1,7 @@
 package org.cedar.schemas.avro.util
 
 import groovy.transform.Canonical
+import groovy.transform.CompileStatic
 import org.cedar.schemas.avro.psi.TemporalBounding
 import org.cedar.schemas.avro.psi.TemporalBoundingAnalysis
 import org.cedar.schemas.avro.psi.TimeRangeDescriptor
@@ -8,17 +9,20 @@ import org.cedar.schemas.avro.psi.ValidDescriptor
 
 import java.time.temporal.ChronoUnit
 
+@CompileStatic
 class TemporalTestData {
 
   @Canonical
-  static class TemporalSitutation {
+  static class TemporalSituation {
     String description
     TemporalBounding bounding
     TemporalBoundingAnalysis analysis
+
+    String toString() { description }
   }
 
-  static Map<String, TemporalSitutation> situtations = [
-      empty  : new TemporalSitutation('undefined range',
+  static Map<String, TemporalSituation> situtations = [
+      empty  : new TemporalSituation('undefined range',
           TemporalBounding.newBuilder().build(),
           TemporalBoundingAnalysis.newBuilder()
               .setBeginDescriptor(ValidDescriptor.UNDEFINED)
@@ -39,7 +43,7 @@ class TemporalTestData {
               .setRangeDescriptor(TimeRangeDescriptor.UNDEFINED)
               .build()
       ),
-      invalid: new TemporalSitutation('invalid dates',
+      invalid: new TemporalSituation('invalid dates',
           TemporalBounding.newBuilder().setBeginDate('not a date').build(),
           TemporalBoundingAnalysis.newBuilder()
               .setBeginDescriptor(ValidDescriptor.INVALID)
@@ -60,7 +64,7 @@ class TemporalTestData {
               .setRangeDescriptor(TimeRangeDescriptor.INVALID)
               .build()
       ),
-      backwards: new TemporalSitutation('non-paleo bounded range begin greater than end',
+      backwards: new TemporalSituation('non-paleo bounded range begin greater than end',
           TemporalBounding.newBuilder().setBeginDate('2009-01-01').setEndDate('1900').build(),
           TemporalBoundingAnalysis.newBuilder()
               .setBeginDescriptor(ValidDescriptor.VALID)
@@ -81,7 +85,7 @@ class TemporalTestData {
               .setRangeDescriptor(TimeRangeDescriptor.BACKWARDS)
               .build()
       ),
-      instantNano: new TemporalSitutation('non-paleo instant with nanos precision',
+      instantNano: new TemporalSituation('non-paleo instant with nanos precision',
           TemporalBounding.newBuilder().setInstant('2008-04-01T00:00:00Z').build(),
           TemporalBoundingAnalysis.newBuilder()
               .setBeginDescriptor(ValidDescriptor.UNDEFINED)
@@ -102,7 +106,7 @@ class TemporalTestData {
               .setRangeDescriptor(TimeRangeDescriptor.INSTANT)
               .build()
       ),
-      instantDay: new TemporalSitutation('non-paleo instant with days precision',
+      instantDay: new TemporalSituation('non-paleo instant with days precision',
           TemporalBounding.newBuilder().setInstant('1999-12-31').build(),
           TemporalBoundingAnalysis.newBuilder()
               .setBeginDescriptor(ValidDescriptor.UNDEFINED)
@@ -123,10 +127,10 @@ class TemporalTestData {
               .setRangeDescriptor(TimeRangeDescriptor.INSTANT)
               .build()
       ),
-      instantYear: new TemporalSitutation('non-paleo instant with years precision',
+      instantYear: new TemporalSituation('non-paleo instant with years precision',
           TemporalBounding.newBuilder().setInstant('1999').build(),
           TemporalBoundingAnalysis.newBuilder()
-              .setBeginDescriptor(false)
+              .setBeginDescriptor(ValidDescriptor.UNDEFINED)
               .setBeginIndexable(true)
               .setBeginPrecision(null)
               .setBeginZoneSpecified(null)
@@ -144,7 +148,7 @@ class TemporalTestData {
               .setRangeDescriptor(TimeRangeDescriptor.INSTANT)
               .build()
       ),
-      instantPaleo: new TemporalSitutation('paleo instant with years precision',
+      instantPaleo: new TemporalSituation('paleo instant with years precision',
           TemporalBounding.newBuilder().setInstant('-1000000000').build(),
           TemporalBoundingAnalysis.newBuilder()
               .setBeginDescriptor(ValidDescriptor.UNDEFINED)
@@ -152,7 +156,7 @@ class TemporalTestData {
               .setBeginPrecision(null)
               .setBeginZoneSpecified(null)
               .setBeginUtcDateTimeString(null)
-              .setEndDescriptor(false)
+              .setEndDescriptor(ValidDescriptor.UNDEFINED)
               .setEndIndexable(true)
               .setEndPrecision(null)
               .setEndZoneSpecified(null)
@@ -165,7 +169,7 @@ class TemporalTestData {
               .setRangeDescriptor(TimeRangeDescriptor.INSTANT)
               .build()
       ),
-      ongoing: new TemporalSitutation('ongoing range with second precision for begin',
+      ongoing: new TemporalSituation('ongoing range with second precision for begin',
           TemporalBounding.newBuilder().setBeginDate('1975-06-15T12:30:00Z').build(),
           TemporalBoundingAnalysis.newBuilder()
               .setBeginDescriptor(ValidDescriptor.VALID)
@@ -186,7 +190,7 @@ class TemporalTestData {
               .setRangeDescriptor(TimeRangeDescriptor.ONGOING)
               .build()
       ),
-      bounded: new TemporalSitutation('non-paleo bounded range with day and year precision',
+      bounded: new TemporalSituation('non-paleo bounded range with day and year precision',
           TemporalBounding.newBuilder().setBeginDate('1900-01-01').setEndDate('2009').build(),
           TemporalBoundingAnalysis.newBuilder()
               .setBeginDescriptor(ValidDescriptor.VALID)
@@ -207,7 +211,7 @@ class TemporalTestData {
               .setRangeDescriptor(TimeRangeDescriptor.BOUNDED)
               .build()
       ),
-      paleoBounded: new TemporalSitutation('paleo bounded range',
+      paleoBounded: new TemporalSituation('paleo bounded range',
           TemporalBounding.newBuilder().setBeginDate('-2000000000').setEndDate('-1000000000').build(),
           TemporalBoundingAnalysis.newBuilder()
               .setBeginDescriptor(ValidDescriptor.VALID)
