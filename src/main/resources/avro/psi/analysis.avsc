@@ -157,19 +157,19 @@
               "name": "titleFleschKincaidReadingGradeLevel",
               "type": [
                 "null",
-                "int"
+                "double"
               ],
               "default": null,
-              "doc": "Flesch-Kincaid readability test grade level presenting the U.S. grade level, or approximate years of education required to understand the record's title"
+              "doc": "Flesch-Kincaid readability test grade level presenting the U.S. grade level (range −3.40 to infinite), or approximate years of education required to understand the record's title"
             },
             {
               "name": "alternateTitleFleschKincaidReadingGradeLevel",
               "type": [
                 "null",
-                "int"
+                "double"
               ],
               "default": null,
-              "doc": "Flesch-Kincaid readability test grade level presenting the U.S. grade level, or approximate years of education required to understand the record's alternate title"
+              "doc": "Flesch-Kincaid readability test grade level presenting the U.S. grade level (range −3.40 to infinite), or approximate years of education required to understand the record's alternate title"
             }
           ]
         }

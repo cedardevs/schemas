@@ -493,13 +493,13 @@
             "double": 60.15
           },
           "titleFleschKincaidReadingGradeLevel": {
-            "int": 8
+            "double": 8.0
           },
           "alternateTitleFleschReadingEaseScore": {
             "double": 82.01
           },
           "alternateTitleFleschKincaidReadingGradeLevel": {
-            "int": 6
+            "double": 6.1
           }
         }
       },
