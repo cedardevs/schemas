@@ -510,6 +510,12 @@
           },
           "descriptionCharacters": {
             "int": 1538
+          },
+          "descriptionFleschReadingEaseScore": {
+            "double": 65.0
+          },
+          "descriptionFleschKincaidReadingGradeLevel": {
+            "double": 10.1
           }
         }
       },
