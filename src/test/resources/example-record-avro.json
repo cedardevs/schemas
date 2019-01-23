@@ -488,6 +488,18 @@
           },
           "alternateTitleCharacters": {
             "int": 31
+          },
+          "titleFleschReadingEaseScore": {
+            "double": 60.15
+          },
+          "titleFleschKincaidReadingGradeLevel": {
+            "int": 8
+          },
+          "alternateTitleFleschReadingEaseScore": {
+            "double": 82.01
+          },
+          "alternateTitleFleschKincaidReadingGradeLevel": {
+            "int": 6
           }
         }
       },
