@@ -134,6 +134,42 @@
               ],
               "default": null,
               "doc": "The number of characters in the analyzed record's alternate title"
+            },
+            {
+              "name": "titleFleschReadingEaseScore",
+              "type": [
+                "null",
+                "double"
+              ],
+              "default": null,
+              "doc": "Flesch reading-ease score measuring the reading ease of the record's title"
+            },
+            {
+              "name": "alternateTitleFleschReadingEaseScore",
+              "type": [
+                "null",
+                "double"
+              ],
+              "default": null,
+              "doc": "Flesch reading-ease score measuring the reading ease of the record's alternate title"
+            },
+            {
+              "name": "titleFleschKincaidReadingGradeLevel",
+              "type": [
+                "null",
+                "double"
+              ],
+              "default": null,
+              "doc": "Flesch-Kincaid readability test grade level presenting the U.S. grade level, or approximate years of education required to understand the record's title"
+            },
+            {
+              "name": "alternateTitleFleschKincaidReadingGradeLevel",
+              "type": [
+                "null",
+                "double"
+              ],
+              "default": null,
+              "doc": "Flesch-Kincaid readability test grade level presenting the U.S. grade level, or approximate years of education required to understand the record's alternate title"
             }
           ]
         }
@@ -166,6 +202,24 @@
               ],
               "default": null,
               "doc": "The number of characters in the analyzed record's description"
+            },
+            {
+              "name": "descriptionFleschReadingEaseScore",
+              "type": [
+                "null",
+                "double"
+              ],
+              "default": null,
+              "doc": "Flesch reading-ease score measuring the reading ease of the record's description"
+            },
+            {
+              "name": "descriptionFleschKincaidReadingGradeLevel",
+              "type": [
+                "null",
+                "double"
+              ],
+              "default": null,
+              "doc": "Flesch-Kincaid readability test grade level presenting the U.S. grade level, or approximate years of education required to understand the record's description"
             }
           ]
         }
