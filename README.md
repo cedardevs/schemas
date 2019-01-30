@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/cedardevs/schemas.svg)](https://jitpack.io/#cedardevs/schemas)
+
 # CEDAR Schemas
 
 The purpose of this project is to provide a common, public repository for use with our other metadata storage, analysis, and search tools. These schemas, and associated code, allow not only our system components to interface cleanly, but also enable outside users to build applications that can as well.
