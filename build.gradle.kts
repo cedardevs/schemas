@@ -33,6 +33,14 @@ dependencies {
 }
 
 tasks {
+  generateAvroJava {
+    source("src/main/resources/avro")
+    setOutputDir(file("$buildDir/generated/java"))
+  }
+  val generateJsonSchema = register<GenerateJsonSchema>("generateJsonSchema") {
+    from("src/main/resources/avro")
+    into("$buildDir/generated/resources/json")
+  }
   val sourceJar = register<Jar>("sourceJar") {
     classifier = "sources"
     from(sourceSets.main.get().allJava)
@@ -46,9 +54,11 @@ tasks {
     classifier = "test"
     from(sourceSets.test.get().output)
   }
-
+  processResources {
+    dependsOn(generateJsonSchema)
+  }
   build {
-    dependsOn(sourceJar, javadocJar, testJar)
+    dependsOn(jar, sourceJar, javadocJar, testJar)
   }
 }
 
@@ -77,6 +87,9 @@ sourceSets {
   main {
     java {
       srcDir(tasks.generateAvroJava.get().outputs)
+    }
+    resources {
+      srcDir("$buildDir/generated/resources")
     }
   }
 }

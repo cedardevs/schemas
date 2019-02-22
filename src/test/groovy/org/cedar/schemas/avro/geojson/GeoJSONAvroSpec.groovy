@@ -106,7 +106,7 @@ class GeoJSONAvroSpec extends Specification {
   def "#testType represents valid corresponding GeoJSON"() {
     when:
     // Setup schema for validation
-    InputStream input = ClassLoader.systemClassLoader.getResourceAsStream('json-schema/geojson/geometry-schema.json')
+    InputStream input = ClassLoader.systemClassLoader.getResourceAsStream('geometry-schema.json')
     def rawSchema = new JSONObject(new JSONTokener(input))
     def geoSchema = SchemaLoader.load(rawSchema)
 
