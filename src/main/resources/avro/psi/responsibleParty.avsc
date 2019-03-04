@@ -1,10 +1,10 @@
 {
-  "type": "record",
-  "name": "TemporalBounding",
+  "name": "ResponsibleParty",
   "namespace": "org.cedar.schemas.avro.psi",
+  "type": "record",
   "fields": [
     {
-      "name": "beginDate",
+      "name": "individualName",
       "type": [
         "null",
         "string"
@@ -12,7 +12,7 @@
       "default": null
     },
     {
-      "name": "beginIndeterminate",
+      "name": "organizationName",
       "type": [
         "null",
         "string"
@@ -20,7 +20,7 @@
       "default": null
     },
     {
-      "name": "endDate",
+      "name": "positionName",
       "type": [
         "null",
         "string"
@@ -28,7 +28,7 @@
       "default": null
     },
     {
-      "name": "endIndeterminate",
+      "name": "role",
       "type": [
         "null",
         "string"
@@ -36,7 +36,7 @@
       "default": null
     },
     {
-      "name": "instant",
+      "name": "email",
       "type": [
         "null",
         "string"
@@ -44,15 +44,7 @@
       "default": null
     },
     {
-      "name": "instantIndeterminate",
-      "type": [
-        "null",
-        "string"
-      ],
-      "default": null
-    },
-    {
-      "name": "description",
+      "name": "phone",
       "type": [
         "null",
         "string"
