@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.github.cedardevs"
-version = "0.1.2"
+version = "master-SNAPSHOT"
 
 repositories {
   mavenCentral()
