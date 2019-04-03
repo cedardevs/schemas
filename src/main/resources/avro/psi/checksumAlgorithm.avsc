@@ -1,0 +1,11 @@
+{
+  "name": "ChecksumAlgorithm",
+  "namespace": "org.cedar.schemas.avro.psi",
+  "type": "enum",
+  "symbols": [
+    "MD5",
+    "SHA1",
+    "SHA256",
+    "SHA512"
+  ]
+}
