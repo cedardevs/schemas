@@ -56,6 +56,7 @@
         "type": "enum",
         "symbols": ["NO_OP", "ADD", "REMOVE"]
       },
+      "doc": "The specific operation to execute, mainly for PATCH-method input messages. Use default of NO_OP for when the method is unambiguous on its own.",
       "default": "NO_OP"
     }
   ]
