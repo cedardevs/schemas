@@ -3,6 +3,7 @@ package org.cedar.schemas.avro.util
 import groovy.json.JsonSlurper
 import org.cedar.schemas.avro.psi.Input
 import org.cedar.schemas.avro.psi.Method
+import org.cedar.schemas.avro.psi.OperationType
 import org.cedar.schemas.avro.psi.ParsedRecord
 import org.cedar.schemas.avro.psi.Publishing
 import org.cedar.schemas.avro.psi.RecordType
@@ -27,7 +28,8 @@ class AvroUtilsSpec extends Specification {
         method: Method.POST,
         source: 'test',
         contentType: 'application/json',
-        content: '{"hello":"world"}'
+        content: '{"hello":"world"}',
+        operation: OperationType.NO_OP
     ]
   }
 
