@@ -17,7 +17,7 @@
       "name": "coordinates",
       "type": {
         "type": "array",
-        "items": ["double"]
+        "items": "double"
       },
       "default": []
     }

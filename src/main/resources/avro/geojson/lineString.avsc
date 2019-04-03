@@ -20,7 +20,7 @@
         "items": [
           {
             "type": "array",
-            "items": ["double"]
+            "items": "double"
           }
         ]
       },
