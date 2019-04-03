@@ -48,6 +48,15 @@
       ],
       "doc": "The source of the input, e.g. the name of an external system which produced this input record",
       "default": null
+    },
+    {
+      "name": "operation",
+      "type": {
+        "name": "OperationType",
+        "type": "enum",
+        "symbols": ["NO_OP", "ADD", "REMOVE"]
+      },
+      "default": "NO_OP"
     }
   ]
 }
