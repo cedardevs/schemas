@@ -2,7 +2,7 @@
   "type": "record",
   "namespace": "org.cedar.schemas.avro.psi",
   "name": "Publishing",
-  "doc": "TBD",
+  "doc": "Record describing whether the object this is in reference to should be publicly available, and if not, for how long it should remain private",
   "fields": [
     {
       "name": "isPrivate",
