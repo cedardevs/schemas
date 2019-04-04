@@ -1,0 +1,104 @@
+{
+  "type": "record",
+  "namespace": "org.cedar.schemas.avro.psi",
+  "name": "AggregatedInput",
+  "doc": "The aggregated most recent view for a metadata record. Raw input is maintained but some high-level inventory management data is extracted, when known, at this point.",
+  "fields": [
+    {
+      "name": "rawJson",
+      "type": [
+        "null",
+        "string"
+      ],
+      "doc": "The raw aggregated JSON input content as a string",
+      "default": null
+    },
+    {
+      "name": "rawXml",
+      "type": [
+        "null",
+        "string"
+      ],
+      "doc": "The raw most recent XML input content as a string",
+      "default": null
+    },
+    {
+      "name": "initialSource",
+      "type": [
+        "null",
+        "string"
+      ],
+      "doc": "The initial source of the input, e.g. the name of an external system which first provided this input record",
+      "default": null
+    },
+    {
+      "name": "type",
+      "type": [
+        "null",
+        "RecordType"
+      ],
+      "doc": "The type of record represented by this input",
+      "default": null
+    },
+    {
+      "name": "fileInformation",
+      "type": [
+        "null",
+        "FileInformation"
+      ],
+      "doc": "Details about the file that this input object is in reference to",
+      "default": null
+    },
+    {
+      "name": "fileLocations",
+      "type": [
+        "null",
+        "FileLocations"
+      ],
+      "doc": "A list of location objects describing where the file is located",
+      "default": null
+    },
+    {
+      "name": "publishing",
+      "type": [
+        "null",
+        "Publishing"
+      ],
+      "doc": "Information pertaining to whether a file is private and for how long if so",
+      "default": null
+    },
+    {
+      "name": "relationships",
+      "type": [
+        "null",
+        "Relationships"
+      ],
+      "doc": "A record of this objects relationships to other objects in the inventory",
+      "default": null
+    },
+    {
+      "name": "deleted",
+      "type": "boolean",
+      "doc": "Whether or not this input should be treated as deleted downstream",
+      "default": false
+    },
+    {
+      "name": "events",
+      "type": {
+        "type": "array",
+        "items": "InputEvent"
+      },
+      "doc": "A list of each instance where modifications to this input object were received",
+      "default": []
+    },
+    {
+      "name": "errors",
+      "type": {
+        "type": "array",
+        "items": "ErrorEvent"
+      },
+      "doc": "A list of any errors that may have been encountered between receiving input events for this object and consolidating all events into this aggregated object",
+      "default": []
+    }
+  ]
+}
