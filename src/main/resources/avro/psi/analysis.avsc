@@ -460,7 +460,7 @@
               "doc": "Indicates if the analyzed record has a spatial bounding"
             },
             {
-              "name": "isValidGeoJSON",
+              "name": "isValid",
               "type": [
                 "null",
                 "boolean"
