@@ -51,12 +51,12 @@
     },
     {
       "name": "fileLocations",
-      "type": [
-        "null",
-        "FileLocations"
-      ],
+      "type": {
+        "type": "array",
+        "items": "FileLocation"
+      },
       "doc": "A list of location objects describing where the file is located",
-      "default": null
+      "default": []
     },
     {
       "name": "publishing",
@@ -69,12 +69,12 @@
     },
     {
       "name": "relationships",
-      "type": [
-        "null",
-        "Relationships"
-      ],
+      "type": {
+        "type": "array",
+        "items": "Relationship"
+      },
       "doc": "A record of this objects relationships to other objects in the inventory",
-      "default": null
+      "default": []
     },
     {
       "name": "deleted",
