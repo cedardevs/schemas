@@ -580,7 +580,7 @@
           "spatialBoundingExists": {
             "boolean": true
           },
-          "isValidGeoJSON": {
+          "isValid": {
             "boolean": true
           },
           "validationError": {
