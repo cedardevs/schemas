@@ -37,7 +37,7 @@
       "name": "operation",
       "type": [
         "null",
-        "Operation"
+        "OperationType"
       ],
       "doc": "The specific operation to execute, mainly for PATCH-method input messages. Use NO_OP for when the method is unambiguous on its own.",
       "default": null
