@@ -1,0 +1,47 @@
+{
+  "type": "record",
+  "namespace": "org.cedar.schemas.avro.psi",
+  "name": "InputEvent",
+  "doc": "Record describing when and what happened when an input was received",
+  "fields": [
+    {
+      "name": "timestamp",
+      "type": [
+        "null", {
+          "type": "long",
+          "logicalType": "timestamp-millis"
+        }
+      ],
+      "doc": "The timestamp of when the event occured",
+      "default": null
+    },
+    {
+      "name": "method",
+      "type": [
+        "null",
+        "Method"
+      ],
+      "doc": "The HTTP method associated with this event",
+      "default": null
+    },
+    {
+      "name": "source",
+      "type": [
+        "null",
+        "string"
+      ],
+      "doc": "The source associated with this event",
+      "default": null
+    },
+    {
+      "name": "operation",
+      "type": {
+        "name": "OperationType",
+        "type": "enum",
+        "symbols": ["NO_OP", "ADD", "REMOVE"]
+      },
+      "doc": "The specific operation associated with this event",
+      "default": "NO_OP"
+    }
+  ]
+}
