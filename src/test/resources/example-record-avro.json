@@ -579,7 +579,11 @@
         "org.cedar.schemas.avro.psi.SpatialBoundingAnalysis": {
           "spatialBoundingExists": {
             "boolean": true
-          }
+          },
+          "isValid": {
+            "boolean": true
+          },
+          "validationError": null
         }
       }
     }

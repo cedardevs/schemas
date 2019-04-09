@@ -458,6 +458,24 @@
               ],
               "default": null,
               "doc": "Indicates if the analyzed record has a spatial bounding"
+            },
+            {
+              "name": "isValid",
+              "type": [
+                "null",
+                "boolean"
+              ],
+              "default": null,
+              "doc": "Indicates if the analyzed record has a valid geometry"
+            },
+            {
+              "name": "validationError",
+              "type": [
+                "null",
+                "string"
+              ],
+              "default": null,
+              "doc": "if invalid geometry, display the Error message"
             }
           ]
         }
