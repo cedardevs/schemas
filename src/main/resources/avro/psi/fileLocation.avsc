@@ -1,0 +1,70 @@
+{
+  "type": "record",
+  "namespace": "org.cedar.schemas.avro.psi",
+  "name": "FileLocation",
+  "doc": "A location at which a file is stored and/or available. All locations require a URI and the equality of two locations is defined by the equality of their URIs",
+  "fields": [
+    {
+      "name": "uri",
+      "type": "string",
+      "doc": "A Uniform Resource Identifier as defined by RFCs 2396 and 3986"
+    },
+    {
+      "name": "deleted",
+      "type": "boolean",
+      "doc": "Indicates if the file has been deleted from this location. Allows for preservation of previously-active locations, for example",
+      "default": false
+    },
+    {
+      "name": "restricted",
+      "type": "boolean",
+      "doc": "Is access to this location restricted from the public?",
+      "default": false
+    },
+    {
+      "name": "asynchronous",
+      "type": "boolean",
+      "doc": "Indicates if access to this location is asynchronous, e.g. it is stored in a tape library",
+      "default": false
+    },
+    {
+      "name": "locality",
+      "type": [
+        "null",
+        "string"
+      ],
+      "doc": "A string indicating the locality of the data, e.g. a FISMA boundary, an AWS Region, an archive service, etc.",
+      "default": null
+    },
+    {
+      "name": "lastModified",
+      "type": [
+        "null",
+        {
+          "type": "long",
+          "logicalType": "timestamp-millis"
+        }
+      ],
+      "doc": "The datetime at which this location was created or last modified, whichever is more recent",
+      "default": null
+    },
+    {
+      "name": "serviceType",
+      "type": [
+        "null",
+        "string"
+      ],
+      "doc": "The type of service this location belongs to, e.g. Amazon:AWS:S3 or OGC:CSW. These should be valid values for srv:serviceType or gmd:protocol attributes in ISO-19115 metadata",
+      "default": null
+    },
+    {
+      "name": "metadata",
+      "type": {
+        "type": "map",
+        "values": "string"
+      },
+      "doc": "A map of additional metadata string values",
+      "default": {}
+    }
+  ]
+}
