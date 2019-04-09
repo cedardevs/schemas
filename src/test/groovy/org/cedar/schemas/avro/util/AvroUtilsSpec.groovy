@@ -20,6 +20,7 @@ class AvroUtilsSpec extends Specification {
     builder.source = 'test'
     builder.contentType = 'application/json'
     builder.content = '{"hello":"world"}'
+    builder.operation = OperationType.NO_OP
     def testInput = builder.build()
 
     expect:
