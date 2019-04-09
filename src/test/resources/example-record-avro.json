@@ -583,9 +583,7 @@
           "isValid": {
             "boolean": true
           },
-          "validationError": {
-            "string": " "
-          }
+          "validationError": null
         }
       }
     }
