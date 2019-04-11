@@ -1,0 +1,12 @@
+{
+  "type": "enum",
+  "namespace": "org.cedar.schemas.avro.psi",
+  "name": "FileLocationType",
+  "doc": "The type of the file location, e.g. an ingest location, access location, etc.",
+  "symbols": [
+    "INGEST",
+    "ARCHIVE",
+    "ACCESS",
+    "WORKING"
+  ]
+}

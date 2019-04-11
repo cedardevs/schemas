@@ -10,6 +10,15 @@
       "doc": "A Uniform Resource Identifier as defined by RFCs 2396 and 3986"
     },
     {
+      "name": "type",
+      "type": [
+        "null",
+        "FileLocationType"
+      ],
+      "doc": "The type of the file location, e.g. an ingest location, access location, etc.",
+      "default": null
+    },
+    {
       "name": "deleted",
       "type": "boolean",
       "doc": "Indicates if the file has been deleted from this location. Allows for preservation of previously-active locations, for example",
