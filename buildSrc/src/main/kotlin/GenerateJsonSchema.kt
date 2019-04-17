@@ -11,6 +11,7 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import java.io.File
+import java.lang.IllegalStateException
 
 /**
  * A task to generate json schema from a set of avro schema files
@@ -51,14 +52,22 @@ open class GenerateJsonSchema : DefaultTask() {
     generateJsonSchema(combinedAvro, outDir)
   }
 
-  private fun sortFiles(files: Set<File>?): List<ComparableAvroFile> {
-    return when {
-      files != null -> files.map(::ComparableAvroFile).sorted()
-      else -> listOf()
+  private fun sortFiles(files: Set<File>?): List<AvroFile> {
+    if (files == null) {
+      return listOf()
     }
+
+    val schemas = files.map(::AvroFile).toSet()
+    val schemasByName = schemas.associateBy { it.name }
+    val edges = schemasByName.values.flatMap { file ->
+      file.dependencies
+          .map { depName -> schemasByName[depName] }
+          .map { if (it == null) null else Edge(from=it, to=file) }
+    }.filterNotNull().toSet()
+    return topologicalSort(schemas, edges)
   }
 
-  private fun printInfo(files: List<ComparableAvroFile>) {
+  private fun printInfo(files: List<AvroFile>) {
     files.forEach { file ->
       logger.info("${file.name} depends on:")
       file.dependencies.forEach { logger.info("  - $it") }
@@ -97,8 +106,10 @@ open class GenerateJsonSchema : DefaultTask() {
     return outFile
   }
 
-  data class ComparableAvroFile(val file: File) : Comparable<ComparableAvroFile> {
-
+  /**
+   * Helper class to parse avro files and collect their dependencies, i.e. references to external record types
+   */
+  data class AvroFile(val file: File) {
     private val knownAvroTypes: List<String> = listOf("null", "boolean", "int", "long", "float", "double", "bytes", "string")
     private val jsonMap: Map<String, Any> = ObjectMapper().readValue(file, mutableMapOf<String, Any>().javaClass)
     private val namespace: String = jsonMap["namespace"].toString()
@@ -136,9 +147,60 @@ open class GenerateJsonSchema : DefaultTask() {
       }
     }
 
-    override fun compareTo(other: ComparableAvroFile): Int {
-      // TODO - I'm definitely not sure that this will work every time... but it works for our current set of schemas!
-      return if (dependencies.contains(other.name) || dependencies.size > other.dependencies.size) 1 else -1
+    override fun toString(): String {
+      return name
+    }
+  }
+
+  /**
+   * Helper class to represent a directed graph edge from one value to another
+   */
+  data class Edge<T>(val from: T, val to: T) {
+    override fun toString(): String {
+      return "$from --> $to"
+    }
+  }
+
+  /**
+   * Kahn's algorithm for topological sorting of DAGs!
+   * see: https://en.wikipedia.org/wiki/Topological_sorting#Kahn's_algorithm
+   *
+   * L ← Empty list that will contain the sorted elements
+   * S ← Set of all nodes with no incoming edge
+   * while S is non-empty do
+   *   remove a node n from S
+   *   add n to tail of L
+   *   for each node m with an edge e from n to m do
+   *     remove edge e from the graph
+   *     if m has no other incoming edges then
+   *       insert m into S
+   * if graph has edges then
+   *   return error   (graph has at least one cycle)
+   * else
+   *   return L   (a topologically sorted order)
+   */
+  private fun <T> topologicalSort(nodes: Set<T>, edges: Set<Edge<T>>): List<T> {
+    val result = mutableListOf<T>()
+    val nodesWithIncoming = edges.map { it.to }
+    val remainingEdges = edges.toMutableSet()
+    val nodesWithoutIncoming = nodes.filter { !nodesWithIncoming.contains(it) }.toMutableSet()
+
+    while (nodesWithoutIncoming.isNotEmpty()) {
+      val node = nodesWithoutIncoming.first()
+      nodesWithoutIncoming.remove(node)
+      result.add(node)
+      edges.filter { it.from == node }.forEach { e ->
+        remainingEdges.remove(e)
+        if (remainingEdges.none { it.to == e.to }) {
+          nodesWithoutIncoming.add(e.to)
+        }
+      }
+    }
+    if (remainingEdges.isNotEmpty()) {
+      throw IllegalStateException("The graph has a cycle in it; unable to sort topologically. The following edges are part of the cycle: $remainingEdges")
+    }
+    else {
+      return result
     }
   }
 }
