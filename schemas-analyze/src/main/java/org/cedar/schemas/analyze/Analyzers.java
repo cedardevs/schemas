@@ -15,6 +15,7 @@ import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalQueries;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.cedar.schemas.avro.psi.TimeRangeDescriptor.*;
 
@@ -128,7 +129,10 @@ public class Analyzers {
   public static SpatialBoundingAnalysis analyzeSpatialBounding(Discovery metadata) {
     SpatialBoundingAnalysis.Builder builder = SpatialBoundingAnalysis.newBuilder();
     if (metadata != null) {
-      builder.setSpatialBoundingExists(metadata.getSpatialBounding() != null);
+      ValidateGeometry.Result validateGeometry = ValidateGeometry.validateGeometry(metadata);
+      builder.setSpatialBoundingExists(validateGeometry.exists)
+          .setIsValid(validateGeometry.isValid)
+          .setValidationError(validateGeometry.error);
     }
     return builder.build();
   }

@@ -88,7 +88,9 @@ class AnalyzersSpec extends Specification {
             rangeDescriptor         : BOUNDED,
         ],
         spatialBounding : [
-            spatialBoundingExists: true
+            spatialBoundingExists: true,
+            isValid              : true,
+            validationError      : null
         ],
         titles          : [
             titleExists             : true,
