@@ -10,8 +10,6 @@ version = "master-SNAPSHOT"
 
 repositories {
   mavenCentral()
-  maven("https://jitpack.io")
-  maven("https://packages.confluent.io/maven/")
 }
 
 dependencies {
@@ -25,16 +23,16 @@ dependencies {
 
 tasks {
   val javadocJar = register<Jar>("javadocJar") {
-    classifier = "javadoc"
+    archiveClassifier.set("javadoc")
     dependsOn(javadoc)
     from(javadoc.get().destinationDir)
   }
   val testJar = register<Jar>("testJar") {
-    classifier = "test"
+    archiveClassifier.set("test")
     from(sourceSets.test.get().output)
   }
   build {
-    dependsOn(jar, javadocJar/*, testJar*/)
+    dependsOn(jar, javadocJar, testJar)
   }
 }
 
