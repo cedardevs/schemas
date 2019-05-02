@@ -19,6 +19,7 @@ repositories {
 dependencies {
   implementation(project(":schemas-core"))
   implementation("org.apache.commons:commons-text:1.6")
+  implementation("org.locationtech.jts.io:jts-io-common:1.16.1")
 
   testImplementation(project(":schemas-parse"))
   testImplementation("org.spockframework:spock-core:1.1-groovy-2.4")
