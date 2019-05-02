@@ -25,6 +25,10 @@ dependencies {
 }
 
 tasks {
+  val sourceJar = register<Jar>("sourceJar") {
+    archiveClassifier.set("sources")
+    from(sourceSets.main.get().allJava)
+  }
   val javadocJar = register<Jar>("javadocJar") {
     archiveClassifier.set("javadoc")
     dependsOn(javadoc)
@@ -35,7 +39,7 @@ tasks {
     from(sourceSets.test.get().output)
   }
   build {
-    dependsOn(jar, javadocJar, testJar)
+    dependsOn(jar, sourceJar, javadocJar, testJar)
   }
 }
 
