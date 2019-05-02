@@ -14,6 +14,7 @@ import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalQueries;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.cedar.schemas.avro.psi.TimeRangeDescriptor.*;
 
@@ -42,8 +43,8 @@ public class Analyzers {
           .build();
     } catch (Exception e) {
       log.error("An error occurred during analysis", e);
-      var errors = record.getErrors() != null ? record.getErrors() : new ArrayList<ErrorEvent>();
-      var error = ErrorEvent.newBuilder()
+      List<ErrorEvent> errors = record.getErrors() != null ? record.getErrors() : new ArrayList<ErrorEvent>();
+      ErrorEvent error = ErrorEvent.newBuilder()
           .setTitle("Analysis failed")
           .setDetail(ExceptionUtils.getRootCauseMessage(e).trim())
           .build();
@@ -52,7 +53,7 @@ public class Analyzers {
     }
   }
 
-  static Analysis analyze(Discovery discovery) {
+  public static Analysis analyze(Discovery discovery) {
     log.debug("Analyzing record: {}", discovery);
     if (discovery == null) {
       return null;
@@ -68,14 +69,14 @@ public class Analyzers {
         .build();
   }
 
-  static IdentificationAnalysis analyzeIdentifiers(Discovery metadata) {
+  public static IdentificationAnalysis analyzeIdentifiers(Discovery metadata) {
     if (metadata == null) {
       return null;
     }
-    var fileIdInfo = new StringInfo(metadata.getFileIdentifier());
-    var doiInfo = new StringInfo(metadata.getDoi());
-    var parentIdInfo = new StringInfo(metadata.getParentIdentifier());
-    var hierarchyInfo = new StringInfo(metadata.getHierarchyLevelName());
+    StringInfo fileIdInfo = new StringInfo(metadata.getFileIdentifier());
+    StringInfo doiInfo = new StringInfo(metadata.getDoi());
+    StringInfo parentIdInfo = new StringInfo(metadata.getParentIdentifier());
+    StringInfo hierarchyInfo = new StringInfo(metadata.getHierarchyLevelName());
 
     return IdentificationAnalysis.newBuilder()
         .setFileIdentifierExists(fileIdInfo.exists)
@@ -89,15 +90,15 @@ public class Analyzers {
         .build();
   }
 
-  static TemporalBoundingAnalysis analyzeTemporalBounding(Discovery metadata) {
-    var builder = TemporalBoundingAnalysis.newBuilder();
+  public static TemporalBoundingAnalysis analyzeTemporalBounding(Discovery metadata) {
+    TemporalBoundingAnalysis.Builder builder = TemporalBoundingAnalysis.newBuilder();
 
     if (metadata != null && metadata.getTemporalBounding() != null) {
       // Gather info
-      var beginInfo = new DateInfo(metadata.getTemporalBounding().getBeginDate(), true);
-      var endInfo = new DateInfo(metadata.getTemporalBounding().getEndDate(), false);
-      var instantInfo = new DateInfo(metadata.getTemporalBounding().getInstant(), true);
-      var rangeDescriptor = rangeDescriptor(beginInfo, endInfo, instantInfo);
+      DateInfo beginInfo = new DateInfo(metadata.getTemporalBounding().getBeginDate(), true);
+      DateInfo endInfo = new DateInfo(metadata.getTemporalBounding().getEndDate(), false);
+      DateInfo instantInfo = new DateInfo(metadata.getTemporalBounding().getInstant(), true);
+      TimeRangeDescriptor rangeDescriptor = rangeDescriptor(beginInfo, endInfo, instantInfo);
 
       // Build
       builder.setBeginDescriptor(beginInfo.descriptor);
@@ -124,19 +125,19 @@ public class Analyzers {
     return builder.build();
   }
 
-  static SpatialBoundingAnalysis analyzeSpatialBounding(Discovery metadata) {
-    var builder = SpatialBoundingAnalysis.newBuilder();
+  public static SpatialBoundingAnalysis analyzeSpatialBounding(Discovery metadata) {
+    SpatialBoundingAnalysis.Builder builder = SpatialBoundingAnalysis.newBuilder();
     if (metadata != null) {
       builder.setSpatialBoundingExists(metadata.getSpatialBounding() != null);
     }
     return builder.build();
   }
 
-  static TitleAnalysis analyzeTitles(Discovery metadata) {
-    var builder = TitleAnalysis.newBuilder();
+  public static TitleAnalysis analyzeTitles(Discovery metadata) {
+    TitleAnalysis.Builder builder = TitleAnalysis.newBuilder();
     if (metadata != null) {
-      var titleAnalysis = new StringInfo(metadata.getTitle());
-      var altAnalysis = new StringInfo(metadata.getAlternateTitle());
+      StringInfo titleAnalysis = new StringInfo(metadata.getTitle());
+      StringInfo altAnalysis = new StringInfo(metadata.getAlternateTitle());
       builder.setTitleExists(titleAnalysis.exists);
       builder.setTitleCharacters(titleAnalysis.characters);
       builder.setAlternateTitleExists(altAnalysis.exists);
@@ -149,10 +150,10 @@ public class Analyzers {
     return builder.build();
   }
 
-  static DescriptionAnalysis analyzeDescription(Discovery metadata) {
-    var builder = DescriptionAnalysis.newBuilder();
+  public static DescriptionAnalysis analyzeDescription(Discovery metadata) {
+    DescriptionAnalysis.Builder builder = DescriptionAnalysis.newBuilder();
     if (metadata != null) {
-      var analysis = new StringInfo(metadata.getDescription());
+      StringInfo analysis = new StringInfo(metadata.getDescription());
       builder.setDescriptionExists(analysis.exists);
       builder.setDescriptionCharacters(analysis.characters);
       builder.setDescriptionFleschReadingEaseScore(analysis.readingEase);
@@ -161,16 +162,16 @@ public class Analyzers {
     return builder.build();
   }
 
-  static ThumbnailAnalysis analyzeThumbnail(Discovery metadata) {
-    var builder = ThumbnailAnalysis.newBuilder();
+  public static ThumbnailAnalysis analyzeThumbnail(Discovery metadata) {
+    ThumbnailAnalysis.Builder builder = ThumbnailAnalysis.newBuilder();
     if (metadata != null) {
       builder.setThumbnailExists(metadata.getThumbnail() != null);
     }
     return builder.build();
   }
 
-  static DataAccessAnalysis analyzeDataAccess(Discovery metadata) {
-    var builder = DataAccessAnalysis.newBuilder();
+  public static DataAccessAnalysis analyzeDataAccess(Discovery metadata) {
+    DataAccessAnalysis.Builder builder = DataAccessAnalysis.newBuilder();
     if (metadata != null) {
       builder.setDataAccessExists(metadata.getLinks().size() > 0);
     }
@@ -212,8 +213,8 @@ public class Analyzers {
         return;
       }
 
-      var longDate = parseLong(dateString);
-      var parsedDate = parseDate(dateString);
+      Long longDate = parseLong(dateString);
+      TemporalAccessor parsedDate = parseDate(dateString);
       if (longDate != null && !indexable(longDate)) {
         descriptor = ValidDescriptor.VALID;
         precision = precision(longDate);
@@ -292,13 +293,13 @@ public class Analyzers {
     }
 
     if (parsedDate instanceof Year) {
-      var yearDate = start ?
+      LocalDateTime yearDate = start ?
           ((Year) parsedDate).atMonth(1).atDay(1).atStartOfDay() :
           ((Year) parsedDate).atMonth(12).atEndOfMonth().atTime(23, 59, 59);
       return DateTimeFormatter.ISO_ZONED_DATE_TIME.format(yearDate.atZone(ZoneOffset.UTC));
     }
     if (parsedDate instanceof LocalDate) {
-      var localDate = start ?
+      LocalDateTime localDate = start ?
           ((LocalDate) parsedDate).atStartOfDay() :
           ((LocalDate) parsedDate).atTime(23, 59, 59);
       return DateTimeFormatter.ISO_ZONED_DATE_TIME.format(localDate.atZone(ZoneOffset.UTC));
@@ -318,14 +319,14 @@ public class Analyzers {
   }
 
   static TimeRangeDescriptor rangeDescriptor(DateInfo beginInfo, DateInfo endInfo, DateInfo instantInfo) {
-    var begin = beginInfo.descriptor;
-    var end = endInfo.descriptor;
-    var instant = instantInfo.descriptor;
+    ValidDescriptor begin = beginInfo.descriptor;
+    ValidDescriptor end = endInfo.descriptor;
+    ValidDescriptor instant = instantInfo.descriptor;
 
     if (begin == ValidDescriptor.VALID &&
         end == ValidDescriptor.VALID &&
         instant == ValidDescriptor.UNDEFINED) {
-      var inOrder = beginLTEEnd(beginInfo, endInfo);
+      Boolean inOrder = beginLTEEnd(beginInfo, endInfo);
       return inOrder == null ? INVALID : inOrder ? BOUNDED : BACKWARDS;
     }
     if (begin == ValidDescriptor.VALID &&
@@ -348,24 +349,24 @@ public class Analyzers {
   }
 
   static Boolean beginLTEEnd(DateInfo beginInfo, DateInfo endInfo) {
-    var beginIndexable = beginInfo.indexable == true;
-    var endIndexable = endInfo.indexable == true;
-    var beginIsYears = beginInfo.precision == ChronoUnit.YEARS.toString();
-    var endIsYears = endInfo.precision == ChronoUnit.YEARS.toString();
+    boolean beginIndexable = beginInfo.indexable;
+    boolean endIndexable = endInfo.indexable;
+    boolean beginIsYears = beginInfo.precision.equals(ChronoUnit.YEARS.toString());
+    boolean endIsYears = endInfo.precision.equals(ChronoUnit.YEARS.toString());
 
     if (beginIndexable && endIndexable) {
       // Compare actual dates with UTC string
-      var beginDate = ZonedDateTime.parse(beginInfo.utcDateTimeString);
-      var endDate = ZonedDateTime.parse(endInfo.utcDateTimeString);
+      ZonedDateTime beginDate = ZonedDateTime.parse(beginInfo.utcDateTimeString);
+      ZonedDateTime endDate = ZonedDateTime.parse(endInfo.utcDateTimeString);
       return beginDate.isBefore(endDate) || beginDate.isEqual(endDate);
     }
     else if ((beginIsYears && endIsYears) || (beginIsYears && endIndexable) || (beginIndexable && endIsYears)) {
       // Compare years only as longs; parse both as string objects since both may not be just a long.
       // Watch out for negative years...
-      var beginYearText = beginInfo.utcDateTimeString.substring(0, beginInfo.utcDateTimeString.indexOf('-', 1));
-      var endYearText = endInfo.utcDateTimeString.substring(0, endInfo.utcDateTimeString.indexOf('-', 1));
-      var beginYear = Long.parseLong(beginYearText);
-      var endYear = Long.parseLong(endYearText);
+      String beginYearText = beginInfo.utcDateTimeString.substring(0, beginInfo.utcDateTimeString.indexOf('-', 1));
+      String endYearText = endInfo.utcDateTimeString.substring(0, endInfo.utcDateTimeString.indexOf('-', 1));
+      Long beginYear = Long.parseLong(beginYearText);
+      Long endYear = Long.parseLong(endYearText);
       return beginYear <= endYear;
     }
     else {

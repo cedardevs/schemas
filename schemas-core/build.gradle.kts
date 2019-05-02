@@ -9,6 +9,10 @@ plugins {
 group = "com.github.cedardevs"
 version = "master-SNAPSHOT"
 
+java {
+  sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
 repositories {
   mavenCentral()
   maven("https://jitpack.io")

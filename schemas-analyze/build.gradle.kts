@@ -9,7 +9,7 @@ group = "com.github.cedardevs"
 version = "master-SNAPSHOT"
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_11
+  sourceCompatibility = JavaVersion.VERSION_1_8
 }
 
 repositories {
