@@ -1,13 +1,17 @@
 plugins {
   groovy
   jacoco
-  id("com.commercehub.gradle.plugin.avro") version "0.9.1"
+  id("com.commercehub.gradle.plugin.avro").version("0.9.1")
   `java-library`
   `maven-publish`
 }
 
 group = "com.github.cedardevs"
 version = "master-SNAPSHOT"
+
+java {
+  sourceCompatibility = JavaVersion.VERSION_1_8
+}
 
 repositories {
   mavenCentral()
@@ -42,16 +46,16 @@ tasks {
     into("$buildDir/generated/resources/json")
   }
   val sourceJar = register<Jar>("sourceJar") {
-    classifier = "sources"
+    archiveClassifier.set("sources")
     from(sourceSets.main.get().allJava)
   }
   val javadocJar = register<Jar>("javadocJar") {
-    classifier = "javadoc"
+    archiveClassifier.set("javadoc")
     dependsOn(javadoc)
     from(javadoc.get().destinationDir)
   }
   val testJar = register<Jar>("testJar") {
-    classifier = "test"
+    archiveClassifier.set("test")
     from(sourceSets.test.get().output)
   }
   processResources {

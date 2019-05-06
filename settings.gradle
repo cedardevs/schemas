@@ -1,1 +1,5 @@
 rootProject.name = 'schemas'
+
+include "schemas-analyze"
+include "schemas-core"
+include "schemas-parse"
