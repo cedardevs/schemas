@@ -41,6 +41,15 @@
         "string"
       ],
       "default": null
+    },
+    {
+      "name": "metadata",
+      "type": {
+        "type": "map",
+        "values": "string"
+      },
+      "doc": "A map of additional metadata string values",
+      "default": {}
     }
   ]
 }
