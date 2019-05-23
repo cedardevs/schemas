@@ -7,6 +7,7 @@
     {
       "name": "isPrivate",
       "type": "boolean",
+      "doc": "Indicates if the object is private or not",
       "default": false
     },
     {
@@ -15,7 +16,7 @@
         "null",
         "long"
       ],
-      "logicalType": "timestamp-millis",
+      "doc": "The time, stored as the number of milliseconds from the unix epoch, until which the isPrivate value is valid and after which it is reversed",
       "default": null
     }
   ]

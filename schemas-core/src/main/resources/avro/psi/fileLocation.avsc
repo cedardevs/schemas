@@ -49,12 +49,9 @@
       "name": "lastModified",
       "type": [
         "null",
-        {
-          "type": "long",
-          "logicalType": "timestamp-millis"
-        }
+        "long"
       ],
-      "doc": "The datetime at which this location was created or last modified, whichever is more recent",
+      "doc": "The datetime at which this location was created or last modified, whichever is more recent, stored as the number of milliseconds from the unix epoch",
       "default": null
     },
     {

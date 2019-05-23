@@ -7,12 +7,10 @@
     {
       "name": "timestamp",
       "type": [
-        "null", {
-          "type": "long",
-          "logicalType": "timestamp-millis"
-        }
+        "null",
+        "long"
       ],
-      "doc": "The timestamp of when the event occured",
+      "doc": "The timestamp of when the event occurred, stored as the number of milliseconds from the unix epoch",
       "default": null
     },
     {
