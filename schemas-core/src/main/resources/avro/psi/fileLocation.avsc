@@ -64,12 +64,12 @@
       "default": null
     },
     {
-      "name": "metadata",
+      "name": "optionalAttributes",
       "type": {
         "type": "map",
         "values": "string"
       },
-      "doc": "A map of additional metadata string values",
+      "doc": "A discretionary map of key/value pairs to capture arbitrary attributes",
       "default": {}
     }
   ]

@@ -69,7 +69,7 @@ class AvroUtilsSpec extends Specification {
             [algorithm: 'MD5', value: 'abc'],
             [algorithm: 'SHA1', value: 'xyz']
         ],
-        metadata: [
+        optionalAttributes: [
             "hello": "world",
             "answer": "42"
         ]
@@ -89,10 +89,10 @@ class AvroUtilsSpec extends Specification {
     result.checksums.every { it instanceof Checksum }
     result.checksums[0] == Checksum.newBuilder().setAlgorithm(ChecksumAlgorithm.MD5).setValue('abc').build()
     result.checksums[1] == Checksum.newBuilder().setAlgorithm(ChecksumAlgorithm.SHA1).setValue('xyz').build()
-    result.metadata instanceof Map
-    result.metadata.size() == 2
-    result.metadata['hello'] == map.metadata.hello
-    result.metadata['answer'] == map.metadata.answer
+    result.optionalAttributes instanceof Map
+    result.optionalAttributes.size() == 2
+    result.optionalAttributes['hello'] == map.optionalAttributes.hello
+    result.optionalAttributes['answer'] == map.optionalAttributes.answer
   }
 
   def 'leniently parses json into a FileInformation'() {
@@ -110,8 +110,8 @@ class AvroUtilsSpec extends Specification {
     result.headers == null
     result.checksums instanceof List
     result.checksums.size() == 0
-    result.metadata instanceof Map
-    result.metadata.size() == 0
+    result.optionalAttributes instanceof Map
+    result.optionalAttributes.size() == 0
   }
 
   def 'ParsedRecord has empty array of errors by default'() {
