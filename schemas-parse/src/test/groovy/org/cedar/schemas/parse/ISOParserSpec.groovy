@@ -41,13 +41,13 @@ class ISOParserSpec extends Specification {
         [
             title: '[TITLE OF PUBLICATION]',
             date : '9999-01-01',
-            links: [new Link(
+            links: [[
                 linkName: null,
                 linkProtocol: null,
                 linkUrl: 'HTTPS://WWW.EXAMPLE.COM',
                 linkDescription: '[DESCRIPTION OF URL]',
                 linkFunction: 'information'
-            )]
+            ]]
         ]
     ]
 
