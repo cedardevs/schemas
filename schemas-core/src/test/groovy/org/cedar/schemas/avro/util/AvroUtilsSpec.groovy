@@ -39,6 +39,12 @@ class AvroUtilsSpec extends Specification {
     result.operation == OperationType.NO_OP
   }
 
+  def 'avroToMap handles nulls'() {
+    expect:
+    AvroUtils.avroToMap(null) == null
+    AvroUtils.avroToMap(null, false) == null
+  }
+
   def 'transforms a map into an input'() {
     def inputMap = [
         type       : RecordType.granule,
@@ -57,6 +63,11 @@ class AvroUtilsSpec extends Specification {
     result.source == 'test'
     result.contentType == 'application/json'
     result.content == '{"hello":"world"}'
+  }
+
+  def 'mapToAvro handles nulls'() {
+    expect:
+    AvroUtils.mapToAvro(null, FileInformation) == null
   }
 
   def 'transforms a map into a FileInformation'() {

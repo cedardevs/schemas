@@ -29,6 +29,7 @@ public class AvroUtils {
   }
 
   public static Map<String, Object> avroToMap(GenericRecord record, boolean recurse) {
+    if (record == null) { return null; }
     List<Schema.Field> fields = record.getSchema().getFields();
     Map<String, Object> result = new LinkedHashMap<>(fields.size());
     fields.forEach((field) -> {
@@ -52,6 +53,7 @@ public class AvroUtils {
   }
 
   public static List<Object> avroCollectionToList(Collection<Object> collection, boolean recurse) {
+    if (collection == null) { return null; }
     return collection
         .stream()
         .map((it) -> it instanceof GenericRecord ? avroToMap((GenericRecord) it, recurse) : it)
@@ -59,28 +61,34 @@ public class AvroUtils {
   }
 
   public static String avroToJson(GenericRecord record) {
+    if (record == null) { return null; }
     return GenericData.get().toString(record);
   }
 
   public static <T extends GenericRecord> T jsonToAvro(String json, Schema schema) throws IOException, ClassNotFoundException {
+    if (json == null) { return null; }
     return jsonToAvro(new ByteArrayInputStream(json.getBytes()), schema);
   }
 
   public static <T extends GenericRecord> T jsonToAvro(InputStream json, Schema schema) throws IOException, ClassNotFoundException {
+    if (json == null) { return null; }
     Decoder decoder = DecoderFactory.get().jsonDecoder(schema, json);
     return new SpecificDatumReader<T>(schema).read(null, decoder);
   }
 
   public static <T extends GenericRecord> T jsonToAvroLenient(String json, Schema schema) throws IOException, ClassNotFoundException {
+    if (json == null) { return null; }
     return jsonToAvroLenient(new ByteArrayInputStream(json.getBytes()), schema);
   }
 
   public static <T extends GenericRecord> T jsonToAvroLenient(InputStream json, Schema schema) throws IOException, ClassNotFoundException {
+    if (json == null) { return null; }
     Map map = new ObjectMapper().readValue(json, Map.class);
     return mapToAvro(map, findAvroClass(schema.getFullName()));
   }
 
   public static <T extends IndexedRecord> T mapToAvro(Map input, Class<T> avroClass) {
+    if (input == null) { return null; }
     try {
       T instance = avroClass.getDeclaredConstructor().newInstance();
       Schema schema = instance.getSchema();
