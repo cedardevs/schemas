@@ -104,7 +104,7 @@ public class AvroUtils {
     }
   }
 
-  private static Object coerceValueForSchema(Object value, Schema schema) {
+  public static Object coerceValueForSchema(Object value, Schema schema) {
     log.debug("coercing value [" + value + "] for schema [" + schema.getFullName() + "]");
     switch(schema.getType()) {
       case RECORD:
@@ -163,7 +163,7 @@ public class AvroUtils {
       case FIXED:
         if (value instanceof byte[]) {
           try {
-            Class<? extends SpecificFixed> fixedClass = findFixed(schema.getFullName());
+            Class<? extends SpecificFixed> fixedClass = findAvroFixed(schema.getFullName());
             return fixedClass.getDeclaredConstructor(byte[].class).newInstance(value);
           }
           catch (Exception e) {
@@ -262,7 +262,7 @@ public class AvroUtils {
     throw new UnsupportedOperationException("Unable to coerce value [" + value + "] of type [" + value.getClass() + "] for schema [" + schema.getFullName() + "]");
   }
 
-  private static <T extends IndexedRecord> Class<T> findAvroClass(String className) throws ClassNotFoundException {
+  public static <T extends IndexedRecord> Class<T> findAvroClass(String className) throws ClassNotFoundException {
     Class clazz = ClassLoader.getSystemClassLoader().loadClass(className);
     if (IndexedRecord.class.isAssignableFrom(clazz)) {
       return clazz;
@@ -272,7 +272,7 @@ public class AvroUtils {
     }
   }
 
-  private static <T extends Enum> Class<T> findEnum(String className) throws ClassNotFoundException {
+  public static <T extends Enum> Class<T> findEnum(String className) throws ClassNotFoundException {
     Class clazz = ClassLoader.getSystemClassLoader().loadClass(className);
     if (clazz.isEnum()) {
       return clazz;
@@ -282,7 +282,7 @@ public class AvroUtils {
     }
   }
 
-  private static <T extends SpecificFixed> Class<T> findFixed(String className) throws ClassNotFoundException {
+  public static <T extends SpecificFixed> Class<T> findAvroFixed(String className) throws ClassNotFoundException {
     Class clazz = ClassLoader.getSystemClassLoader().loadClass(className);
     if (SpecificFixed.class.isAssignableFrom(clazz)) {
       return clazz;
