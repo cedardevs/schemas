@@ -52,10 +52,10 @@
     {
       "name": "fileLocations",
       "type": {
-        "type": "array",
-        "items": "FileLocation"
+        "type": "map",
+        "values": "FileLocation"
       },
-      "doc": "A list of location objects describing where the file is located",
+      "doc": "A map of URIs to location objects describing where the file is located",
       "default": []
     },
     {
