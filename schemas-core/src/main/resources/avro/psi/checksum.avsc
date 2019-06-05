@@ -1,0 +1,15 @@
+{
+  "name": "Checksum",
+  "namespace": "org.cedar.schemas.avro.psi",
+  "type": "record",
+  "fields": [
+    {
+      "name": "algorithm",
+      "type": "ChecksumAlgorithm"
+    },
+    {
+      "name": "value",
+      "type": "string"
+    }
+  ]
+}

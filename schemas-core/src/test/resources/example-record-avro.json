@@ -588,9 +588,12 @@
       }
     }
   },
+  "fileInformation": null,
+  "fileLocations": {},
   "publishing": {
     "isPrivate": false,
     "until": null
   },
+  "relationships": [],
   "errors": []
 }

@@ -1,0 +1,44 @@
+{
+  "type": "record",
+  "namespace": "org.cedar.schemas.avro.psi",
+  "name": "InputEvent",
+  "doc": "Record describing when and what happened when an input was received",
+  "fields": [
+    {
+      "name": "timestamp",
+      "type": [
+        "null",
+        "long"
+      ],
+      "doc": "The timestamp of when the event occurred, stored as the number of milliseconds from the unix epoch",
+      "default": null
+    },
+    {
+      "name": "method",
+      "type": [
+        "null",
+        "Method"
+      ],
+      "doc": "The HTTP method associated with this event",
+      "default": null
+    },
+    {
+      "name": "source",
+      "type": [
+        "null",
+        "string"
+      ],
+      "doc": "The source associated with this event",
+      "default": null
+    },
+    {
+      "name": "operation",
+      "type": [
+        "null",
+        "OperationType"
+      ],
+      "doc": "The specific operation to execute, mainly for PATCH-method input messages. Use NO_OP for when the method is unambiguous on its own.",
+      "default": null
+    }
+  ]
+}

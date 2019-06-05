@@ -29,12 +29,39 @@
       "default": null
     },
     {
+      "name": "fileInformation",
+      "type": [
+        "null",
+        "FileInformation"
+      ],
+      "doc": "Details about the file that this input object is in reference to",
+      "default": null
+    },
+    {
+      "name": "fileLocations",
+      "type": {
+        "type": "map",
+        "values": "FileLocation"
+      },
+      "doc": "A list of location objects describing where the file is located",
+      "default": []
+    },
+    {
       "name": "publishing",
       "type": "Publishing",
       "default": {
         "isPrivate": false,
         "until": null
       }
+    },
+    {
+      "name": "relationships",
+      "type": {
+        "type": "array",
+        "items": "Relationship"
+      },
+      "doc": "A record of this objects relationships to other objects in the inventory",
+      "default": []
     },
     {
       "name": "errors",

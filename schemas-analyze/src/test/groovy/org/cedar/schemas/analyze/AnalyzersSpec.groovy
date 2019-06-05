@@ -117,17 +117,16 @@ class AnalyzersSpec extends Specification {
     ]
 
     when:
-    def analysisObj = Analyzers.analyze(discovery)
-    def analysisMap = AvroUtils.avroToMap(analysisObj)
+    def analysis = Analyzers.analyze(discovery)
 
     then:
-    AvroUtils.avroToMap(analysisMap.identification) == expectedAnalysisMap.identification
-    AvroUtils.avroToMap(analysisMap.titles) == expectedAnalysisMap.titles
-    AvroUtils.avroToMap(analysisMap.description) == expectedAnalysisMap.description
-    AvroUtils.avroToMap(analysisMap.dataAccess) == expectedAnalysisMap.dataAccess
-    AvroUtils.avroToMap(analysisMap.thumbnail) == expectedAnalysisMap.thumbnail
-    AvroUtils.avroToMap(analysisMap.temporalBounding) == expectedAnalysisMap.temporalBounding
-    AvroUtils.avroToMap(analysisMap.spatialBounding) == expectedAnalysisMap.spatialBounding
+    AvroUtils.avroToMap(analysis.identification) == expectedAnalysisMap.identification
+    AvroUtils.avroToMap(analysis.titles) == expectedAnalysisMap.titles
+    AvroUtils.avroToMap(analysis.description) == expectedAnalysisMap.description
+    AvroUtils.avroToMap(analysis.dataAccess) == expectedAnalysisMap.dataAccess
+    AvroUtils.avroToMap(analysis.thumbnail) == expectedAnalysisMap.thumbnail
+    AvroUtils.avroToMap(analysis.temporalBounding) == expectedAnalysisMap.temporalBounding
+    AvroUtils.avroToMap(analysis.spatialBounding) == expectedAnalysisMap.spatialBounding
   }
 
   def 'extracts date info from date strings'() {

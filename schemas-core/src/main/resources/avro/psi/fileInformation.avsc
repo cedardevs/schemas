@@ -1,0 +1,55 @@
+{
+  "name": "FileInformation",
+  "namespace":  "org.cedar.schemas.avro.psi",
+  "type": "record",
+  "fields": [
+    {
+      "name": "name",
+      "doc": "The file name",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "size",
+      "doc": "The size of the file in bytes",
+      "type": "long",
+      "default": 0
+    },
+    {
+      "name": "checksums",
+      "doc": "A list of checksums for the file",
+      "type": {
+        "type": "array",
+        "items": "Checksum"
+      },
+      "default": []
+    },
+    {
+      "name": "format",
+      "doc": "Optional field to indicate the format of the file",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "headers",
+      "doc": "Optional field to capture a file's headers",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "optionalAttributes",
+      "type": {
+        "type": "map",
+        "values": "string"
+      },
+      "doc": "A discretionary map of key/value pairs to capture arbitrary attributes",
+      "default": {}
+    }
+  ]
+}

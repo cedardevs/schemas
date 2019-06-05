@@ -1,0 +1,11 @@
+{
+  "type": "enum",
+  "namespace": "org.cedar.schemas.avro.psi",
+  "name": "OperationType",
+  "doc": "The specific operation to execute, mainly for PATCH-method input messages. Use default of NO_OP for when the method is unambiguous on its own",
+  "symbols": [
+    "NO_OP",
+    "ADD",
+    "REMOVE"
+  ]
+}

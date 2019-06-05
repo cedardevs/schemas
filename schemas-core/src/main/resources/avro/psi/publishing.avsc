@@ -2,11 +2,12 @@
   "type": "record",
   "namespace": "org.cedar.schemas.avro.psi",
   "name": "Publishing",
-  "doc": "TBD",
+  "doc": "Record describing whether the object this is in reference to should be publicly available, and if not, for how long it should remain private",
   "fields": [
     {
       "name": "isPrivate",
       "type": "boolean",
+      "doc": "Indicates if the object is private or not",
       "default": false
     },
     {
@@ -15,7 +16,7 @@
         "null",
         "long"
       ],
-      "logicalType": "timestamp-millis",
+      "doc": "The time, stored as the number of milliseconds from the unix epoch, until which the isPrivate value is valid and after which it is reversed",
       "default": null
     }
   ]

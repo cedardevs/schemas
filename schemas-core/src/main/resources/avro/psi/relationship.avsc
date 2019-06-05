@@ -1,0 +1,22 @@
+{
+  "type": "record",
+  "name": "Relationship",
+  "namespace": "org.cedar.schemas.avro.psi",
+  "doc": "Record of a relationship to another object in inventory",
+  "fields": [
+    {
+      "name": "type",
+      "type": {
+        "name": "RelationshipType",
+        "type": "enum",
+        "symbols": ["COLLECTION"]
+      },
+      "doc": "The relationship that the other object has in reference to the object that 'owns' this relationship"
+    },
+    {
+      "name": "id",
+      "type": "string",
+      "doc": "The id of the related object"
+    }
+  ]
+}
