@@ -40,8 +40,8 @@
     {
       "name": "fileLocations",
       "type": {
-        "type": "array",
-        "items": "FileLocation"
+        "type": "map",
+        "values": "FileLocation"
       },
       "doc": "A list of location objects describing where the file is located",
       "default": []

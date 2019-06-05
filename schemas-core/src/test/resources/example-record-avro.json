@@ -589,7 +589,7 @@
     }
   },
   "fileInformation": null,
-  "fileLocations": [],
+  "fileLocations": {},
   "publishing": {
     "isPrivate": false,
     "until": null
