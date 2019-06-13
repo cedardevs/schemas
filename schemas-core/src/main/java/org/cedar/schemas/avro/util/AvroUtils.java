@@ -65,12 +65,12 @@ public class AvroUtils {
     return GenericData.get().toString(record);
   }
 
-  public static <T extends GenericRecord> T jsonToAvro(String json, Schema schema) throws IOException, ClassNotFoundException {
+  public static <T extends GenericRecord> T jsonToAvro(String json, Schema schema) throws IOException {
     if (json == null) { return null; }
     return jsonToAvro(new ByteArrayInputStream(json.getBytes()), schema);
   }
 
-  public static <T extends GenericRecord> T jsonToAvro(InputStream json, Schema schema) throws IOException, ClassNotFoundException {
+  public static <T extends GenericRecord> T jsonToAvro(InputStream json, Schema schema) throws IOException {
     if (json == null) { return null; }
     Decoder decoder = DecoderFactory.get().jsonDecoder(schema, json);
     return new SpecificDatumReader<T>(schema).read(null, decoder);
