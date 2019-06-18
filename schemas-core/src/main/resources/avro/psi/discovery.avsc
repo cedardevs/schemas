@@ -474,7 +474,7 @@
     {
       "name": "dsmmAverage",
       "type": "float",
-      "default": 0,
+      "default": 0.0,
       "doc": "Calculated mean average of individual DSMM scores for Accessibility, Data Integrity, Data Quality Assessment, Data Quality Assurance, Data Quality Control Monitoring, Preservability, Production Sustainability, Transparency Traceability, and Usability."
     },
     {

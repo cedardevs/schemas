@@ -3,6 +3,7 @@ package org.cedar.schemas.avro.util
 import groovy.json.JsonSlurper
 import org.cedar.schemas.avro.psi.Checksum
 import org.cedar.schemas.avro.psi.ChecksumAlgorithm
+import org.cedar.schemas.avro.psi.Discovery
 import org.cedar.schemas.avro.psi.FileInformation
 import org.cedar.schemas.avro.psi.Input
 import org.cedar.schemas.avro.psi.Method
@@ -63,6 +64,20 @@ class AvroUtilsSpec extends Specification {
     result.source == 'test'
     result.contentType == 'application/json'
     result.content == '{"hello":"world"}'
+  }
+
+  def 'transforms a sparse map into a Discovery'() {
+    def input = [
+        fileIdentifier: 'test_id'
+    ]
+
+    when:
+    def result = AvroUtils.mapToAvro(input, Discovery)
+
+    then:
+    noExceptionThrown()
+    result instanceof Discovery
+    result.fileIdentifier == 'test_id'
   }
 
   def 'mapToAvro handles nulls'() {

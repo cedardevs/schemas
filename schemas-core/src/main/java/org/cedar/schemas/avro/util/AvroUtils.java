@@ -254,12 +254,13 @@ public class AvroUtils {
         break;
 
       case NULL:
-        if (value == null || value == JsonProperties.NULL_VALUE) {
+        if (value == null || value instanceof JsonProperties.Null) {
           return null;
         }
         break;
     }
-    throw new UnsupportedOperationException("Unable to coerce value [" + value + "] of type [" + value.getClass() + "] for schema [" + schema.getFullName() + "]");
+    throw new UnsupportedOperationException("Unable to coerce value [" + value + "] of type ["
+        + (value == null ? "null" : value.getClass()) + "] for schema [" + schema.getFullName() + "]");
   }
 
   public static <T extends IndexedRecord> Class<T> findAvroClass(String className) throws ClassNotFoundException {
