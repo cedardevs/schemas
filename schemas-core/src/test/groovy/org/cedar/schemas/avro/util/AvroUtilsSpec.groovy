@@ -5,6 +5,7 @@ import org.cedar.schemas.avro.psi.Checksum
 import org.cedar.schemas.avro.psi.ChecksumAlgorithm
 import org.cedar.schemas.avro.psi.Discovery
 import org.cedar.schemas.avro.psi.FileInformation
+import org.cedar.schemas.avro.psi.FileLocation
 import org.cedar.schemas.avro.psi.Input
 import org.cedar.schemas.avro.psi.Method
 import org.cedar.schemas.avro.psi.OperationType
@@ -38,6 +39,23 @@ class AvroUtilsSpec extends Specification {
     result.method == Method.POST
     result.source == 'test'
     result.operation == OperationType.NO_OP
+  }
+
+  def 'transforms a an avro object with a nested map which contains avro values ... into a map'() {
+    def builder = ParsedRecord.newBuilder()
+    builder.fileLocations = [ // <-- fileLocations is a map with values which are avro objects
+        'testURI': FileLocation.newBuilder().setUri('testURI').build()
+    ]
+    def testInput = builder.build()
+
+    when:
+    def result = AvroUtils.avroToMap(testInput)
+
+    then:
+    result instanceof Map
+    result.fileLocations instanceof Map
+    result.fileLocations.testURI instanceof Map
+    result.fileLocations.testURI.uri == 'testURI'
   }
 
   def 'avroToMap handles nulls'() {

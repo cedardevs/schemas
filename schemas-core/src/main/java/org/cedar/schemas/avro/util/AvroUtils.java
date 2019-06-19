@@ -42,6 +42,14 @@ public class AvroUtils {
       else if (recurse && value instanceof Collection) {
         result.put(name, avroCollectionToList((Collection)value, recurse));
       }
+      else if (recurse && value instanceof Map) {
+        LinkedHashMap<String, Object> transformedMap = new LinkedHashMap<>();
+        ((Map) value).forEach((k, v) -> {
+          Object mappedValue = v instanceof GenericRecord ? avroToMap((GenericRecord) v, recurse) : v;
+          transformedMap.put(k.toString(), mappedValue);
+        });
+        result.put(name, transformedMap);
+      }
       else {
         result.put(name, value);
       }
