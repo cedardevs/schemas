@@ -30,6 +30,7 @@ public class AvroUtils {
 
   public static Map<String, Object> avroToMap(GenericRecord record, boolean recurse) {
     if (record == null) { return null; }
+    log.debug("Transforming a record of type [" + record.getClass() + "] to a map, with recursive [" + recurse + "]");
     List<Schema.Field> fields = record.getSchema().getFields();
     Map<String, Object> result = new LinkedHashMap<>(fields.size());
     fields.forEach((field) -> {
@@ -54,6 +55,7 @@ public class AvroUtils {
 
   public static List<Object> avroCollectionToList(Collection<Object> collection, boolean recurse) {
     if (collection == null) { return null; }
+    log.debug("Transforming a collection of type [" + collection.getClass() + "] to a list of maps, with recursive [" + recurse + "]");
     return collection
         .stream()
         .map((it) -> it instanceof GenericRecord ? avroToMap((GenericRecord) it, recurse) : it)
@@ -89,6 +91,7 @@ public class AvroUtils {
 
   public static <T extends IndexedRecord> T mapToAvro(Map input, Class<T> avroClass) {
     if (input == null) { return null; }
+    log.debug("Transforming a map of type to Avro type [" + avroClass + "]");
     try {
       T instance = avroClass.getDeclaredConstructor().newInstance();
       Schema schema = instance.getSchema();
@@ -114,6 +117,7 @@ public class AvroUtils {
             return mapToAvro((Map) value, recordClass);
           }
           catch(Exception e) {
+            log.debug("Unable to build record of type " + schema.getFullName(), e);
             throw new UnsupportedOperationException("Unable to build record of type " + schema.getFullName(), e);
           }
         }
@@ -130,7 +134,8 @@ public class AvroUtils {
           }
         }
         catch (Exception e) {
-          throw new UnsupportedOperationException("Unable to build enum of type " + schema.getFullName());
+          log.debug("Unable to build enum of type " + schema.getFullName(), e);
+          throw new UnsupportedOperationException("Unable to build enum of type " + schema.getFullName(), e);
         }
 
       case ARRAY:
@@ -156,7 +161,7 @@ public class AvroUtils {
             return coerceValueForSchema(value, type);
           }
           catch (Exception e) {
-            log.debug("tried and failed to coerce value for specific type " + type);
+            log.debug("tried and failed to coerce value for specific type " + type, e);
           }
         }
 
@@ -167,7 +172,8 @@ public class AvroUtils {
             return fixedClass.getDeclaredConstructor(byte[].class).newInstance(value);
           }
           catch (Exception e) {
-            throw new UnsupportedOperationException("Unable to build fixed of type " + schema.getFullName());
+            log.debug("Unable to build fixed of type " + schema.getFullName(), e);
+            throw new UnsupportedOperationException("Unable to build fixed of type " + schema.getFullName(), e);
           }
         }
         break;
@@ -269,6 +275,7 @@ public class AvroUtils {
       return clazz;
     }
     else {
+      log.debug("Class " + className + " is not an Avro IndexedRecord class");
       throw new IllegalArgumentException("Class " + className + " is not an Avro IndexedRecord class");
     }
   }
@@ -279,6 +286,7 @@ public class AvroUtils {
       return clazz;
     }
     else {
+      log.debug("Class " + className + " is not an enumeration");
       throw new IllegalArgumentException("Class " + className + " is not an enumeration");
     }
   }
@@ -289,6 +297,7 @@ public class AvroUtils {
       return clazz;
     }
     else {
+      log.debug("Class " + className + " is not a fixed");
       throw new IllegalArgumentException("Class " + className + " is not a fixed");
     }
   }
