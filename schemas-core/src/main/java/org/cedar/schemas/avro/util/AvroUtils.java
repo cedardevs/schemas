@@ -270,7 +270,7 @@ public class AvroUtils {
   }
 
   public static <T extends IndexedRecord> Class<T> findAvroClass(String className) throws ClassNotFoundException {
-    Class clazz = ClassLoader.getSystemClassLoader().loadClass(className);
+    Class clazz = AvroUtils.class.getClassLoader().loadClass(className);
     if (IndexedRecord.class.isAssignableFrom(clazz)) {
       return clazz;
     }
@@ -281,7 +281,7 @@ public class AvroUtils {
   }
 
   public static <T extends Enum> Class<T> findEnum(String className) throws ClassNotFoundException {
-    Class clazz = ClassLoader.getSystemClassLoader().loadClass(className);
+    Class clazz = AvroUtils.class.getClassLoader().loadClass(className);
     if (clazz.isEnum()) {
       return clazz;
     }
@@ -292,7 +292,7 @@ public class AvroUtils {
   }
 
   public static <T extends SpecificFixed> Class<T> findAvroFixed(String className) throws ClassNotFoundException {
-    Class clazz = ClassLoader.getSystemClassLoader().loadClass(className);
+    Class clazz = AvroUtils.class.getClassLoader().loadClass(className);
     if (SpecificFixed.class.isAssignableFrom(clazz)) {
       return clazz;
     }
