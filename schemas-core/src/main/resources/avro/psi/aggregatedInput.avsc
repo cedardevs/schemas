@@ -56,7 +56,7 @@
         "values": "FileLocation"
       },
       "doc": "A map of URIs to location objects describing where the file is located",
-      "default": []
+      "default": {}
     },
     {
       "name": "publishing",
