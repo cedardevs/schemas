@@ -20,18 +20,18 @@ repositories {
 }
 
 dependencies {
-  api("org.apache.avro:avro:1.8.2")
+  api("org.apache.avro:avro:1.9.0")
 
   testImplementation("org.codehaus.groovy:groovy:2.4.13")
   testImplementation("org.spockframework:spock-core:1.1-groovy-2.4")
-  testImplementation("org.apache.kafka:kafka-streams-test-utils:2.1.0")
-  testImplementation("org.apache.kafka:kafka-clients:2.1.0")
-  testImplementation("org.apache.kafka:kafka-clients:2.1.0:test")
-  testImplementation("org.apache.kafka:kafka_2.12:2.1.0")
-  testImplementation("org.apache.kafka:kafka_2.12:2.1.0:test")
-  testImplementation("io.confluent:kafka-schema-registry:5.1.0")
-  testImplementation("io.confluent:kafka-schema-registry:5.1.0:tests")
-  testImplementation("io.confluent:kafka-streams-avro-serde:5.1.0")
+  testImplementation("org.apache.kafka:kafka-streams-test-utils:2.2.1")
+  testImplementation("org.apache.kafka:kafka-clients:2.2.1")
+  testImplementation("org.apache.kafka:kafka-clients:2.2.1:test")
+  testImplementation("org.apache.kafka:kafka_2.12:2.2.1")
+  testImplementation("org.apache.kafka:kafka_2.12:2.2.1:test")
+  testImplementation("io.confluent:kafka-schema-registry:5.2.2")
+  testImplementation("io.confluent:kafka-schema-registry:5.2.2:tests")
+  testImplementation("io.confluent:kafka-streams-avro-serde:5.2.2")
   testImplementation("com.github.everit-org.json-schema:org.everit.json.schema:1.9.2")
   testImplementation("org.json:json:20180813")
 }
