@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-  api("org.apache.avro:avro:1.9.0")
+  api("org.apache.avro:avro:1.8.2")
 
   testImplementation("org.codehaus.groovy:groovy:2.4.13")
   testImplementation("org.spockframework:spock-core:1.1-groovy-2.4")
