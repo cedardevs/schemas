@@ -41,10 +41,16 @@ public class DefaultParser {
     builder.setDataFormats(dataFormats);
 
     // Set parentIdentifier with COLLECTION relationship id value
-    Optional<Relationship> collectionRelationship = relationships.stream()
-        .filter(r -> r.getType() == RelationshipType.COLLECTION)
-        .findFirst();
-    String parentIdentifier = collectionRelationship.isPresent() ? collectionRelationship.get().getId() : null;
+    String parentIdentifier;
+    if(relationships != null) {
+      Optional<Relationship> collectionRelationship = relationships.stream()
+          .filter(r -> r.getType() == RelationshipType.COLLECTION)
+          .findFirst();
+      parentIdentifier = collectionRelationship.isPresent() ? collectionRelationship.get().getId() : null;
+    }
+    else {
+      parentIdentifier = null;
+    }
     builder.setParentIdentifier(parentIdentifier);
 
     // Set links from file locations that are not restricted access
