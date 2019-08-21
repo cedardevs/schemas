@@ -29,13 +29,15 @@ public class DefaultParser {
     Discovery.Builder builder = Discovery.newBuilder();
 
     // Set fileIdentifier and title with the file name
-    String fileName = fileInfo.getName();
+    String fileName = fileInfo != null ? fileInfo.getName() : null;
     builder.setFileIdentifier(fileName);
     builder.setTitle(fileName);
 
     // Set data format with known file format
     List<DataFormat> dataFormats = new ArrayList<>();
-    dataFormats.add(DataFormat.newBuilder().setName(fileInfo.getFormat()).build());
+    if(fileInfo != null && fileInfo.getFormat() != null && !fileInfo.getFormat().isEmpty()) {
+      dataFormats.add(DataFormat.newBuilder().setName(fileInfo.getFormat()).build());
+    }
     builder.setDataFormats(dataFormats);
 
     // Set parentIdentifier with COLLECTION relationship id value
