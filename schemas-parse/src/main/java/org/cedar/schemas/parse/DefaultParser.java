@@ -56,16 +56,18 @@ public class DefaultParser {
     // Set links from file locations that are not restricted access
     // TODO In the future we may need to look at Publishing as well...
     List<Link> links = new ArrayList<>();
-    fileLocations.forEach( (k, v) -> {
-      if(v.getType() == FileLocationType.ACCESS && !v.getRestricted() && !v.getDeleted()) {
-        Link link = Link.newBuilder()
-            .setLinkProtocol(v.getServiceType())
-            .setLinkUrl(v.getUri())
-            .setLinkFunction("download")
-            .build();
-        links.add(link);
-      }
-    });
+    if(fileLocations != null) {
+      fileLocations.forEach( (k, v) -> {
+        if(v.getType() == FileLocationType.ACCESS && !v.getRestricted() && !v.getDeleted()) {
+          Link link = Link.newBuilder()
+              .setLinkProtocol(v.getServiceType())
+              .setLinkUrl(v.getUri())
+              .setLinkFunction("download")
+              .build();
+          links.add(link);
+        }
+      });
+    }
     builder.setLinks(links);
 
     return builder.build();
