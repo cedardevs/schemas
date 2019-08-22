@@ -150,4 +150,13 @@ class DefaultParserSpec extends Specification {
     def actualFormats = actualDiscovery.dataFormats
     actualFormats == expectedDiscovery.dataFormats
   }
+
+  def 'null required parts create empty Discovery'() {
+    when:
+    def actualDiscovery = DefaultParser.buildDefaultDiscovery(null, null, null)
+
+    then:
+    actualDiscovery != null
+    actualDiscovery == Discovery.newBuilder().build()
+  }
 }
