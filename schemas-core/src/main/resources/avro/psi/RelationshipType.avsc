@@ -1,0 +1,9 @@
+{
+  "namespace": "org.cedar.schemas.avro.psi",
+  "name": "RelationshipType",
+  "type": "enum",
+  "doc": "The relationship that the other object has in reference to the object that 'owns' this relationship",
+  "symbols": [
+    "COLLECTION"
+  ]
+}
