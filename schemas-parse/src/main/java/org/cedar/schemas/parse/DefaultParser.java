@@ -10,7 +10,7 @@ import java.util.Optional;
 public class DefaultParser {
 
   public static ParsedRecord addDiscoveryToParsedRecord(ParsedRecord parsedRecord) {
-    Discovery defaultDiscovery = buildDefaultDiscovery(parsedRecord.getFileInformation(),
+    Discovery defaultDiscovery = buildDefaultDiscovery(parsedRecord.getType(), parsedRecord.getFileInformation(),
         parsedRecord.getFileLocations(), parsedRecord.getRelationships());
 
     ParsedRecord updatedRecord = ParsedRecord.newBuilder(parsedRecord)
@@ -20,11 +20,11 @@ public class DefaultParser {
   }
 
   public static Discovery buildDefaultDiscovery(AggregatedInput aggregatedInput) {
-    return buildDefaultDiscovery(aggregatedInput.getFileInformation(), aggregatedInput.getFileLocations(),
-        aggregatedInput.getRelationships());
+    return buildDefaultDiscovery(aggregatedInput.getType(), aggregatedInput.getFileInformation(),
+        aggregatedInput.getFileLocations(), aggregatedInput.getRelationships());
   }
 
-  public static Discovery buildDefaultDiscovery(FileInformation fileInfo, Map<String, FileLocation> fileLocations,
+  public static Discovery buildDefaultDiscovery(RecordType type, FileInformation fileInfo, Map<String, FileLocation> fileLocations,
                                                 List<Relationship> relationships) {
     Discovery.Builder builder = Discovery.newBuilder();
 
@@ -32,13 +32,6 @@ public class DefaultParser {
     String fileName = fileInfo != null ? fileInfo.getName() : null;
     builder.setFileIdentifier(fileName);
     builder.setTitle(fileName);
-
-    // Set data format with known file format
-    List<DataFormat> dataFormats = new ArrayList<>();
-    if(fileInfo != null && fileInfo.getFormat() != null && !fileInfo.getFormat().isEmpty()) {
-      dataFormats.add(DataFormat.newBuilder().setName(fileInfo.getFormat()).build());
-    }
-    builder.setDataFormats(dataFormats);
 
     // Set parentIdentifier with COLLECTION relationship id value
     String parentIdentifier;
@@ -52,6 +45,10 @@ public class DefaultParser {
       parentIdentifier = null;
     }
     builder.setParentIdentifier(parentIdentifier);
+
+    // Set hierarchyLevelName with RecordType
+    String hierarchyLevelName = type != null ? type.name().toLowerCase() : null;
+    builder.setHierarchyLevelName(hierarchyLevelName);
 
     // Set links from file locations that are not restricted access
     // TODO In the future we may need to look at Publishing as well...
@@ -69,6 +66,13 @@ public class DefaultParser {
       });
     }
     builder.setLinks(links);
+
+    // Set data format with known file format
+    List<DataFormat> dataFormats = new ArrayList<>();
+    if(fileInfo != null && fileInfo.getFormat() != null && !fileInfo.getFormat().isEmpty()) {
+      dataFormats.add(DataFormat.newBuilder().setName(fileInfo.getFormat()).build());
+    }
+    builder.setDataFormats(dataFormats);
 
     return builder.build();
   }

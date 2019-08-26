@@ -93,6 +93,7 @@ class DefaultParserSpec extends Specification {
     actualDiscovery != null
     actualDiscovery.fileIdentifier == expectedDiscovery.fileIdentifier
     actualDiscovery.parentIdentifier == expectedDiscovery.parentIdentifier
+    actualDiscovery.hierarchyLevelName == 'granule'
     actualDiscovery.title == expectedDiscovery.title
 
     and:
@@ -120,6 +121,7 @@ class DefaultParserSpec extends Specification {
     then:
     actualDiscovery.fileIdentifier == expectedDiscovery.fileIdentifier
     actualDiscovery.parentIdentifier == expectedDiscovery.parentIdentifier
+    actualDiscovery.hierarchyLevelName == 'granule'
     actualDiscovery.title == expectedDiscovery.title
 
     and:
@@ -134,11 +136,12 @@ class DefaultParserSpec extends Specification {
 
   def 'builds default Discovery from required parts'() {
     when:
-    def actualDiscovery = DefaultParser.buildDefaultDiscovery(fileInfo, fileLocations, relationships)
+    def actualDiscovery = DefaultParser.buildDefaultDiscovery(RecordType.granule, fileInfo, fileLocations, relationships)
 
     then:
     actualDiscovery.fileIdentifier == expectedDiscovery.fileIdentifier
     actualDiscovery.parentIdentifier == expectedDiscovery.parentIdentifier
+    actualDiscovery.hierarchyLevelName == 'granule'
     actualDiscovery.title == expectedDiscovery.title
 
     and:
@@ -153,7 +156,7 @@ class DefaultParserSpec extends Specification {
 
   def 'null required parts create empty Discovery'() {
     when:
-    def actualDiscovery = DefaultParser.buildDefaultDiscovery(null, null, null)
+    def actualDiscovery = DefaultParser.buildDefaultDiscovery(null, null, null, null)
 
     then:
     actualDiscovery != null
