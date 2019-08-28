@@ -176,25 +176,35 @@ class ISOParserSpec extends Specification {
     temporalBounding == output
   }
 
-  def "Polygon spatial bounding is correctly parsed"() {
+  def "Non-global Polygon spatial bounding is correctly parsed"() {
+    when:
+    def result = ISOParser.parseSpatialInfo(metadata)
+
+    then:
+    result.spatialBounding.coordinates == [[[-140.3989, 59.3811], [-139.4611, 59.3811], [-139.4611, 60.0611], [-140.3989, 60.0611], [-140.3989, 59.3811]]]
+    result.spatialBounding.type == PolygonType.Polygon
+    !result.isGlobal
+  }
+
+  def "Global Polygon spatial bounding is correctly parsed"() {
+    given:
+    def document = ClassLoader.systemClassLoader.getResourceAsStream("test-iso-global-polygon-coords.xml").text
+    def metadata = new XmlSlurper().parseText(document)
+
     when:
     def result = ISOParser.parseSpatialInfo(metadata)
 
     then:
     result.spatialBounding.coordinates == [[[-180, -90], [180, -90], [180, 90], [-180, 90], [-180, -90]]]
     result.spatialBounding.type == PolygonType.Polygon
-    !result.isGlobal
+    result.isGlobal
   }
-
 
   def "Spatial bounding is correctly parsed when it contains zeros"() {
 
     given:
     def document = ClassLoader.systemClassLoader.getResourceAsStream("test-iso-zero-coords-metadata.xml").text
     def metadata = new XmlSlurper().parseText(document)
-    // given:
-    // def document = ClassLoader.systemClassLoader.getResourceAsStream("test-iso-zero-coords-metadata.xml").text
-    // def metadata = new XmlSlurper().parseText(document)
 
     when:
     def result = ISOParser.parseSpatialInfo(metadata)

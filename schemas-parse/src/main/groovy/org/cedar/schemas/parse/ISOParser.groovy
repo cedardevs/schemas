@@ -302,10 +302,10 @@ class ISOParser {
       return null
     }
 
-    def west = (bbox.westBoundLongitude == "null" || bbox.westBoundLongitude == "") ? null : bbox.westBoundLongitude.Decimal.toDouble()
-    def east = (bbox.eastBoundLongitude == "null" || bbox.eastBoundLongitude == "") ? null : bbox.eastBoundLongitude.Decimal.toDouble()
-    def north = (bbox.northBoundLatitude == "null" || bbox.northBoundLatitude == "") ? null : bbox.northBoundLatitude.Decimal.toDouble()
-    def south = (bbox.southBoundLatitude == "null" || bbox.southBoundLatitude == "") ? null : bbox.southBoundLatitude.Decimal.toDouble()
+    Double west = (bbox.westBoundLongitude == "null" || bbox.westBoundLongitude == "") ? null : bbox.westBoundLongitude.Decimal.toDouble()
+    Double east = (bbox.eastBoundLongitude == "null" || bbox.eastBoundLongitude == "") ? null : bbox.eastBoundLongitude.Decimal.toDouble()
+    Double north = (bbox.northBoundLatitude == "null" || bbox.northBoundLatitude == "") ? null : bbox.northBoundLatitude.Decimal.toDouble()
+    Double south = (bbox.southBoundLatitude == "null" || bbox.southBoundLatitude == "") ? null : bbox.southBoundLatitude.Decimal.toDouble()
 
     // all corners are null, return a null GeoJSON object
     if (west == null && east == null && north == null && south == null) {
@@ -337,7 +337,7 @@ class ISOParser {
   }
 
   static def checkIsGlobal(def bounds) {
-    if (bounds?.type != 'Polygon') {
+    if(!(bounds instanceof Polygon)) {
       return false
     }
 
