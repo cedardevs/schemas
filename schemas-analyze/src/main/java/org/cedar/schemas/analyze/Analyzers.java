@@ -86,7 +86,7 @@ public class Analyzers {
         .setParentIdentifierExists(parentIdInfo.exists)
         .setParentIdentifierString(parentIdInfo.value)
         .setHierarchyLevelNameExists(hierarchyInfo.exists)
-        .setMatchesIdentifiers((hierarchyInfo.value != null && hierarchyInfo.value.equals("granule") && parentIdInfo.exists) || !hierarchyInfo.exists)
+        .setMatchesIdentifiers((hierarchyInfo.exists && hierarchyInfo.value.equals("granule") && parentIdInfo.exists) || (hierarchyInfo.exists && !hierarchyInfo.value.equals("granule")) || !hierarchyInfo.exists)
         .build();
   }
 

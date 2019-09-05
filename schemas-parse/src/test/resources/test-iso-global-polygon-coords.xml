@@ -7,18 +7,18 @@
         <gmd:EX_Extent id="boundingExtent">
           <gmd:geographicElement>
             <gmd:EX_GeographicBoundingBox id="boundingGeographicBoundingBox">
-              <!--<gmd:westBoundLongitude>-->
-              <!--<gco:Decimal>-105</gco:Decimal>-->
-              <!--</gmd:westBoundLongitude>-->
+              <gmd:westBoundLongitude>
+                <gco:Decimal>-180</gco:Decimal>
+              </gmd:westBoundLongitude>
               <gmd:eastBoundLongitude>
-                <gco:Decimal>-105</gco:Decimal>
+                <gco:Decimal>180</gco:Decimal>
               </gmd:eastBoundLongitude>
               <gmd:southBoundLatitude>
-                <gco:Decimal>40</gco:Decimal>
+                <gco:Decimal>-90</gco:Decimal>
               </gmd:southBoundLatitude>
-              <!--<gmd:northBoundLatitude>-->
-              <!--<gco:Decimal>40</gco:Decimal>-->
-              <!--</gmd:northBoundLatitude>-->
+              <gmd:northBoundLatitude>
+                <gco:Decimal>90</gco:Decimal>
+              </gmd:northBoundLatitude>
             </gmd:EX_GeographicBoundingBox>
           </gmd:geographicElement>
         </gmd:EX_Extent>

@@ -6,12 +6,11 @@
   "fields": [
     {
       "name": "type",
-      "type": {
-        "name": "RelationshipType",
-        "type": "enum",
-        "symbols": ["COLLECTION"]
-      },
-      "doc": "The relationship that the other object has in reference to the object that 'owns' this relationship"
+      "type": [
+        "null",
+        "RelationshipType"
+      ],
+      "default": null
     },
     {
       "name": "id",

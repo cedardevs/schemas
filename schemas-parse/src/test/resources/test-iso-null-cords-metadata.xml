@@ -21,20 +21,9 @@
                             </gmd:northBoundLatitude>
                         </gmd:EX_GeographicBoundingBox>
                     </gmd:geographicElement>
-                    <gmd:temporalElement>
-                        <gmd:EX_TemporalExtent id="boundingTemporalExtent">
-                            <gmd:extent>
-                                <gml:TimePeriod gml:id="boundingTemporalExtentPeriod">
-                                    <gml:beginPosition>2005-05-09</gml:beginPosition>
-                                    <gml:endPosition indeterminatePosition="now"/>
-                                </gml:TimePeriod>
-                            </gmd:extent>
-                        </gmd:EX_TemporalExtent>
-                    </gmd:temporalElement>
                 </gmd:EX_Extent>
             </gmd:extent>
             <gmd:supplementalInformation gco:nilReason="missing"/>
         </gmd:MD_DataIdentification>
     </gmd:identificationInfo>
 </gmi:MI_Metadata>
-
