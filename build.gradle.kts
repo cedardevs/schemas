@@ -3,10 +3,6 @@ plugins {
     jacoco
 }
 
-tasks.build {
-    dependsOn("check")
-}
-
 subprojects {
     afterEvaluate {
         if (project.plugins.hasPlugin("jacoco")) {
@@ -24,6 +20,10 @@ subprojects {
 
         tasks.check {
             dependsOn(":jacocoTestReport")
+        }
+
+        tasks.build {
+            dependsOn("check")
         }
     }
 }
