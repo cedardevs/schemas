@@ -16,14 +16,14 @@ subprojects {
                     html.destination = file("${buildDir}/reports/jacoco/html")
                 }
             }
-        }
 
-        tasks.check {
-            dependsOn(":jacocoTestReport")
-        }
+            tasks.check {
+                dependsOn(":jacocoTestReport")
+            }
 
-        tasks.build {
-            dependsOn(":check")
+            tasks.build {
+                dependsOn(":check")
+            }
         }
     }
 }
