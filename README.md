@@ -1,5 +1,7 @@
 [![Build Status](https://circleci.com/gh/cedardevs/schemas.svg?style=svg)](https://circleci.com/gh/cedardevs/schemas)
+[![codecov](https://codecov.io/gh/cedardevs/schemas/branch/master/graph/badge.svg)](https://codecov.io/gh/cedardevs/schemas)
 [![](https://jitpack.io/v/cedardevs/schemas.svg)](https://jitpack.io/#cedardevs/schemas)
+
 
 # CEDAR Schemas
 
