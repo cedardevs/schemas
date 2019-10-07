@@ -23,7 +23,7 @@ subprojects {
         }
 
         tasks.build {
-            dependsOn("check")
+            dependsOn(":check")
         }
     }
 }
