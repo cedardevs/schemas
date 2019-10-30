@@ -99,11 +99,12 @@ class DefaultParserSpec extends Specification {
     and:
     def actualLinks = actualDiscovery.links
     actualLinks.size() == 1
-    actualLinks == expectedDiscovery.links
+    actualLinks[0] == expectedDiscovery.links[0]
 
     and:
     def actualFormats = actualDiscovery.dataFormats
-    actualFormats == expectedDiscovery.dataFormats
+    actualFormats.size() == 1
+    actualFormats[0] == expectedDiscovery.dataFormats[0]
   }
 
   def 'builds default Discovery from AggregatedInput'() {
@@ -127,11 +128,12 @@ class DefaultParserSpec extends Specification {
     and:
     def actualLinks = actualDiscovery.links
     actualLinks.size() == 1
-    actualLinks == expectedDiscovery.links
+    actualLinks[0] == expectedDiscovery.links[0]
 
     and:
     def actualFormats = actualDiscovery.dataFormats
-    actualFormats == expectedDiscovery.dataFormats
+    actualFormats.size() == 1
+    actualFormats[0] == expectedDiscovery.dataFormats[0]
   }
 
   def 'builds default Discovery from required parts'() {
@@ -147,11 +149,12 @@ class DefaultParserSpec extends Specification {
     and:
     def actualLinks = actualDiscovery.links
     actualLinks.size() == 1
-    actualLinks == expectedDiscovery.links
+    actualLinks[0] == expectedDiscovery.links[0]
 
     and:
     def actualFormats = actualDiscovery.dataFormats
-    actualFormats == expectedDiscovery.dataFormats
+    actualFormats.size() == 1
+    actualFormats[0] == expectedDiscovery.dataFormats[0]
   }
 
   def 'null required parts create empty Discovery'() {
