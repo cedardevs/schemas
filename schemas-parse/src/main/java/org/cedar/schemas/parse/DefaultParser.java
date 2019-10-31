@@ -114,11 +114,17 @@ public class DefaultParser {
   }
 
   public static ParsedRecord.Builder setDefaultLinks(ParsedRecord.Builder builder) {
-    if (discoveryListEmpty(builder, Discovery::getLinks)) {
-      // TODO - do we actually want to always add in the default links? Maybe make a set based on url?
-      Discovery discovery = getDiscoveryBuilder(builder).setLinks(defaultLinks(builder)).build();
-      builder.setDiscovery(discovery);
-    }
+    List<Link> inputLinks = discoveryListEmpty(builder, Discovery::getLinks) ?
+        new ArrayList<>(0) : builder.getDiscovery().getLinks();
+    Map<String, Link> inputLinksByUrl = inputLinks.stream()
+        .collect(Collectors.toMap(Link::getLinkUrl, Function.identity()));
+    Map<String, Link> defaultLinksByUrl = defaultLinks(builder).stream()
+        .collect(Collectors.toMap(Link::getLinkUrl, Function.identity()));
+    // override defaults with explicit input links based on URLs
+    inputLinksByUrl.forEach((k, v) -> defaultLinksByUrl.merge(k, v, (a, b) -> v));
+    List<Link> mergedLinks = new ArrayList<>(defaultLinksByUrl.values());
+    Discovery discovery = getDiscoveryBuilder(builder).setLinks(mergedLinks).build();
+    builder.setDiscovery(discovery);
     return builder;
   }
 

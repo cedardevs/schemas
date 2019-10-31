@@ -259,16 +259,29 @@ class DefaultParserSpec extends Specification {
     then:
     result.discovery.links.size() == output.size()
     if (output.size() > 0) {
-      result.discovery.links.eachWithIndex({ l, i ->
-        assert l == output[i]
-      })
+      result.discovery.links.each({ assert output.contains(it) })
     }
 
     where:
     input             | output
     emptyRecord       | []
     inputRecord       | defaultDiscovery.links
-    overriddenRecord  | overriddenDiscovery.links
+    overriddenRecord  | overriddenDiscovery.links + defaultDiscovery.links
+  }
+
+  def 'input link with matching url overrides default link'() {
+    setup:
+    def matchingUrl = defaultDiscovery.links[0].linkUrl
+    def inputLink = Link.newBuilder().setLinkUrl(matchingUrl).setLinkName('OVERRIDE!').build()
+    def inputDiscovery = Discovery.newBuilder().setLinks([inputLink]).build()
+    def customBuilder = ParsedRecord.newBuilder(inputRecord).setDiscovery(inputDiscovery)
+
+    when:
+    def result = DefaultParser.setDefaultLinks(customBuilder)
+
+    then:
+    result.discovery.links.size() == 1
+    result.discovery.links[0].linkName == inputLink.linkName
   }
 
   def 'fills in default value for dataFormats'() {
@@ -278,9 +291,7 @@ class DefaultParserSpec extends Specification {
     then:
     result.discovery.dataFormats.size() == output.size()
     if (output.size() > 0) {
-      result.discovery.dataFormats.eachWithIndex({ f, i ->
-        assert f == output[i]
-      })
+      result.discovery.dataFormats.each({ assert output.contains(it) })
     }
 
     where:
