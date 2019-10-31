@@ -21,19 +21,9 @@ public class DefaultParser {
         .orElse(null);
   }
 
-  public static ParsedRecord addDiscoveryToParsedRecord(ParsedRecord parsedRecord) {
-    Discovery defaultDiscovery = buildDefaultDiscovery(parsedRecord.getType(), parsedRecord.getFileInformation(),
-        parsedRecord.getFileLocations(), parsedRecord.getRelationships());
-
-    ParsedRecord updatedRecord = ParsedRecord.newBuilder(parsedRecord)
-        .setDiscovery(defaultDiscovery)
-        .build();
-    return updatedRecord;
-  }
-
-  public static Discovery buildDefaultDiscovery(AggregatedInput aggregatedInput) {
-    return buildDefaultDiscovery(aggregatedInput.getType(), aggregatedInput.getFileInformation(),
-        aggregatedInput.getFileLocations(), aggregatedInput.getRelationships());
+  public static Discovery buildDefaultDiscovery(ParsedRecord record) {
+    ParsedRecord tempRecord = ParsedRecord.newBuilder(record).setDiscovery(null).build();
+    return fillInDefaults(tempRecord).getDiscovery();
   }
 
   public static Discovery buildDefaultDiscovery(RecordType type, FileInformation fileInfo, Map<String, FileLocation> fileLocations,

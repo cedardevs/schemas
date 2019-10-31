@@ -1,6 +1,5 @@
 package org.cedar.schemas.parse
 
-import org.cedar.schemas.avro.psi.AggregatedInput
 import org.cedar.schemas.avro.psi.DataFormat
 import org.cedar.schemas.avro.psi.Discovery
 import org.cedar.schemas.avro.psi.FileInformation
@@ -59,10 +58,11 @@ class DefaultParserSpec extends Specification {
   ]
 
   static final Discovery defaultDiscovery = Discovery.newBuilder()
-      .setFileIdentifier(fileName)
       .setTitle(fileName)
-      .setLinks([Link.newBuilder().setLinkFunction('download').setLinkUrl(fileUri).setLinkProtocol(protocol).build()])
+      .setFileIdentifier(fileName)
       .setParentIdentifier(collectionId)
+      .setHierarchyLevelName('granule')
+      .setLinks([Link.newBuilder().setLinkFunction('download').setLinkUrl(fileUri).setLinkProtocol(protocol).build()])
       .setDataFormats([DataFormat.newBuilder().setName(format).build()])
       .build()
 
@@ -91,29 +91,6 @@ class DefaultParserSpec extends Specification {
       .build()
 
 
-  def 'adds default Discovery to ParsedRecord'() {
-    when:
-    def updatedParsedRecord = DefaultParser.addDiscoveryToParsedRecord(inputRecord)
-
-    then:
-    def actualDiscovery = updatedParsedRecord.discovery
-    actualDiscovery != null
-    actualDiscovery.fileIdentifier == defaultDiscovery.fileIdentifier
-    actualDiscovery.parentIdentifier == defaultDiscovery.parentIdentifier
-    actualDiscovery.hierarchyLevelName == 'granule'
-    actualDiscovery.title == defaultDiscovery.title
-
-    and:
-    def actualLinks = actualDiscovery.links
-    actualLinks.size() == 1
-    actualLinks[0] == defaultDiscovery.links[0]
-
-    and:
-    def actualFormats = actualDiscovery.dataFormats
-    actualFormats.size() == 1
-    actualFormats[0] == defaultDiscovery.dataFormats[0]
-  }
-
   def 'fills in all default Discovery fields in a ParsedRecord'() {
     when:
     def filledInRecord = DefaultParser.fillInDefaults(inputRecord)
@@ -123,7 +100,7 @@ class DefaultParserSpec extends Specification {
     actualDiscovery != null
     actualDiscovery.fileIdentifier == defaultDiscovery.fileIdentifier
     actualDiscovery.parentIdentifier == defaultDiscovery.parentIdentifier
-    actualDiscovery.hierarchyLevelName == 'granule'
+    actualDiscovery.hierarchyLevelName == defaultDiscovery.hierarchyLevelName
     actualDiscovery.title == defaultDiscovery.title
 
     and:
@@ -137,22 +114,15 @@ class DefaultParserSpec extends Specification {
     actualFormats[0] == defaultDiscovery.dataFormats[0]
   }
 
-  def 'builds default Discovery from AggregatedInput'() {
-    given:
-    def aggregatedInput = AggregatedInput.newBuilder()
-        .setType(RecordType.granule)
-        .setFileInformation(fileInfo)
-        .setFileLocations(fileLocations)
-        .setRelationships(relationships)
-        .build()
-
+  def 'builds full default Discovery from input record, ignoring existing discovery'() {
     when:
-    def actualDiscovery = DefaultParser.buildDefaultDiscovery(aggregatedInput)
+    // note: using the record with overridden discovery values should still produce default discovery values
+    def actualDiscovery = DefaultParser.buildDefaultDiscovery(overriddenRecord)
 
     then:
     actualDiscovery.fileIdentifier == defaultDiscovery.fileIdentifier
     actualDiscovery.parentIdentifier == defaultDiscovery.parentIdentifier
-    actualDiscovery.hierarchyLevelName == 'granule'
+    actualDiscovery.hierarchyLevelName == defaultDiscovery.hierarchyLevelName
     actualDiscovery.title == defaultDiscovery.title
 
     and:
@@ -166,14 +136,14 @@ class DefaultParserSpec extends Specification {
     actualFormats[0] == defaultDiscovery.dataFormats[0]
   }
 
-  def 'builds default Discovery from required parts'() {
+  def 'builds full default Discovery from individual parts'() {
     when:
     def actualDiscovery = DefaultParser.buildDefaultDiscovery(RecordType.granule, fileInfo, fileLocations, relationships)
 
     then:
     actualDiscovery.fileIdentifier == defaultDiscovery.fileIdentifier
     actualDiscovery.parentIdentifier == defaultDiscovery.parentIdentifier
-    actualDiscovery.hierarchyLevelName == 'granule'
+    actualDiscovery.hierarchyLevelName == defaultDiscovery.hierarchyLevelName
     actualDiscovery.title == defaultDiscovery.title
 
     and:
@@ -248,7 +218,7 @@ class DefaultParserSpec extends Specification {
     where:
     input             | output
     emptyRecord       | null
-    inputRecord       | 'granule'
+    inputRecord       | defaultDiscovery.hierarchyLevelName
     overriddenRecord  | overriddenDiscovery.hierarchyLevelName
   }
 
