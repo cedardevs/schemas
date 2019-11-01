@@ -15,7 +15,7 @@ public class DefaultParser {
    * {@link FileInformation#getName()} (see: {@link #defaultTitle(ParsedRecord.Builder)}).
    * <br/>
    * In general, only fields which have no value will be set with their defaults. The exception is the links,
-   * which will have the defaults merged into the input values, which inputs taking precedence.
+   * which will have the defaults merged into the input values, with inputs taking precedence.
    * See: {@link #setDefaultLinks(ParsedRecord.Builder)}
    *
    * @param inputRecord The input record
@@ -147,7 +147,7 @@ public class DefaultParser {
   }
 
   /**
-   * If the input builder's Discovery object does not already have a hierarchyLevelName, apply the default to it.
+   * If the input builder's Discovery object does not already have a hierarchyLevelName, apply {@link #defaultHierarchyName(ParsedRecord.Builder) the default} to it.
    * @param builder The input builder
    * @return An updated builder
    */
@@ -218,7 +218,7 @@ public class DefaultParser {
   }
 
   /**
-   * If the input builder's Discovery object does not already have any dataFormats, apply the default to it.
+   * If the input builder's Discovery object does not already have any dataFormats, apply {@link #defaultDataFormats(ParsedRecord.Builder) the default} to it.
    * @param builder The input builder
    * @return An updated builder
    */
