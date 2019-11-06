@@ -5,6 +5,7 @@ import org.cedar.schemas.avro.geojson.PointType
 import org.cedar.schemas.avro.geojson.PolygonType
 import org.cedar.schemas.avro.psi.*
 import org.cedar.schemas.avro.util.AvroUtils
+import org.xml.sax.SAXParseException
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -494,5 +495,16 @@ class ISOParserSpec extends Specification {
     then:
     miscellaneous.updateFrequency == 'asNeeded'
     miscellaneous.presentationForm == 'tableDigital'
+  }
+
+  def "CVE-2018-1000840 use external docs hack"() {
+    given: 'an xml which utilizes this vulnerability'
+    def document = ClassLoader.systemClassLoader.getResourceAsStream("attack.xml").text
+
+    when: 'you attempt to parse the xml'
+    ISOParser.parseXMLMetadataToDiscovery(document)
+
+    then: 'we throw an exception instead of parsing attack-vector xml'
+    thrown(SAXParseException)
   }
 }
