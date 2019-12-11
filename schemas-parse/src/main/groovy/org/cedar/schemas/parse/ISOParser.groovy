@@ -6,6 +6,7 @@ import org.apache.commons.text.StringEscapeUtils
 import org.cedar.schemas.avro.geojson.LineString
 import org.cedar.schemas.avro.geojson.Point
 import org.cedar.schemas.avro.geojson.Polygon
+import org.cedar.schemas.avro.geojson.MultiPolygon
 import org.cedar.schemas.avro.psi.*
 
 class ISOParser {
@@ -323,6 +324,13 @@ class ISOParser {
       //       determined. A diagonal line will be interpreted as a polygon.
       builder = LineString.newBuilder()
       coordinates = [[west, south], [east, north]]
+    }
+    else if (west > east) {
+      builder = MultiPolygon.newBuilder()
+      coordinates = [
+        [[[-180, south], [east, south], [east, north], [-180, north], [-180, south]]],
+        [[[west, south], [180, south], [180, north], [west, north], [west, south]]]
+        ]
     }
     else {
       // this returns with correlating null values as well

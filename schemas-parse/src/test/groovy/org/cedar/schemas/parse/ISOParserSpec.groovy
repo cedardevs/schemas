@@ -3,6 +3,7 @@ package org.cedar.schemas.parse
 import org.cedar.schemas.avro.geojson.LineStringType
 import org.cedar.schemas.avro.geojson.PointType
 import org.cedar.schemas.avro.geojson.PolygonType
+import org.cedar.schemas.avro.geojson.MultiPolygonType
 import org.cedar.schemas.avro.psi.*
 import org.cedar.schemas.avro.util.AvroUtils
 import org.xml.sax.SAXParseException
@@ -199,6 +200,39 @@ class ISOParserSpec extends Specification {
     result.spatialBounding.coordinates == [[[-180, -90], [180, -90], [180, 90], [-180, 90], [-180, -90]]]
     result.spatialBounding.type == PolygonType.Polygon
     result.isGlobal
+  }
+
+  def "Spatial bounding is correctly parsed when it crosses the antimeridian"() {
+
+    given:
+    def document = ClassLoader.systemClassLoader.getResourceAsStream("test-iso-discontinous-antimeridian-coords.xml").text
+    def metadata = new XmlSlurper().parseText(document)
+
+    when:
+    def result = ISOParser.parseSpatialInfo(metadata)
+
+
+    then:
+
+    def expectedCoordinates = [
+    [[
+      [-180.0, -81.3282],
+      [6.2995, -81.3282],
+      [6.2995, 81.3282],
+      [-180.0, 81.3282],
+      [-180.0, -81.3282]
+    ]],
+    [[
+      [141.7005, -81.3282],
+      [180.0, -81.3282],
+      [180.0, 81.3282],
+      [141.7005, 81.3282],
+      [141.7005, -81.3282]
+    ]]
+    ]
+    result.spatialBounding.coordinates == expectedCoordinates
+    result.spatialBounding.type == MultiPolygonType.MultiPolygon
+    !result.isGlobal
   }
 
   def "Spatial bounding is correctly parsed when it contains zeros"() {
