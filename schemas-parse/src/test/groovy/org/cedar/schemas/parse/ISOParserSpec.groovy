@@ -1,5 +1,6 @@
 package org.cedar.schemas.parse
 
+import org.cedar.schemas.avro.psi.Discovery
 import org.cedar.schemas.avro.geojson.LineStringType
 import org.cedar.schemas.avro.geojson.PointType
 import org.cedar.schemas.avro.geojson.PolygonType
@@ -208,9 +209,11 @@ class ISOParserSpec extends Specification {
     def document = ClassLoader.systemClassLoader.getResourceAsStream("test-iso-discontinous-antimeridian-coords.xml").text
     def metadata = new XmlSlurper().parseText(document)
 
-    when:
-    def result = ISOParser.parseSpatialInfo(metadata)
+    when: // convert to map and back catches dumb problems that suck to find later (int->double coersion)
+    AvroUtils.mapToAvro(AvroUtils.avroToMap(ISOParser.parseXMLMetadataToDiscovery(document)), Discovery)
 
+    and:
+    def result = ISOParser.parseSpatialInfo(metadata)
 
     then:
 
