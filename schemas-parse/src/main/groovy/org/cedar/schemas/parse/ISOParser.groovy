@@ -328,8 +328,8 @@ class ISOParser {
     else if (west > east) {
       builder = MultiPolygon.newBuilder()
       coordinates = [
-        [[[-180.0, south], [east, south], [east, north], [-180.0, north], [-180.0, south]]],
-        [[[west, south], [180.0, south], [180.0, north], [west, north], [west, south]]]
+        [[[-180.0d, south], [east, south], [east, north], [-180.0d, north], [-180.0d, south]]],
+        [[[west, south], [180.0d, south], [180.0d, north], [west, north], [west, south]]]
         ]
     }
     else {
