@@ -130,9 +130,9 @@ public class GCMDKeywordScraper {
     return cleanMap;
   }
 
-  public static String titleCaseKeyword(String keyword) {
-
-  }
+//  public static String titleCaseKeyword(String keyword) {
+//
+//  }
 
 //  public static Map buildComparisonStrings(Map<String, String> namesAndUrls) {
 //
