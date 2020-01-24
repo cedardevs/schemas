@@ -22,6 +22,7 @@ dependencies {
   implementation("org.codehaus.groovy:groovy-xml:2.4.16")
   implementation("org.codehaus.groovy:groovy-json:2.4.16")
 
+  testImplementation("org.slf4j:slf4j-simple:1.7.30")
   testImplementation("org.spockframework:spock-core:1.1-groovy-2.4")
 }
 

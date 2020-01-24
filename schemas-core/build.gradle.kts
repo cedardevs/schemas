@@ -22,6 +22,7 @@ repositories {
 dependencies {
   api("org.apache.avro:avro:1.8.2")
 
+  testImplementation("org.slf4j:slf4j-simple:1.7.30")
   testImplementation("org.codehaus.groovy:groovy:2.4.13")
   testImplementation("org.spockframework:spock-core:1.1-groovy-2.4")
   testImplementation("org.apache.kafka:kafka-streams-test-utils:2.3.0")
