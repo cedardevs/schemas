@@ -445,7 +445,7 @@ class ISOParser {
     def builder = Link.newBuilder()
     builder.linkName        = node.name?.CharacterString?.text()?.trim() ?: null
     builder.linkProtocol    = node.protocol?.CharacterString?.text()?.trim() ?: null
-    builder.linkUrl         = node.linkage?.URL?.text() ? StringEscapeUtils.unescapeXml(node.linkage.URL.text()) : null
+    builder.linkUrl         = StringEscapeUtils.unescapeXml(node.linkage?.URL?.text()?.trim()) ?: null
     builder.linkDescription = node.description?.CharacterString?.text()?.trim() ?: null
     builder.linkFunction    = node.function?.CI_OnLineFunctionCode?.@codeListValue?.text()?.trim() ?: null
     return builder.build()
