@@ -425,11 +425,19 @@ class ISOParser {
   }
 
   static List<Link> parseLinks(GPathResult metadata) {
-    def linkNodes = metadata.distributionInfo.MD_Distribution.'**'.findAll {
+    def allLinkNodes = metadata.distributionInfo.MD_Distribution.'**'.findAll {
       it.name() == 'CI_OnlineResource'
     }
-    def uniqueLinks = linkNodes.collect(ISOParser.&parseLink).findAll() as Set
-    return uniqueLinks.toList()
+    def allUniqueLinks = allLinkNodes.collect(ISOParser.&parseLink).findAll() as Set
+
+    // Find all contact links and remove them
+    def allContactLinkNodes = metadata.distributionInfo.MD_Distribution.distributor.MD_Distributor.distributorContact.'**'.findAll {
+      it.name() == 'CI_OnlineResource'
+    }
+    def allUniqueContactLinks = allContactLinkNodes.collect(ISOParser.&parseLink).findAll() as Set
+
+    allUniqueLinks.removeAll(allUniqueContactLinks)
+    return allUniqueLinks.toList()
   }
 
   static Link parseLink(GPathResult node) {
