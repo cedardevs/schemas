@@ -79,7 +79,7 @@ class AnalyzersSpec extends Specification {
             endPrecision            : ChronoUnit.DAYS.toString(),
             endIndexable            : true,
             endZoneSpecified        : null,
-            endUtcDateTimeString    : '2010-10-01T23:59:59Z',
+            endUtcDateTimeString    : '2010-10-01T23:59:59.999Z',
             instantDescriptor       : ValidDescriptor.UNDEFINED,
             instantPrecision        : null,
             instantIndexable        : true,
@@ -132,6 +132,7 @@ class AnalyzersSpec extends Specification {
   def 'extracts date info from date strings'() {
     when:
     def result = new Analyzers.DateInfo(input, start)
+    println(result.utcDateTimeString)
 
     then:
     result.descriptor == descriptor
@@ -144,11 +145,16 @@ class AnalyzersSpec extends Specification {
     input                  | start || descriptor                | precision | indexable | zone | string
     '2042-04-02T00:42:42Z' | false || ValidDescriptor.VALID     | 'Nanos'   | true      | 'Z'  | '2042-04-02T00:42:42Z'
     '2042-04-02T00:42:42'  | false || ValidDescriptor.VALID     | 'Nanos'   | true      | null | '2042-04-02T00:42:42Z'
-    '2042-04-02'           | false || ValidDescriptor.VALID     | 'Days'    | true      | null | '2042-04-02T23:59:59Z'
+    '2042-04-02'           | false || ValidDescriptor.VALID     | 'Days'    | true      | null | '2042-04-02T23:59:59.999Z'
     '2042-04-02'           | true  || ValidDescriptor.VALID     | 'Days'    | true      | null | '2042-04-02T00:00:00Z'
+    '2042-05'              | true  || ValidDescriptor.VALID     | 'Months'  | true      | null | '2042-05-01T00:00:00Z'
+    '-2042-05'             | false || ValidDescriptor.VALID     | 'Months'  | true      | null | '-2042-05-31T23:59:59.999Z'
     '2042'                 | true  || ValidDescriptor.VALID     | 'Years'   | true      | null | '2042-01-01T00:00:00Z'
+    '1965'                 | false || ValidDescriptor.VALID     | 'Years'   | true      | null | '1965-12-31T23:59:59.999Z'
     '-5000'                | true  || ValidDescriptor.VALID     | 'Years'   | true      | null | '-5000-01-01T00:00:00Z'
+    '-3000'                | false || ValidDescriptor.VALID     | 'Years'   | true      | null | '-3000-12-31T23:59:59.999Z'
     '-100000001'           | true  || ValidDescriptor.VALID     | 'Years'   | false     | null | '-100000001-01-01T00:00:00Z'
+    '-100000002'           | false || ValidDescriptor.VALID     | 'Years'   | false     | null | '-100000002-12-31T23:59:59.999Z'
     'ABC'                  | true  || ValidDescriptor.INVALID   | null      | false     | null | null
     ''                     | true  || ValidDescriptor.UNDEFINED | null      | true      | null | null
     null                   | true  || ValidDescriptor.UNDEFINED | null      | true      | null | null
