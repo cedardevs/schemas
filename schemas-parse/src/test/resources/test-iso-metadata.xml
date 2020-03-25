@@ -1359,7 +1359,7 @@
               <gmd:onLine>
                 <gmd:CI_OnlineResource>
                   <gmd:linkage>
-                    <gmd:URL>http://www.example.com</gmd:URL>
+                    <gmd:URL>         http://www.example.com        </gmd:URL>
                   </gmd:linkage>
                   <gmd:protocol>
                     <gco:CharacterString>HTTP</gco:CharacterString>
@@ -1380,6 +1380,24 @@
               </gmd:onLine>
             </gmd:MD_DigitalTransferOptions>
           </gmd:distributorTransferOptions>
+          <gmd:distributorContact>
+            <gmd:CI_ResponsibleParty>
+              <gmd:contactInfo>
+                <gmd:CI_Contact>
+                  <gmd:onlineResource>
+                    <gmd:CI_OnlineResource>
+                      <gmd:linkage>
+                        <gmd:URL>http://www.contact-example.com</gmd:URL>
+                      </gmd:linkage>
+                      <gmd:name>
+                        <gco:CharacterString>Contact Link That Shouldn't Appear</gco:CharacterString>
+                      </gmd:name>
+                    </gmd:CI_OnlineResource>
+                  </gmd:onlineResource>
+                </gmd:CI_Contact>
+              </gmd:contactInfo>
+            </gmd:CI_ResponsibleParty>
+          </gmd:distributorContact>
         </gmd:MD_Distributor>
       </gmd:distributor>
       <gmd:distributionFormat>

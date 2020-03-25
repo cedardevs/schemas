@@ -1,6 +1,5 @@
 package org.cedar.schemas.parse
 
-import org.cedar.schemas.avro.psi.Discovery
 import org.cedar.schemas.avro.geojson.LineStringType
 import org.cedar.schemas.avro.geojson.PointType
 import org.cedar.schemas.avro.geojson.PolygonType
@@ -370,10 +369,10 @@ class ISOParserSpec extends Specification {
     then:
     links instanceof List
     links.every { it instanceof Link }
-    links.size() == 1
+    links.size() == 1                                     // Distributor Contact link should not appear
     links[0].linkName == 'Super Important Access Link'
     links[0].linkProtocol == 'HTTP'
-    links[0].linkUrl == 'http://www.example.com'
+    links[0].linkUrl == 'http://www.example.com'          // Whitespace needs to be cleaned up
     links[0].linkDescription == 'Everything Important, All In One Place'
     links[0].linkFunction == 'search'
   }

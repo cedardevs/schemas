@@ -26,10 +26,14 @@ public class Analyzers {
       .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE_TIME)  // e.g.  2010-12-30T00:00:00
       .appendOptional(DateTimeFormatter.ISO_LOCAL_DATE)       // e.g.  2010-12-30
       .appendOptional(new DateTimeFormatterBuilder()
-          .appendValue(ChronoField.YEAR)
-          .appendPattern("-MM-dd").toFormatter())        // e.g. -200-01-01
-      .appendOptional(new DateTimeFormatterBuilder()
-          .appendValue(ChronoField.YEAR).toFormatter())         // e.g. -200
+          .appendValue(ChronoField.YEAR)                      // e.g. -200
+          .optionalStart()
+          .appendPattern("-MM")                               // e.g. -200-10
+          .optionalEnd()
+          .optionalStart()
+          .appendPattern("-dd")                               // e.g. -200-01-01
+          .optionalEnd()
+          .toFormatter())
       .toFormatter()
       .withResolverStyle(ResolverStyle.STRICT);
 
@@ -256,6 +260,7 @@ public class Analyzers {
             ZonedDateTime::from,
             LocalDateTime::from,
             LocalDate::from,
+            YearMonth::from,
             Year::from);
       } catch (Exception e) {
         return null;
@@ -298,13 +303,19 @@ public class Analyzers {
     if (parsedDate instanceof Year) {
       LocalDateTime yearDate = start ?
           ((Year) parsedDate).atMonth(1).atDay(1).atStartOfDay() :
-          ((Year) parsedDate).atMonth(12).atEndOfMonth().atTime(23, 59, 59);
+          ((Year) parsedDate).atMonth(12).atEndOfMonth().atTime(23, 59, 59, 999000000);
       return DateTimeFormatter.ISO_ZONED_DATE_TIME.format(yearDate.atZone(ZoneOffset.UTC));
+    }
+    if (parsedDate instanceof YearMonth) {
+      LocalDateTime yearMonthDate = start ?
+          ((YearMonth) parsedDate).atDay(1).atStartOfDay() :
+          ((YearMonth) parsedDate).atEndOfMonth().atTime(23, 59, 59, 999000000);
+      return DateTimeFormatter.ISO_ZONED_DATE_TIME.format((yearMonthDate.atZone(ZoneOffset.UTC)));
     }
     if (parsedDate instanceof LocalDate) {
       LocalDateTime localDate = start ?
           ((LocalDate) parsedDate).atStartOfDay() :
-          ((LocalDate) parsedDate).atTime(23, 59, 59);
+          ((LocalDate) parsedDate).atTime(23, 59, 59, 999000000);
       return DateTimeFormatter.ISO_ZONED_DATE_TIME.format(localDate.atZone(ZoneOffset.UTC));
     }
     if (parsedDate instanceof LocalDateTime) {
@@ -318,7 +329,7 @@ public class Analyzers {
   }
 
   static String utcDateTimeString(Long year, boolean start) {
-    return start ? year.toString() + "-01-01T00:00:00Z" : year.toString() + "-12-31T23:59:59Z";
+    return start ? year.toString() + "-01-01T00:00:00Z" : year.toString() + "-12-31T23:59:59.999Z";
   }
 
   static TimeRangeDescriptor rangeDescriptor(DateInfo beginInfo, DateInfo endInfo, DateInfo instantInfo) {

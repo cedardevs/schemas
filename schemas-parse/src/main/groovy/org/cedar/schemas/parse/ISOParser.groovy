@@ -425,11 +425,19 @@ class ISOParser {
   }
 
   static List<Link> parseLinks(GPathResult metadata) {
-    def linkNodes = metadata.distributionInfo.MD_Distribution.'**'.findAll {
+    def allLinkNodes = metadata.distributionInfo.MD_Distribution.'**'.findAll {
       it.name() == 'CI_OnlineResource'
     }
-    def uniqueLinks = linkNodes.collect(ISOParser.&parseLink).findAll() as Set
-    return uniqueLinks.toList()
+    def allUniqueLinks = allLinkNodes.collect(ISOParser.&parseLink).findAll() as Set
+
+    // Find all contact links and remove them
+    def allContactLinkNodes = metadata.distributionInfo.MD_Distribution.distributor.MD_Distributor.distributorContact.'**'.findAll {
+      it.name() == 'CI_OnlineResource'
+    }
+    def allUniqueContactLinks = allContactLinkNodes.collect(ISOParser.&parseLink).findAll() as Set
+
+    allUniqueLinks.removeAll(allUniqueContactLinks)
+    return allUniqueLinks.toList()
   }
 
   static Link parseLink(GPathResult node) {
@@ -437,7 +445,7 @@ class ISOParser {
     def builder = Link.newBuilder()
     builder.linkName        = node.name?.CharacterString?.text()?.trim() ?: null
     builder.linkProtocol    = node.protocol?.CharacterString?.text()?.trim() ?: null
-    builder.linkUrl         = node.linkage?.URL?.text() ? StringEscapeUtils.unescapeXml(node.linkage.URL.text()) : null
+    builder.linkUrl         = StringEscapeUtils.unescapeXml(node.linkage?.URL?.text()?.trim()) ?: null
     builder.linkDescription = node.description?.CharacterString?.text()?.trim() ?: null
     builder.linkFunction    = node.function?.CI_OnLineFunctionCode?.@codeListValue?.text()?.trim() ?: null
     return builder.build()
