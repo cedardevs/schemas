@@ -39,6 +39,15 @@
         "int"
       ],
       "default": null
+    },
+    {
+      "name": "source",
+      "doc": "The origination source, i.e., the application, of the error",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
     }
   ]
 }
