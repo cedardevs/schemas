@@ -278,15 +278,15 @@ public class DefaultParser {
 
   /**
    * <em>IMPORTANT!!</em>
-   * <br/>
+   * <br>
    * Apparently functions on an Avro builder which return a builder for a nested object,
    * for example {@link ParsedRecord.Builder#getDiscoveryBuilder}, are not always null-safe!
-   * <br/>
+   * <br>
    * If that nested object is nullable, and you built the {@code ParsedRecord} builder from another {@code ParsedRecord}
    * instance with {@link ParsedRecord#newBuilder(ParsedRecord)}, then it'll set {@code null} as the value
    * for the {@code Discovery} object, which will cause {@link ParsedRecord.Builder#hasDiscovery()} to return {@code true}
    * since the {@code Discovery} object was technically set (even though it was set to {@code null}).
-   * <br/>
+   * <br>
    * The result in that case is that {@link ParsedRecord.Builder#getDiscoveryBuilder()} throws a {@link NullPointerException}.
    * This function will check whether the {@code Discovery} is null and create a {@code Discovery.Builder} safely.
    *
