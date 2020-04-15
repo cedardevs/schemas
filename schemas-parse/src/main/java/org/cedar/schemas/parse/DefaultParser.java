@@ -13,7 +13,7 @@ public class DefaultParser {
    * Given a {@link ParsedRecord}, fill in any empty fields for which a default can be calculated. For instance
    * if the record's {@link Discovery} does not have a title, it will be set with the default, which is the the
    * {@link FileInformation#getName()} (see: {@link #defaultTitle(ParsedRecord.Builder)}).
-   * <br/>
+   * <br>
    * In general, only fields which have no value will be set with their defaults. The exception is the links,
    * which will have the defaults merged into the input values, with inputs taking precedence.
    * See: {@link #setDefaultLinks(ParsedRecord.Builder)}
