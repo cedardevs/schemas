@@ -77,6 +77,15 @@
               "doc": "Indicates if the analyzed record has a hierarchy level name"
             },
             {
+              "name": "isGranule",
+              "type": [
+                "null",
+                "boolean"
+              ],
+              "default": null,
+              "doc": "Resolves to true if metadata content indicates a record is a granule. That is, a parent identifier is present and the hierarchy level name is 'granule'."
+            },
+            {
               "name": "matchesIdentifiers",
               "type": [
                 "null",
@@ -84,6 +93,61 @@
               ],
               "default": null,
               "doc": "Resolves to true if 'granule' specified as hierarchy level and parent id provided OR if hierarchy level not 'granule' (parent id value irrelevant here -- record is assumed a collection)."
+            }
+          ]
+        }
+      ],
+      "default": null
+    },
+    {
+      "name": "relationships",
+      "doc": "Assessment of the relationships identified in the metadata.",
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "RelationshipAnalysis",
+          "fields": [
+            {
+              "name": "hasRelationships",
+              "type": [
+                "null",
+                "boolean"
+              ],
+              "default": null,
+              "doc": "Indicates if a record has any identified relationships"
+            },
+            {
+              "name": "relationships",
+              "doc": "Summary of associated relationship RecordTypes and corresponding counts"
+              "type": {
+                "type": "array",
+                "items": {
+                  "name": "RelationshipAnalysisElement",
+                  "type": "record",
+                  "fields": [
+                    {
+                      "name": "type",
+                      "type": [
+                        null,
+                        "RelationshipType"
+                      ],
+                      "default": null,
+                      "doc": "RecordType of associated relationship(s)."
+                    },
+                    {
+                      "name": "count",
+                      "type": [
+                        "null",
+                        "int"
+                      ],
+                      "default": null,
+                      "doc": "Count of associated relationships for the given RecordType."
+                    }
+                  ]
+                }
+              },
+              "default": []
             }
           ]
         }
