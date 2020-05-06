@@ -65,7 +65,7 @@ class AnalyzersSpec extends Specification {
             parentIdentifierExists  : true,
             parentIdentifierString  : 'gov.super.important:PARENT-ID',
             hierarchyLevelNameExists: true,
-            matchesIdentifiers      : true
+            isGranule               : true
         ],
         temporalBounding: [
             beginDescriptor         : ValidDescriptor.VALID,

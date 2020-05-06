@@ -64,6 +64,7 @@ public class Analyzers {
     }
     return Analysis.newBuilder()
         .setIdentification(analyzeIdentifiers(discovery))
+        //.setRelationships(analyzeRelationships()) // FIXME -- this would require access to the larger ParsedRecord + substantial code changes
         .setTemporalBounding(analyzeTemporalBounding(discovery))
         .setSpatialBounding(analyzeSpatialBounding(discovery))
         .setTitles(analyzeTitles(discovery))
@@ -90,7 +91,7 @@ public class Analyzers {
         .setParentIdentifierExists(parentIdInfo.exists)
         .setParentIdentifierString(parentIdInfo.value)
         .setHierarchyLevelNameExists(hierarchyInfo.exists)
-        .setMatchesIdentifiers((hierarchyInfo.exists && hierarchyInfo.value.equals("granule") && parentIdInfo.exists) || (hierarchyInfo.exists && !hierarchyInfo.value.equals("granule")) || !hierarchyInfo.exists)
+        .setIsGranule(hierarchyInfo.exists && hierarchyInfo.value.equals("granule") && parentIdInfo.exists)
         .build();
   }
 

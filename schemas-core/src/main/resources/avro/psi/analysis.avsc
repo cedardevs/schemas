@@ -84,15 +84,6 @@
               ],
               "default": null,
               "doc": "Resolves to true if metadata content indicates a record is a granule. That is, a parent identifier is present and the hierarchy level name is 'granule'."
-            },
-            {
-              "name": "matchesIdentifiers",
-              "type": [
-                "null",
-                "boolean"
-              ],
-              "default": null,
-              "doc": "Resolves to true if 'granule' specified as hierarchy level and parent id provided OR if hierarchy level not 'granule' (parent id value irrelevant here -- record is assumed a collection)."
             }
           ]
         }
@@ -119,7 +110,7 @@
             },
             {
               "name": "relationships",
-              "doc": "Summary of associated relationship RecordTypes and corresponding counts"
+              "doc": "Summary of associated relationship RecordTypes and corresponding counts",
               "type": {
                 "type": "array",
                 "items": {
@@ -129,7 +120,7 @@
                     {
                       "name": "type",
                       "type": [
-                        null,
+                        "null",
                         "RelationshipType"
                       ],
                       "default": null,
