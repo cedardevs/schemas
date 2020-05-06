@@ -41,7 +41,7 @@ class AvroUtilsSpec extends Specification {
     result.operation == OperationType.NO_OP
   }
 
-  def 'transforms a an avro object with a nested map which contains avro values ... into a map'() {
+  def 'transforms an avro object with a nested map which contains avro values ... into a map'() {
     def builder = ParsedRecord.newBuilder()
     builder.fileLocations = [ // <-- fileLocations is a map with values which are avro objects
         'testURI': FileLocation.newBuilder().setUri('testURI').build()
