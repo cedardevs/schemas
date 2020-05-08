@@ -64,7 +64,6 @@ public class Analyzers {
     }
     return Analysis.newBuilder()
         .setIdentification(analyzeIdentifiers(discovery))
-        //.setRelationships(analyzeRelationships()) // FIXME -- this would require access to the larger ParsedRecord + substantial code changes
         .setTemporalBounding(analyzeTemporalBounding(discovery))
         .setSpatialBounding(analyzeSpatialBounding(discovery))
         .setTitles(analyzeTitles(discovery))

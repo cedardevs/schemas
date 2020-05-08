@@ -253,7 +253,7 @@ class AnalyzersSpec extends Specification {
     !result.parentIdentifierExists
     result.parentIdentifierString == null
     !result.hierarchyLevelNameExists
-    result.matchesIdentifiers
+    !result.isGranule
   }
 
   def "detects mismatch between metadata type and corresponding identifiers"() {
@@ -275,7 +275,7 @@ class AnalyzersSpec extends Specification {
     !result.parentIdentifierExists
     result.parentIdentifierString == null
     result.hierarchyLevelNameExists
-    !result.matchesIdentifiers
+    !result.isGranule
   }
 
   def 'handles analysis of #testCase strings'() {

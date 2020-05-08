@@ -470,8 +470,8 @@
           "hierarchyLevelNameExists": {
             "boolean": false
           },
-          "matchesIdentifiers": {
-            "boolean": true
+          "isGranule": {
+            "boolean": false
           }
         }
       },
