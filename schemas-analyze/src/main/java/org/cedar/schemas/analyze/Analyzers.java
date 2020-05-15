@@ -435,32 +435,4 @@ public class Analyzers {
     // Covers undefined begin date with valid end date which is meaningless, regardless of presence of an instant date
     return INVALID;
   }
-
-  static Boolean beginLTEEnd(DateInfo beginInfo, DateInfo endInfo) {
-    boolean beginIndexable = beginInfo.indexable;
-    boolean endIndexable = endInfo.indexable;
-    boolean beginIsYears = beginInfo.precision.equals(ChronoUnit.YEARS.toString());
-    boolean endIsYears = endInfo.precision.equals(ChronoUnit.YEARS.toString());
-
-    if (beginIndexable && endIndexable) {
-      // Compare actual dates with UTC string
-      ZonedDateTime beginDate = ZonedDateTime.parse(beginInfo.utcDateTimeString);
-      ZonedDateTime endDate = ZonedDateTime.parse(endInfo.utcDateTimeString);
-      return beginDate.isBefore(endDate) || beginDate.isEqual(endDate);
-    }
-    else if ((beginIsYears && endIsYears) || (beginIsYears && endIndexable) || (beginIndexable && endIsYears)) {
-      // Compare years only as longs; parse both as string objects since both may not be just a long.
-      // Watch out for negative years...
-      String beginYearText = beginInfo.utcDateTimeString.substring(0, beginInfo.utcDateTimeString.indexOf('-', 1));
-      String endYearText = endInfo.utcDateTimeString.substring(0, endInfo.utcDateTimeString.indexOf('-', 1));
-      Long beginYear = Long.parseLong(beginYearText);
-      Long endYear = Long.parseLong(endYearText);
-      return beginYear <= endYear;
-    }
-    else {
-      // One or both has an INVALID search format that is not just due to a paleo year
-      return null;
-    }
-  }
-
 }
