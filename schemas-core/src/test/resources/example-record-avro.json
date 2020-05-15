@@ -548,6 +548,10 @@
           "beginUtcDateTimeString": {
             "string": "2002-06-01T00:00:00Z"
           },
+          "beginYear": {"long": 2002},
+          "beginMonth": {"int": 6},
+          "beginDayOfMonth":{"int":  1},
+          "beginDayOfYear": {"int": 152},
           "endDescriptor": {
             "org.cedar.schemas.avro.psi.ValidDescriptor": "VALID"
           },
@@ -561,6 +565,10 @@
           "endUtcDateTimeString": {
             "string": "2011-10-04T23:59:59Z"
           },
+          "endYear": {"long": 2011},
+          "endMonth": {"int": 10},
+          "endDayOfMonth": {"int": 4},
+          "endDayOfYear": {"int": 277},
           "instantDescriptor": {
             "org.cedar.schemas.avro.psi.ValidDescriptor": "UNDEFINED"
           },
@@ -570,6 +578,10 @@
           },
           "instantZoneSpecified": null,
           "instantUtcDateTimeString": null,
+          "instantYear": null,
+          "instantMonth": null,
+          "instantDayOfMonth": null,
+          "instantDayOfYear": null,
           "rangeDescriptor": {
             "org.cedar.schemas.avro.psi.TimeRangeDescriptor": "BOUNDED"
           }

@@ -327,6 +327,42 @@
               "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed beginning value"
             },
             {
+              "name": "beginYear",
+              "type": [
+                "null",
+                "long"
+              ],
+              "default": null,
+              "doc": "If possible, an long indicating the beginning year"
+            },
+            {
+              "name": "beginDayOfYear",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If possible, an integer indicating the day of year for the beginning value"
+            },
+            {
+              "name": "beginDayOfMonth",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If possible, an integer indicating the day of month for the beginning value"
+            },
+            {
+              "name": "beginMonth",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If possible, an integer indicating the month for the beginning value"
+            },
+            {
               "name": "endDescriptor",
               "type": [
                 "null",
@@ -372,6 +408,42 @@
               "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed end value"
             },
             {
+              "name": "endYear",
+              "type": [
+                "null",
+                "long"
+              ],
+              "default": null,
+              "doc": "If possible, an long indicating the end year"
+            },
+            {
+              "name": "endDayOfYear",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If possible, an integer indicating the day of year for the end value"
+            },
+            {
+              "name": "endDayOfMonth",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If possible, an integer indicating the day of month for the end value"
+            },
+            {
+              "name": "endMonth",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If possible, an integer indicating the month for the end value"
+            },
+            {
               "name": "instantDescriptor",
               "type": [
                 "null",
@@ -415,6 +487,42 @@
               ],
               "default": null,
               "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed instant value"
+            },
+            {
+              "name": "instantYear",
+              "type": [
+                "null",
+                "long"
+              ],
+              "default": null,
+              "doc": "If possible, an long indicating the instant year"
+            },
+            {
+              "name": "instantDayOfYear",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If possible, an integer indicating the day of year for the instant value"
+            },
+            {
+              "name": "instantDayOfMonth",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If possible, an integer indicating the day of month for the instant value"
+            },
+            {
+              "name": "instantMonth",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If possible, an integer indicating the month for the instant value"
             },
             {
               "name": "rangeDescriptor",
