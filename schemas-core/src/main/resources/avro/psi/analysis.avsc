@@ -436,7 +436,7 @@
                 }
               ],
               "default": null,
-              "doc": "A label describing the nature of the time range in the analyzed temporal bounding"
+              "doc": "A label describing the nature of the time range in the analyzed temporal bounding. Any individual date descriptor being 'INVALID' results in 'NOT_APPLICABLE' for this field."
             }
           ]
         }
