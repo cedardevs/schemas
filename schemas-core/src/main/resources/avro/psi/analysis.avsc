@@ -424,12 +424,14 @@
                   "type": "enum",
                   "name": "TimeRangeDescriptor",
                   "symbols": [
+                    "AMBIGUOUS",
+                    "BACKWARDS",
                     "BOUNDED",
-                    "ONGOING",
                     "INSTANT",
-                    "UNDEFINED",
                     "INVALID",
-                    "BACKWARDS"
+                    "ONGOING",
+                    "NOT_APPLICABLE",
+                    "UNDEFINED"
                   ]
                 }
               ],

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
@@ -203,7 +204,7 @@ public class Analyzers {
     }
   }
 
-  static class DateInfo {
+  static class DateInfo implements Comparable<DateInfo> {
     public final ValidDescriptor descriptor;
     public final String precision;
     public final boolean indexable;
@@ -264,6 +265,42 @@ public class Analyzers {
             Year::from);
       } catch (Exception e) {
         return null;
+      }
+    }
+
+    @Override
+    public int compareTo(DateInfo o) {
+      boolean thisIndexable = this.indexable;
+      boolean oIndexable = o.indexable;
+      boolean thisIsYears = this.precision.equals(ChronoUnit.YEARS.toString());
+      boolean oIsYears = o.precision.equals(ChronoUnit.YEARS.toString());
+
+      if (thisIndexable && oIndexable) {
+        // Compare actual dates with UTC string
+        ZonedDateTime thisDate = ZonedDateTime.parse(this.utcDateTimeString);
+        ZonedDateTime oDate = ZonedDateTime.parse(o.utcDateTimeString);
+        if (thisDate.isEqual(oDate)) {
+          return 0;
+        } else {
+          return thisDate.isBefore(oDate) ? -1 : 1;
+        }
+      }
+      else if ((thisIsYears && oIsYears) || (thisIsYears && oIndexable) || (thisIndexable && oIsYears)) {
+        // Compare years only as longs; parse both as string objects since both may not be just a long.
+        // Watch out for negative years...
+        String thisYearText = this.utcDateTimeString.substring(0, this.utcDateTimeString.indexOf('-', 1));
+        String oYearText = o.utcDateTimeString.substring(0, o.utcDateTimeString.indexOf('-', 1));
+        Long thisYear = Long.parseLong(thisYearText);
+        Long oYear = Long.parseLong(oYearText);
+        if (thisYear == oYear) {
+          return 0;
+        } else {
+          return thisYear < oYear ? -1 : 1;
+        }
+      }
+      else {
+        // One or both has an INVALID search format that is not just due to a paleo year
+        throw new DateTimeException("One or both dates being compared have an INVALID format.");
       }
     }
   }
@@ -337,28 +374,65 @@ public class Analyzers {
     ValidDescriptor end = endInfo.descriptor;
     ValidDescriptor instant = instantInfo.descriptor;
 
-    if (begin == ValidDescriptor.VALID &&
-        end == ValidDescriptor.VALID &&
-        instant == ValidDescriptor.UNDEFINED) {
-      Boolean inOrder = beginLTEEnd(beginInfo, endInfo);
-      return inOrder == null ? INVALID : inOrder ? BOUNDED : BACKWARDS;
+    // A time range cannot be described as an error exists with one or more dates:
+    if(begin == ValidDescriptor.INVALID ||
+        end == ValidDescriptor.INVALID ||
+        instant == ValidDescriptor.INVALID) {
+      return NOT_APPLICABLE;
     }
-    if (begin == ValidDescriptor.VALID &&
-        end == ValidDescriptor.UNDEFINED &&
-        instant == ValidDescriptor.UNDEFINED) {
-      return ONGOING;
-    }
-    if (begin == ValidDescriptor.UNDEFINED &&
-        end == ValidDescriptor.UNDEFINED &&
-        instant == ValidDescriptor.VALID) {
-      return INSTANT;
-    }
+
+    // Dates are all undefined so range is undefined:
     if (begin == ValidDescriptor.UNDEFINED &&
         end == ValidDescriptor.UNDEFINED &&
         instant == ValidDescriptor.UNDEFINED) {
       return UNDEFINED;
     }
 
+    // If begin is valid but end is undefined, this indicates an ongoing range:
+    if (begin == ValidDescriptor.VALID &&
+        end == ValidDescriptor.UNDEFINED &&
+        instant == ValidDescriptor.UNDEFINED) {
+      return ONGOING;
+    }
+
+    // Valid instant is straightforward:
+    if (begin == ValidDescriptor.UNDEFINED &&
+        end == ValidDescriptor.UNDEFINED &&
+        instant == ValidDescriptor.VALID) {
+      return INSTANT;
+    }
+
+    // Dates describe more than one valid range descriptor, which is ambiguous:
+    if ( ( begin == ValidDescriptor.VALID && end == ValidDescriptor.VALID && instant == ValidDescriptor.VALID ) ||
+        ( begin == ValidDescriptor.VALID && end == ValidDescriptor.UNDEFINED && instant == ValidDescriptor.VALID ) ) {
+      return AMBIGUOUS;
+    }
+
+    // Begin and end dates are independently valid but based on how they compare to each other can describe very
+    // different range types:
+    if (begin == ValidDescriptor.VALID &&
+        end == ValidDescriptor.VALID &&
+        instant == ValidDescriptor.UNDEFINED) {
+      try {
+        int comparator = beginInfo.compareTo(endInfo);
+        TimeRangeDescriptor descriptor;
+        switch (comparator) {
+          case -1: descriptor = BOUNDED;
+                   break;
+          case 0:  descriptor = INSTANT;
+                   break;
+          case 1:  descriptor = BACKWARDS;
+                   break;
+          default: descriptor = INVALID;
+                   break;
+        }
+        return descriptor;
+      } catch(DateTimeException e) {
+        return INVALID;
+      }
+    }
+
+    // Covers undefined begin date with valid end date which is meaningless, regardless of presence of an instant date
     return INVALID;
   }
 
