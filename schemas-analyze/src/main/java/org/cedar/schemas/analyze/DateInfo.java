@@ -48,7 +48,7 @@ public class DateInfo implements Comparable<DateInfo> {
 
     Integer yearValue = extractField(parsedDate, ChronoField.YEAR);
     if (yearValue == null) {
-      year = null;
+      year = longDate;
     } else {
       year = (long) yearValue;
     }

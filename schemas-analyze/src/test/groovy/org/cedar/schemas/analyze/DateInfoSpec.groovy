@@ -33,8 +33,8 @@ class DateInfoSpec extends Specification {
     '1999-12-31' | 1999 | 365 | 31 | 12
     '1999' | 1999 | null | null | null
     '1999-01-01T00:00:00Z' | 1999 | 1 | 1 | 1
-    '-1000000000' | null | null | null | null // too big paleo number isn't parsed as a year value
-    '-35000000' | -35_000_000L | null | null | null
+    '-1000000000' | -1_000_000_000L | null | null | null // too big paleo number is parsed as a year value, although it cannot be a datetime string
+    '-35000000' | -35_000_000L | null | null | null // this one can be a datetime string
     '2008-04-01T00:00:00Z' | 2008 | 92 | 1 | 4
     '1975-06-15T12:30:00Z' | 1975 | 166 | 15 | 6
     null | null | null | null | null
