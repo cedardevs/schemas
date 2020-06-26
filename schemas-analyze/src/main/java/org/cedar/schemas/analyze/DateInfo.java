@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAccessor;
+import java.time.Year;
+import java.time.YearMonth;
 import java.time.DateTimeException;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -25,9 +27,14 @@ public class DateInfo implements Comparable<DateInfo> {
   public final String zoneSpecified;
   public final String utcDateTimeString;
   public final Long year;
-  public final Integer dayOfYear; // values 1 - 366
-  public final Integer dayOfMonth; // values 1 - 31
-  public final Integer month; // values 1 - 12
+  public Integer dayOfYear; // values 1 - 366 // TODO temp remove final from these fields, just to sanity check things
+  public Integer dayOfMonth; // values 1 - 31
+  public Integer month; // values 1 - 12
+
+  // special stuff for dealing with how we interpret year or month precision instants:
+  public Integer endDayOfYear;
+  public Integer endDayOfMonth;
+  public Integer endMonth;
 
   public DateInfo(String dateString, boolean start) {
     if (dateString == null || dateString.length() == 0) {
@@ -55,6 +62,27 @@ public class DateInfo implements Comparable<DateInfo> {
     dayOfYear = extractField(parsedDate, ChronoField.DAY_OF_YEAR);
     dayOfMonth = extractField(parsedDate, ChronoField.DAY_OF_MONTH);
     month = extractField(parsedDate, ChronoField.MONTH_OF_YEAR);
+    if (parsedDate != null && dayOfMonth == null && month != null) { // TODO or parsedDate instanceof YearMonth
+      endMonth = month;
+      dayOfMonth = 1;
+      endDayOfMonth = ((YearMonth)parsedDate).lengthOfMonth();
+      dayOfYear = ((YearMonth)parsedDate).atDay(1).getDayOfYear();
+      endDayOfYear = ((YearMonth)parsedDate).atEndOfMonth().getDayOfYear();
+      System.out.println("year month - setting endDayOf* fields..." + endDayOfMonth);
+      System.out.println("year month - setting endDayOf* fields..." + dayOfYear);
+      System.out.println("year month - setting endDayOf* fields..." + endDayOfYear);
+    } else if (parsedDate != null && month == null && year != null) { // TODO or instanceof Year?
+      dayOfMonth = 1;
+      dayOfYear = 1;
+      endDayOfYear = ((Year)parsedDate).length(); // number of days in the year, including leap years
+      endDayOfMonth = 31;
+      month = 1;
+      endMonth = 12;
+    } else {
+      endMonth = month;
+      endDayOfMonth = dayOfMonth;
+      endDayOfYear = dayOfYear;
+    }
 
     if (longDate != null && !indexable(longDate)) {
       descriptor = ValidDescriptor.VALID;

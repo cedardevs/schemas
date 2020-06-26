@@ -297,7 +297,7 @@
                 "string"
               ],
               "default": null,
-              "doc": "The precision of the beginning of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit"
+              "doc": "The precision of the beginning of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit. Note that this may sometimes not exactly match the input data, since it reflects the Java class the date is able to be parsed into"
             },
             {
               "name": "beginIndexable",
@@ -306,7 +306,7 @@
                 "boolean"
               ],
               "default": null,
-              "doc": "Indicates whether or not the beginning can be indexed for searching"
+              "doc": "Indicates whether or not beginUtcDateTimeString can be indexed for searching"
             },
             {
               "name": "beginZoneSpecified",
@@ -342,7 +342,7 @@
                 "int"
               ],
               "default": null,
-              "doc": "If possible, an integer indicating the day of year for the beginning value"
+              "doc": "If possible, an integer indicating the day of year for the beginning value. This may be populated by extrapolating into a DateTime. See beginPrecision for the best indicator of if this value is extrapolated or provided in the original date format"
             },
             {
               "name": "beginDayOfMonth",
@@ -351,7 +351,7 @@
                 "int"
               ],
               "default": null,
-              "doc": "If possible, an integer indicating the day of month for the beginning value"
+              "doc": "If possible, an integer indicating the day of month for the beginning value. This may be populated by extrapolating into a DateTime. See beginPrecision for the best indicator of if this value is extrapolated or provided in the original date format"
             },
             {
               "name": "beginMonth",
@@ -360,7 +360,7 @@
                 "int"
               ],
               "default": null,
-              "doc": "If possible, an integer indicating the month for the beginning value"
+              "doc": "If possible, an integer indicating the month for the beginning value. This may be populated by extrapolating into a DateTime. See beginPrecision for the best indicator of if this value is extrapolated or provided in the original date format"
             },
             {
               "name": "endDescriptor",
@@ -378,7 +378,7 @@
                 "string"
               ],
               "default": null,
-              "doc": "The precision of the end of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit"
+              "doc": "The precision of the end of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit. Note that this may sometimes not exactly match the input data, since it reflects the Java class the date is able to be parsed into"
             },
             {
               "name": "endIndexable",
@@ -387,7 +387,7 @@
                 "boolean"
               ],
               "default": null,
-              "doc": "Indicates whether or not the ending can be indexed for searching"
+              "doc": "Indicates whether or not endUtcDateTimeString can be indexed for searching"
             },
             {
               "name": "endZoneSpecified",
@@ -423,7 +423,7 @@
                 "int"
               ],
               "default": null,
-              "doc": "If possible, an integer indicating the day of year for the end value"
+              "doc": "If possible, an integer indicating the day of year for the end value. This may be populated by extrapolating into a DateTime. See endPrecision for the best indicator of if this value is extrapolated or provided in the original date format"
             },
             {
               "name": "endDayOfMonth",
@@ -432,7 +432,7 @@
                 "int"
               ],
               "default": null,
-              "doc": "If possible, an integer indicating the day of month for the end value"
+              "doc": "If possible, an integer indicating the day of month for the end value. This may be populated by extrapolating into a DateTime. See endPrecision for the best indicator of if this value is extrapolated or provided in the original date format"
             },
             {
               "name": "endMonth",
@@ -441,7 +441,7 @@
                 "int"
               ],
               "default": null,
-              "doc": "If possible, an integer indicating the month for the end value"
+              "doc": "If possible, an integer indicating the month for the end value. This may be populated by extrapolating into a DateTime. See endPrecision for the best indicator of if this value is extrapolated or provided in the original date format"
             },
             {
               "name": "instantDescriptor",
@@ -459,7 +459,7 @@
                 "string"
               ],
               "default": null,
-              "doc": "The precision of the instant of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit"
+              "doc": "The precision of the instant of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit. Note that this may sometimes not exactly match the input data, since it reflects the Java class the date is able to be parsed into"
             },
             {
               "name": "instantIndexable",
@@ -468,7 +468,7 @@
                 "boolean"
               ],
               "default": null,
-              "doc": "Indicates whether or not the instant can be indexed for searching"
+              "doc": "Indicates whether or not instantUtcDateTimeString can be indexed for searching"
             },
             {
               "name": "instantZoneSpecified",
@@ -504,7 +504,16 @@
                 "int"
               ],
               "default": null,
-              "doc": "If possible, an integer indicating the day of year for the instant value"
+              "doc": "If possible, an integer indicating the day of year for the instant value. This may be populated by extrapolating into a DateTime. See instantPrecision for the best indicator of if this value is extrapolated or provided in the original date format"
+            },
+            {
+              "name": "instantEndDayOfYear",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If instantPrecision does not include day, an integer indicating the assumed day of year the instant ends, e.g. the last day of a month or year"
             },
             {
               "name": "instantDayOfMonth",
@@ -513,7 +522,16 @@
                 "int"
               ],
               "default": null,
-              "doc": "If possible, an integer indicating the day of month for the instant value"
+              "doc": "If possible, an integer indicating the day of month for the instant value. This may be populated by extrapolating into a DateTime. See instantPrecision for the best indicator of if this value is extrapolated or provided in the original date format"
+            },
+            {
+              "name": "instantEndDayOfMonth",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If instantPrecision does not include day, an integer indicating the assumed day of month the instant ends, e.g. the last day of a month or year"
             },
             {
               "name": "instantMonth",
@@ -522,7 +540,16 @@
                 "int"
               ],
               "default": null,
-              "doc": "If possible, an integer indicating the month for the instant value"
+              "doc": "If possible, an integer indicating the month for the instant value. This may be populated by extrapolating into a DateTime. See instantPrecision for the best indicator of if this value is extrapolated or provided in the original date format"
+            },
+            {
+              "name": "instantEndMonth",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If instantPrecision does not include day, an integer indicating the assumed month the instant ends, e.g. the last month of the year"
             },
             {
               "name": "rangeDescriptor",

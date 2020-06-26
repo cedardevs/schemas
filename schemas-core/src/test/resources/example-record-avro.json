@@ -582,6 +582,9 @@
           "instantMonth": null,
           "instantDayOfMonth": null,
           "instantDayOfYear": null,
+          "instantEndMonth": null,
+          "instantEndDayOfMonth": null,
+          "instantEndDayOfYear": null,
           "rangeDescriptor": {
             "org.cedar.schemas.avro.psi.TimeRangeDescriptor": "BOUNDED"
           }

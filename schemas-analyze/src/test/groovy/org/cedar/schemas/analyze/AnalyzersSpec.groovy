@@ -97,6 +97,9 @@ class AnalyzersSpec extends Specification {
             instantDayOfMonth       : null,
             instantYear             : null,
             instantMonth            : null,
+            instantEndDayOfYear     : null,
+            instantEndDayOfMonth    : null,
+            instantEndMonth         : null,
             rangeDescriptor         : BOUNDED,
         ],
         spatialBounding : [

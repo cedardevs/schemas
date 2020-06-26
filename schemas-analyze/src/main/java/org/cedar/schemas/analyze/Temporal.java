@@ -111,6 +111,9 @@ public class Temporal {
       builder.setInstantDayOfYear(instantInfo.dayOfYear);
       builder.setInstantDayOfMonth(instantInfo.dayOfMonth);
       builder.setInstantMonth(instantInfo.month);
+      builder.setInstantEndDayOfYear(instantInfo.endDayOfYear);
+      builder.setInstantEndDayOfMonth(instantInfo.endDayOfMonth);
+      builder.setInstantEndMonth(instantInfo.endMonth);
 
       builder.setRangeDescriptor(rangeDescriptor);
     }
