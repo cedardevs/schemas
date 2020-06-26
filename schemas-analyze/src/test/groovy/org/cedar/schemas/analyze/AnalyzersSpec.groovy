@@ -93,6 +93,7 @@ class AnalyzersSpec extends Specification {
             instantIndexable        : true,
             instantZoneSpecified    : null,
             instantUtcDateTimeString: null,
+            instantEndUtcDateTimeString: null,
             instantDayOfYear        : null,
             instantDayOfMonth       : null,
             instantYear             : null,

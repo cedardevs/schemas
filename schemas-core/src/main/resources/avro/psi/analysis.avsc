@@ -489,6 +489,15 @@
               "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed instant value"
             },
             {
+              "name": "instantEndUtcDateTimeString",
+              "type": [
+                "null",
+                "string"
+              ],
+              "default": null,
+              "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed instant value. If instantPrecision does not include time, day, or month, the value is the assumed date time the instant ends, e.g. the last day of a month or year"
+            },
+            {
               "name": "instantYear",
               "type": [
                 "null",

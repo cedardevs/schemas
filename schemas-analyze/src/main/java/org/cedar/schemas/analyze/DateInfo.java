@@ -26,6 +26,7 @@ public class DateInfo implements Comparable<DateInfo> {
   public final boolean indexable;
   public final String zoneSpecified;
   public final String utcDateTimeString;
+  public final String endUtcDateTimeString;
   public final Long year;
   public Integer dayOfYear; // values 1 - 366 // TODO temp remove final from these fields, just to sanity check things
   public Integer dayOfMonth; // values 1 - 31
@@ -43,6 +44,7 @@ public class DateInfo implements Comparable<DateInfo> {
       indexable = true;
       zoneSpecified = null;
       utcDateTimeString = null;
+      endUtcDateTimeString = null;
       year = null;
       dayOfYear = null;
       dayOfMonth = null;
@@ -68,9 +70,7 @@ public class DateInfo implements Comparable<DateInfo> {
       endDayOfMonth = ((YearMonth)parsedDate).lengthOfMonth();
       dayOfYear = ((YearMonth)parsedDate).atDay(1).getDayOfYear();
       endDayOfYear = ((YearMonth)parsedDate).atEndOfMonth().getDayOfYear();
-      System.out.println("year month - setting endDayOf* fields..." + endDayOfMonth);
-      System.out.println("year month - setting endDayOf* fields..." + dayOfYear);
-      System.out.println("year month - setting endDayOf* fields..." + endDayOfYear);
+      // endUtcDateTimeString = utcDateTimeString(((YearMonth)parsedDate).atEndOfMonth(), false);
     } else if (parsedDate != null && month == null && year != null) { // TODO or instanceof Year?
       dayOfMonth = 1;
       dayOfYear = 1;
@@ -78,10 +78,13 @@ public class DateInfo implements Comparable<DateInfo> {
       endDayOfMonth = 31;
       month = 1;
       endMonth = 12;
+
+      // endUtcDateTimeString = utcDateTimeString(((Year)parsedDate).atDay(endDayOfYear), false);
     } else {
       endMonth = month;
       endDayOfMonth = dayOfMonth;
       endDayOfYear = dayOfYear;
+      // endUtcDateTimeString = utcDateTimeString;
     }
 
     if (longDate != null && !indexable(longDate)) {
@@ -90,6 +93,7 @@ public class DateInfo implements Comparable<DateInfo> {
       indexable = indexable(longDate);
       zoneSpecified = timezone(longDate);
       utcDateTimeString = utcDateTimeString(longDate, start);
+      endUtcDateTimeString = utcDateTimeString(longDate, false);
     }
     else if (parsedDate != null) {
       descriptor = ValidDescriptor.VALID;
@@ -97,6 +101,7 @@ public class DateInfo implements Comparable<DateInfo> {
       indexable = true;
       zoneSpecified = timezone(parsedDate);
       utcDateTimeString = utcDateTimeString(parsedDate, start);
+      endUtcDateTimeString = utcDateTimeString(parsedDate, false);
     }
     else {
       descriptor = ValidDescriptor.INVALID;
@@ -104,6 +109,7 @@ public class DateInfo implements Comparable<DateInfo> {
       indexable = false;
       zoneSpecified = null;
       utcDateTimeString = null;
+      endUtcDateTimeString = null;
     }
   }
 

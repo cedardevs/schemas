@@ -98,15 +98,16 @@ public class Temporal {
       builder.setEndZoneSpecified(endInfo.zoneSpecified);
       builder.setEndUtcDateTimeString(endInfo.utcDateTimeString);
       builder.setEndYear(endInfo.year);
-      builder.setEndDayOfYear(endInfo.dayOfYear);
-      builder.setEndDayOfMonth(endInfo.dayOfMonth);
-      builder.setEndMonth(endInfo.month);
+      builder.setEndDayOfYear(endInfo.endDayOfYear == null ? endInfo.dayOfYear : endInfo.endDayOfYear);
+      builder.setEndDayOfMonth(endInfo.endDayOfMonth == null ? endInfo.dayOfMonth : endInfo.endDayOfMonth);
+      builder.setEndMonth(endInfo.endMonth == null ? endInfo.month : endInfo.endMonth);
 
       builder.setInstantDescriptor(instantInfo.descriptor);
       builder.setInstantPrecision(instantInfo.precision);
       builder.setInstantIndexable(instantInfo.indexable);
       builder.setInstantZoneSpecified(instantInfo.zoneSpecified);
       builder.setInstantUtcDateTimeString(instantInfo.utcDateTimeString);
+      builder.setInstantEndUtcDateTimeString(instantInfo.endUtcDateTimeString);
       builder.setInstantYear(instantInfo.year);
       builder.setInstantDayOfYear(instantInfo.dayOfYear);
       builder.setInstantDayOfMonth(instantInfo.dayOfMonth);

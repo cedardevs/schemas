@@ -17,6 +17,29 @@ class TemporalSpec extends Specification {
 
   final String analysisAvro = ClassLoader.systemClassLoader.getResourceAsStream('avro/psi/analysis.avsc').text
 
+  def "end date #description (#endDate) correctly extrapolates date"() {
+    given:
+    def bounding = TemporalBounding.newBuilder()
+        .setEndDate(endDate)
+        .build()
+    def discovery = Discovery.newBuilder().setTemporalBounding(bounding).build()
+
+    when:
+    def result = Temporal.analyzeBounding(discovery)
+
+    then:
+    result.endMonth == month
+    result.endDayOfMonth == dayOfMonth
+    result.endDayOfYear == dayOfYear
+
+    where:
+    description | endDate | month | dayOfMonth | dayOfYear
+    "month precision" | '2003-02' | 2 | 28 | 59
+    "month precision leap year" | '2004-02' | 2 | 29 | 60
+    "year precision leap year" | '2004' | 12 | 31 | 366
+    "year precision" | '2003' | 12 | 31 | 365
+  }
+
   def "instant #description (#instant) correctly extrapolates date range"() {
     given:
     def bounding = TemporalBounding.newBuilder()
@@ -28,21 +51,21 @@ class TemporalSpec extends Specification {
     def result = Temporal.analyzeBounding(discovery)
 
     then:
-    println("????"+result)
     result.instantMonth == month
     result.instantEndMonth == endMonth
     result.instantDayOfMonth == dayOfMonth
     result.instantEndDayOfMonth == endDayOfMonth
     result.instantDayOfYear == dayOfYear
     result.instantEndDayOfYear == endDayOfYear
+    result.instantEndUtcDateTimeString == endString
 
     where:
 
-    description | instant | year | dayOfYear | dayOfMonth | month | endYear | endDayOfYear | endDayOfMonth | endMonth
-    "instant with month precision" | '2003-02' | 2003 | 32 | 1 | 2 | 2003 | 59 | 28 | 2
-    "instant on leapyear with month precision" | '2004-02' | 2004 | 32 | 1 | 2 | 2004 | 60 | 29 | 2
-    "instant with day precision" | '2001-06-22' | 2001 | 173 | 22 | 6 | 2001 | 173 | 22 | 6
-    "instant with day precision on leapyear" | '2020-06-22' | 2020 | 174 | 22 | 6 | 2020 | 174 | 22 | 6
+    description | instant | year | dayOfYear | dayOfMonth | month | endYear | endDayOfYear | endDayOfMonth | endMonth | endString
+    "instant with month precision" | '2003-02' | 2003 | 32 | 1 | 2 | 2003 | 59 | 28 | 2 | '2003-02-28T23:59:59.999Z'
+    "instant on leapyear with month precision" | '2004-02' | 2004 | 32 | 1 | 2 | 2004 | 60 | 29 | 2 | '2004-02-29T23:59:59.999Z'
+    "instant with day precision" | '2001-06-22' | 2001 | 173 | 22 | 6 | 2001 | 173 | 22 | 6 | '2001-06-22T23:59:59.999Z'
+    "instant with day precision on leapyear" | '2020-06-22' | 2020 | 174 | 22 | 6 | 2020 | 174 | 22 | 6 | '2020-06-22T23:59:59.999Z'
 
   }
 

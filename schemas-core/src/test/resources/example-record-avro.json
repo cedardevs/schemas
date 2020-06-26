@@ -578,6 +578,7 @@
           },
           "instantZoneSpecified": null,
           "instantUtcDateTimeString": null,
+          "instantEndUtcDateTimeString": null,
           "instantYear": null,
           "instantMonth": null,
           "instantDayOfMonth": null,
