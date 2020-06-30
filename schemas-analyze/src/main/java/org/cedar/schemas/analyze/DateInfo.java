@@ -28,14 +28,14 @@ public class DateInfo implements Comparable<DateInfo> {
   public final String utcDateTimeString;
   public final String endUtcDateTimeString;
   public final Long year;
-  public Integer dayOfYear; // values 1 - 366 // TODO temp remove final from these fields, just to sanity check things
-  public Integer dayOfMonth; // values 1 - 31
-  public Integer month; // values 1 - 12
+  public final Integer dayOfYear; // values 1 - 366
+  public final Integer dayOfMonth; // values 1 - 31
+  public final Integer month; // values 1 - 12
 
-  // special stuff for dealing with how we interpret year or month precision instants:
-  public Integer endDayOfYear;
-  public Integer endDayOfMonth;
-  public Integer endMonth;
+  // special stuff for dealing with how we interpret range, including instants with year or month precision instants:
+  public final Integer endDayOfYear; // values 1 - 366
+  public final Integer endDayOfMonth; // values 1 - 31
+  public final Integer endMonth; // values 1 - 12
 
   public DateInfo(String dateString, boolean start) {
     if (dateString == null || dateString.length() == 0) {
@@ -49,6 +49,9 @@ public class DateInfo implements Comparable<DateInfo> {
       dayOfYear = null;
       dayOfMonth = null;
       month = null;
+      endDayOfYear = null;
+      endDayOfMonth = null;
+      endMonth = null;
       return;
     }
 
@@ -61,30 +64,30 @@ public class DateInfo implements Comparable<DateInfo> {
     } else {
       year = (long) yearValue;
     }
-    dayOfYear = extractField(parsedDate, ChronoField.DAY_OF_YEAR);
-    dayOfMonth = extractField(parsedDate, ChronoField.DAY_OF_MONTH);
-    month = extractField(parsedDate, ChronoField.MONTH_OF_YEAR);
-    if (parsedDate != null && dayOfMonth == null && month != null) { // TODO or parsedDate instanceof YearMonth
+    Integer dayOfYearValue = extractField(parsedDate, ChronoField.DAY_OF_YEAR);
+    Integer dayOfMonthValue = extractField(parsedDate, ChronoField.DAY_OF_MONTH);
+    Integer monthValue = extractField(parsedDate, ChronoField.MONTH_OF_YEAR);
+    if (parsedDate instanceof YearMonth) {
+      month = monthValue;
       endMonth = month;
       dayOfMonth = 1;
       endDayOfMonth = ((YearMonth)parsedDate).lengthOfMonth();
       dayOfYear = ((YearMonth)parsedDate).atDay(1).getDayOfYear();
       endDayOfYear = ((YearMonth)parsedDate).atEndOfMonth().getDayOfYear();
-      // endUtcDateTimeString = utcDateTimeString(((YearMonth)parsedDate).atEndOfMonth(), false);
-    } else if (parsedDate != null && month == null && year != null) { // TODO or instanceof Year?
+    } else if (parsedDate instanceof Year) {
       dayOfMonth = 1;
       dayOfYear = 1;
       endDayOfYear = ((Year)parsedDate).length(); // number of days in the year, including leap years
       endDayOfMonth = 31;
       month = 1;
       endMonth = 12;
-
-      // endUtcDateTimeString = utcDateTimeString(((Year)parsedDate).atDay(endDayOfYear), false);
     } else {
+      dayOfYear = dayOfYearValue;
+      dayOfMonth = dayOfMonthValue;
+      month = monthValue;
       endMonth = month;
       endDayOfMonth = dayOfMonth;
       endDayOfYear = dayOfYear;
-      // endUtcDateTimeString = utcDateTimeString;
     }
 
     if (longDate != null && !indexable(longDate)) {
