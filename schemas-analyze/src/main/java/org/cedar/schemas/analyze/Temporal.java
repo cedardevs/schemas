@@ -127,7 +127,7 @@ public class Temporal {
     // this number is a bit arbitrary, and prone to change when ES switches to the Java time library (minimum supported year
     // being -999,999,999). We will limit the year ourselves instead to -100,000,000 -- since this is a fairly safe bet for
     // supportability across many date libraries if the utcDateTime ends up used as is by a downstream app.
-    return year >= -100_000_000L;
+    return Math.abs(year) <= 100_000_000L;
   }
 
   static String precision(TemporalAccessor date) {

@@ -71,6 +71,7 @@ class DateInfoSpec extends Specification {
     '-3000'                | false || ValidDescriptor.VALID     | 'Years'   | true      | null | '-3000-12-31T23:59:59.999Z'
     '-100000001'           | true  || ValidDescriptor.VALID     | 'Years'   | false     | null | '-100000001-01-01T00:00:00Z'
     '-100000002'           | false || ValidDescriptor.VALID     | 'Years'   | false     | null | '-100000002-12-31T23:59:59.999Z'
+    '100000002'            | false || ValidDescriptor.VALID     | 'Years'   | false     | null | '100000002-12-31T23:59:59.999Z'
     'ABC'                  | true  || ValidDescriptor.INVALID   | null      | false     | null | null
     ''                     | true  || ValidDescriptor.UNDEFINED | null      | true      | null | null
     null                   | true  || ValidDescriptor.UNDEFINED | null      | true      | null | null
