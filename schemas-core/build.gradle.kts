@@ -1,7 +1,7 @@
 plugins {
   groovy
   jacoco
-  id("com.commercehub.gradle.plugin.avro").version("0.9.1")
+  id("com.commercehub.gradle.plugin.avro").version("0.21.0")
   `java-library`
   `maven-publish`
 }
@@ -10,7 +10,7 @@ group = "com.github.cedardevs"
 version = "master-SNAPSHOT"
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_1_8
+  sourceCompatibility = JavaVersion.VERSION_11
 }
 
 repositories {
@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-  api("org.apache.avro:avro:1.8.2")
+  api("org.apache.avro:avro:1.10.0")
 
   testImplementation("org.slf4j:slf4j-simple:1.7.30")
   testImplementation("org.codehaus.groovy:groovy:2.4.13")
