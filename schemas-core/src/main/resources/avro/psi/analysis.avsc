@@ -77,13 +77,13 @@
               "doc": "Indicates if the analyzed record has a hierarchy level name"
             },
             {
-              "name": "matchesIdentifiers",
+              "name": "isGranule",
               "type": [
                 "null",
                 "boolean"
               ],
               "default": null,
-              "doc": "Resolves to true if 'granule' specified as hierarchy level and parent id provided OR if hierarchy level not 'granule' (parent id value irrelevant here -- record is assumed a collection)."
+              "doc": "Resolves to true if metadata content indicates a record is a granule. That is, a parent identifier is present and the hierarchy level name is 'granule'."
             }
           ]
         }
@@ -288,7 +288,7 @@
                 "ValidDescriptor"
               ],
               "default": null,
-              "doc": "Describes the state of the temporal bounding's beginning, e.g. valid, invalid, undefined"
+              "doc": "Describes the state of the temporal bounding's beginning, i.e. VALID, INVALID, or UNDEFINED."
             },
             {
               "name": "beginPrecision",
@@ -297,7 +297,7 @@
                 "string"
               ],
               "default": null,
-              "doc": "The precision of the beginning of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit"
+              "doc": "The precision of the beginning of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit. Note that this may sometimes not exactly match the input data, since it reflects the Java class the date is able to be parsed into."
             },
             {
               "name": "beginIndexable",
@@ -306,7 +306,7 @@
                 "boolean"
               ],
               "default": null,
-              "doc": "Indicates whether or not the beginning can be indexed for searching"
+              "doc": "Indicates whether or not beginUtcDateTimeString can be indexed into Elasticsearch for searching."
             },
             {
               "name": "beginZoneSpecified",
@@ -324,7 +324,43 @@
                 "string"
               ],
               "default": null,
-              "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed beginning value"
+              "doc": "If provided begin date is VALID, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed value."
+            },
+            {
+              "name": "beginYear",
+              "type": [
+                "null",
+                "long"
+              ],
+              "default": null,
+              "doc": "If provided begin date is VALID, a long indicating the beginning year."
+            },
+            {
+              "name": "beginDayOfYear",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If provided begin date is VALID, an integer indicating the day of year for the beginning value. This may be populated by extrapolating into a DateTime. See beginPrecision for the best indicator of if this value is extrapolated or provided in the original date format."
+            },
+            {
+              "name": "beginDayOfMonth",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If provided begin date is VALID, an integer indicating the day of month for the beginning value. This may be populated by extrapolating into a DateTime. See beginPrecision for the best indicator of if this value is extrapolated or provided in the original date format."
+            },
+            {
+              "name": "beginMonth",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If provided begin date is VALID, an integer indicating the month for the beginning value. This may be populated by extrapolating into a DateTime. See beginPrecision for the best indicator of if this value is extrapolated or provided in the original date format."
             },
             {
               "name": "endDescriptor",
@@ -333,7 +369,7 @@
                 "ValidDescriptor"
               ],
               "default": null,
-              "doc": "Describes the state of the temporal bounding's end, e.g. valid, invalid, undefined"
+              "doc": "Describes the state of the temporal bounding's end, i.e. VALID, INVALID, or UNDEFINED."
             },
             {
               "name": "endPrecision",
@@ -342,7 +378,7 @@
                 "string"
               ],
               "default": null,
-              "doc": "The precision of the end of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit"
+              "doc": "The precision of the end of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit. Note that this may sometimes not exactly match the input data, since it reflects the Java class the date is able to be parsed into."
             },
             {
               "name": "endIndexable",
@@ -351,7 +387,7 @@
                 "boolean"
               ],
               "default": null,
-              "doc": "Indicates whether or not the ending can be indexed for searching"
+              "doc": "Indicates whether or not endUtcDateTimeString can be indexed into Elasticsearch for searching."
             },
             {
               "name": "endZoneSpecified",
@@ -369,7 +405,43 @@
                 "string"
               ],
               "default": null,
-              "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed end value"
+              "doc": "If provided end date is VALID, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed end value."
+            },
+            {
+              "name": "endYear",
+              "type": [
+                "null",
+                "long"
+              ],
+              "default": null,
+              "doc": "If provided end date is VALID, an long indicating the end year."
+            },
+            {
+              "name": "endDayOfYear",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If provided end date is VALID, an integer indicating the day of year for the end value. This may be populated by extrapolating into a DateTime. See endPrecision for the best indicator of if this value is extrapolated or provided in the original date format."
+            },
+            {
+              "name": "endDayOfMonth",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If provided end date is VALID, an integer indicating the day of month for the end value. This may be populated by extrapolating into a DateTime. See endPrecision for the best indicator of if this value is extrapolated or provided in the original date format."
+            },
+            {
+              "name": "endMonth",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If provided end date is VALID, an integer indicating the month for the end value. This may be populated by extrapolating into a DateTime. See endPrecision for the best indicator of if this value is extrapolated or provided in the original date format."
             },
             {
               "name": "instantDescriptor",
@@ -378,7 +450,7 @@
                 "ValidDescriptor"
               ],
               "default": null,
-              "doc": "Describes the state of the temporal bounding's instant, e.g. valid, invalid, undefined"
+              "doc": "Describes the state of the temporal bounding's instant, i.e. VALID, INVALID, or UNDEFINED."
             },
             {
               "name": "instantPrecision",
@@ -387,7 +459,7 @@
                 "string"
               ],
               "default": null,
-              "doc": "The precision of the instant of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit"
+              "doc": "The precision of the instant of the analyzed bounding, e.g. 'Years', 'Seconds', etc. See java.time.temporal.ChronoUnit. Note that this may sometimes not exactly match the input data, since it reflects the Java class the date is able to be parsed into."
             },
             {
               "name": "instantIndexable",
@@ -396,7 +468,7 @@
                 "boolean"
               ],
               "default": null,
-              "doc": "Indicates whether or not the instant can be indexed for searching"
+              "doc": "Indicates whether or not instantUtcDateTimeString/instantEndUtcDateTimeString can be indexed into Elasticsearch for searching."
             },
             {
               "name": "instantZoneSpecified",
@@ -414,7 +486,79 @@
                 "string"
               ],
               "default": null,
-              "doc": "If possible, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed instant value"
+              "doc": "If provided instant is VALID, a full ISO-8601 formatted date time string in the UTC time zone for the analyzed instant value."
+            },
+            {
+              "name": "instantEndUtcDateTimeString",
+              "type": [
+                "null",
+                "string"
+              ],
+              "default": null,
+              "doc": "If provided instant is VALID, a full ISO-8601 formatted date time string in the UTC time zone for the end analyzed instant value. The actual or assumed end date time based on precision of original data."
+            },
+            {
+              "name": "instantYear",
+              "type": [
+                "null",
+                "long"
+              ],
+              "default": null,
+              "doc": "If provided instant is VALID, an long indicating the instant year."
+            },
+            {
+              "name": "instantDayOfYear",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If provided instant is VALID, an integer indicating the day of year for the instant value. This may be populated by extrapolating into a DateTime. See instantPrecision for the best indicator of if this value is extrapolated or provided in the original date format."
+            },
+            {
+              "name": "instantEndDayOfYear",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If provided instant is VALID, an integer indicating the actual or assumed day of year the instant ends depending on the precision of the original content, e.g. the last day of a month or year."
+            },
+            {
+              "name": "instantDayOfMonth",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If provided instant is VALID, an integer indicating the day of month for the instant value. This may be populated by extrapolating into a DateTime. See instantPrecision for the best indicator of if this value is extrapolated or provided in the original date format."
+            },
+            {
+              "name": "instantEndDayOfMonth",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If provided instant is VALID, an integer indicating the actual or assumed day of month the instant ends depending on precision, e.g. the last day of a month or year."
+            },
+            {
+              "name": "instantMonth",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If provided instant is VALID, an integer indicating the month for the instant value. This may be populated by extrapolating into a DateTime. See instantPrecision for the best indicator of if this value is extrapolated or provided in the original date format."
+            },
+            {
+              "name": "instantEndMonth",
+              "type": [
+                "null",
+                "int"
+              ],
+              "default": null,
+              "doc": "If provided instant is VALID and instantPrecision does not include day, an integer indicating the assumed month the instant ends, e.g. the last month of the year."
             },
             {
               "name": "rangeDescriptor",
@@ -424,17 +568,19 @@
                   "type": "enum",
                   "name": "TimeRangeDescriptor",
                   "symbols": [
+                    "AMBIGUOUS",
+                    "BACKWARDS",
                     "BOUNDED",
-                    "ONGOING",
                     "INSTANT",
-                    "UNDEFINED",
                     "INVALID",
-                    "BACKWARDS"
+                    "ONGOING",
+                    "NOT_APPLICABLE",
+                    "UNDEFINED"
                   ]
                 }
               ],
               "default": null,
-              "doc": "A label describing the nature of the time range in the analyzed temporal bounding"
+              "doc": "A label describing the nature of the time range in the analyzed temporal bounding. Any individual date descriptor being 'INVALID' results in 'NOT_APPLICABLE' for this field."
             }
           ]
         }

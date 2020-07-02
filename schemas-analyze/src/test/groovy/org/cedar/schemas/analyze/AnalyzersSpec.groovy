@@ -65,7 +65,7 @@ class AnalyzersSpec extends Specification {
             parentIdentifierExists  : true,
             parentIdentifierString  : 'gov.super.important:PARENT-ID',
             hierarchyLevelNameExists: true,
-            matchesIdentifiers      : true
+            isGranule               : true
         ],
         temporalBounding: [
             beginDescriptor         : ValidDescriptor.VALID,
@@ -75,16 +75,32 @@ class AnalyzersSpec extends Specification {
             beginIndexable          : true,
             beginZoneSpecified      : 'Z',
             beginUtcDateTimeString  : '2005-05-09T00:00:00Z',
+            beginDayOfYear          : 129,
+            beginDayOfMonth         : 9,
+            beginYear               : 2005,
+            beginMonth              : 5,
             endDescriptor           : ValidDescriptor.VALID,
             endPrecision            : ChronoUnit.DAYS.toString(),
             endIndexable            : true,
             endZoneSpecified        : null,
             endUtcDateTimeString    : '2010-10-01T23:59:59.999Z',
+            endDayOfYear            : 274,
+            endDayOfMonth           : 1,
+            endYear                 : 2010,
+            endMonth                : 10,
             instantDescriptor       : ValidDescriptor.UNDEFINED,
             instantPrecision        : null,
             instantIndexable        : true,
             instantZoneSpecified    : null,
             instantUtcDateTimeString: null,
+            instantEndUtcDateTimeString: null,
+            instantDayOfYear        : null,
+            instantDayOfMonth       : null,
+            instantYear             : null,
+            instantMonth            : null,
+            instantEndDayOfYear     : null,
+            instantEndDayOfMonth    : null,
+            instantEndMonth         : null,
             rangeDescriptor         : BOUNDED,
         ],
         spatialBounding : [
@@ -129,97 +145,6 @@ class AnalyzersSpec extends Specification {
     AvroUtils.avroToMap(analysis.spatialBounding) == expectedAnalysisMap.spatialBounding
   }
 
-  def 'extracts date info from date strings'() {
-    when:
-    def result = new Analyzers.DateInfo(input, start)
-    println(result.utcDateTimeString)
-
-    then:
-    result.descriptor == descriptor
-    result.precision == precision
-    result.indexable == indexable
-    result.zoneSpecified == zone
-    result.utcDateTimeString == string
-
-    where:
-    input                  | start || descriptor                | precision | indexable | zone | string
-    '2042-04-02T00:42:42Z' | false || ValidDescriptor.VALID     | 'Nanos'   | true      | 'Z'  | '2042-04-02T00:42:42Z'
-    '2042-04-02T00:42:42'  | false || ValidDescriptor.VALID     | 'Nanos'   | true      | null | '2042-04-02T00:42:42Z'
-    '2042-04-02'           | false || ValidDescriptor.VALID     | 'Days'    | true      | null | '2042-04-02T23:59:59.999Z'
-    '2042-04-02'           | true  || ValidDescriptor.VALID     | 'Days'    | true      | null | '2042-04-02T00:00:00Z'
-    '2042-05'              | true  || ValidDescriptor.VALID     | 'Months'  | true      | null | '2042-05-01T00:00:00Z'
-    '-2042-05'             | false || ValidDescriptor.VALID     | 'Months'  | true      | null | '-2042-05-31T23:59:59.999Z'
-    '2042'                 | true  || ValidDescriptor.VALID     | 'Years'   | true      | null | '2042-01-01T00:00:00Z'
-    '1965'                 | false || ValidDescriptor.VALID     | 'Years'   | true      | null | '1965-12-31T23:59:59.999Z'
-    '-5000'                | true  || ValidDescriptor.VALID     | 'Years'   | true      | null | '-5000-01-01T00:00:00Z'
-    '-3000'                | false || ValidDescriptor.VALID     | 'Years'   | true      | null | '-3000-12-31T23:59:59.999Z'
-    '-100000001'           | true  || ValidDescriptor.VALID     | 'Years'   | false     | null | '-100000001-01-01T00:00:00Z'
-    '-100000002'           | false || ValidDescriptor.VALID     | 'Years'   | false     | null | '-100000002-12-31T23:59:59.999Z'
-    'ABC'                  | true  || ValidDescriptor.INVALID   | null      | false     | null | null
-    ''                     | true  || ValidDescriptor.UNDEFINED | null      | true      | null | null
-    null                   | true  || ValidDescriptor.UNDEFINED | null      | true      | null | null
-  }
-
-  def "#descriptor date range correctly identified when #situation"() {
-    given:
-    def bounding = TemporalBounding.newBuilder()
-        .setBeginDate(begin)
-        .setEndDate(end)
-        .setInstant(instant)
-        .build()
-    def discovery = Discovery.newBuilder().setTemporalBounding(bounding).build()
-
-    when:
-    def result = Analyzers.analyzeTemporalBounding(discovery)
-
-    then:
-    result.rangeDescriptor == descriptor
-
-    where:
-    descriptor | situation                                                   | begin                  | end                    | instant
-    ONGOING    | 'start date exists but not end date'                        | '2010-01-01'           | ''                     | null
-    BOUNDED    | 'start and end date exist and are valid'                    | '2000-01-01T00:00:00Z' | '2001-01-01T00:00:00Z' | null
-    UNDEFINED  | 'neither start nor end date exist'                          | ''                     | ''                     | null
-    INSTANT    | 'neither start nor end date exist but valid instant does'   | ''                     | ''                     | '2001-01-01'
-    INVALID    | 'end date exists but not start date'                        | ''                     | '2010'                 | null
-    BACKWARDS  | 'start and end date exist but start after end'              | '2100-01-01T00:00:00Z' | '2002-01-01'           | null
-    INVALID    | 'neither start nor end date exist but invalid instant does' | ''                     | ''                     | '2001-01-32'
-    INVALID    | 'has valid start, end, and instant'                         | '2010-01-01'           | '2001-01-01T00:00:00Z' | '2001-01-32'
-  }
-
-  def "Begin date LTE end date check is #value when #situation"() {
-    given:
-    def bounding = TemporalBounding.newBuilder()
-        .setBeginDate(begin)
-        .setEndDate(end)
-        .build()
-    def discovery = Discovery.newBuilder().setTemporalBounding(bounding).build()
-
-    when:
-    def result = Analyzers.analyzeTemporalBounding(discovery)
-
-    then:
-    result.rangeDescriptor == value
-
-    where:
-    value     | situation                                                       | begin                  | end
-    BOUNDED   | 'start is valid format and before valid format end'             | '2010-01-01'           | '2011-01-01'
-    BACKWARDS | 'start is valid format and after valid format end'              | '2011-01-01T00:00:00Z' | '2001-01-01T00:00:00Z'
-    BOUNDED   | 'start is invalid format but paleo and before valid format end' | '-1000000000'          | '2015'
-    BOUNDED   | 'start and end both invalid but paleo and start before end'     | '-2000000000'          | '-1000000000'
-    BOUNDED   | 'start valid LT end valid but years less than 4 digits'         | '-900'                 | '100-01-01'
-    BACKWARDS | 'start and end both invalid but paleo and start after end'      | '-1000000000'          | '-2000000000'
-    BOUNDED   | 'start and end both same instant'                               | '2000-01-01T00:00:00Z' | '2000-01-01T00:00:00Z'
-    ONGOING   | 'start exists but not end'                                      | '2000-01-01T00:00:00Z' | ''
-    INVALID   | 'start does not exist but end does'                             | ''                     | '2000-01-01T00:00:00Z'
-    UNDEFINED | 'neither start nor end exist'                                   | ''                     | ''
-    INVALID   | 'start is invalid format but paleo and end is fully invalid'    | '-1000000000'          | '1999-13-12'
-    INVALID   | 'start is fully invalid and end is invalid format but paleo'    | '15mya'                | '-1000000000'
-    INVALID   | 'start is valid and end is fully invalid'                       | '2000-01-01T00:00:00Z' | '2000-12-31T25:00:00Z'
-    INVALID   | 'start and end both fully invalid'                              | '2000-01-01T00:61:00Z' | '2000-11-31T00:00:00Z'
-    INVALID   | 'start is fully invalid but end is valid'                       | '2000-01-01T00:00:61Z' | '2000-01-02T00:00:00Z'
-  }
-
   def "analyzes when links are #testCase"() {
     given:
     def record = Discovery.newBuilder().setLinks(testLinks).build()
@@ -253,7 +178,7 @@ class AnalyzersSpec extends Specification {
     !result.parentIdentifierExists
     result.parentIdentifierString == null
     !result.hierarchyLevelNameExists
-    result.matchesIdentifiers
+    !result.isGranule
   }
 
   def "detects mismatch between metadata type and corresponding identifiers"() {
@@ -275,7 +200,7 @@ class AnalyzersSpec extends Specification {
     !result.parentIdentifierExists
     result.parentIdentifierString == null
     result.hierarchyLevelNameExists
-    !result.matchesIdentifiers
+    !result.isGranule
   }
 
   def 'handles analysis of #testCase strings'() {
