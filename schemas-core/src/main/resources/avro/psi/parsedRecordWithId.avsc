@@ -2,8 +2,15 @@
   "type": "record",
   "namespace": "org.cedar.schemas.avro.psi",
   "name": "ParsedRecordWithId",
+  "doc": "A wrapper to tie a ParsedRecord together with its ID",
   "fields": [
-    {"name": "id", "type": "string"},
-    {"name": "record",  "type": "ParsedRecord" },
+    {
+      "name": "id",
+      "type": "string"
+    },
+    {
+      "name": "record",
+      "type": "ParsedRecord"
+    }
  ]
 }
