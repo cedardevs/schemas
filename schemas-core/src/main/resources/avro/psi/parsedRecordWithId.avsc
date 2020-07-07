@@ -1,0 +1,9 @@
+{
+  "type": "record",
+  "namespace": "org.cedar.schemas.avro.psi",
+  "name": "ParsedRecordWithId",
+  "fields": [
+    {"name": "id", "type": "string"},
+    {"name": "record",  "type": "ParsedRecord" },
+ ]
+}
