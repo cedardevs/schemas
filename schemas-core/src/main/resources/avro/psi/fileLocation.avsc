@@ -6,12 +6,9 @@
   "fields": [
     {
       "name": "uri",
-      "type": [
-        "null",
-        "string"
-       ],
+      "type": "string",
       "doc": "A Uniform Resource Identifier as defined by RFCs 2396 and 3986",
-      "default": null
+      "default": ""
     },
     {
       "name": "type",
