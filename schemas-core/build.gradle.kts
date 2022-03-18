@@ -1,7 +1,7 @@
 plugins {
   groovy
   jacoco
-  id("com.commercehub.gradle.plugin.avro").version("0.9.1")
+  id("com.commercehub.gradle.plugin.avro").version("0.99.99")
   `java-library`
   `maven-publish`
 }
