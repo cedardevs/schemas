@@ -18,12 +18,12 @@ repositories {
 
 dependencies {
   implementation(project(":schemas-core"))
-  implementation("org.apache.commons:commons-text:1.6")
+  implementation("org.apache.commons:commons-text:${Versions.COMMONS_TEXT}")
   implementation("org.locationtech.jts.io:jts-io-common:1.16.1")
 
-  testImplementation("org.slf4j:slf4j-simple:1.7.30")
+  testImplementation("org.slf4j:slf4j-simple:${Versions.SLF4J}")
   testImplementation(project(":schemas-parse"))
-  testImplementation("org.spockframework:spock-core:1.1-groovy-2.4")
+  testImplementation("org.spockframework:spock-core:${Versions.SPOCK}")
 }
 
 tasks {
