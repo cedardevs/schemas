@@ -2,8 +2,8 @@
 object Versions {
     const val DEFAULT: String = "0.0.0"
 
-    const val CONFLUENT: String = "5.3.0" //"7.0.0"
-    const val KAFKA: String = "2.3.0" // 3.1.0
+    const val CONFLUENT: String = "7.1.1" //"7.0.0"
+    const val KAFKA: String = "3.1.0" // 3.1.0
     const val AVRO: String = "1.8.2"
 
 //    const val APACHE_COMMONS = "1.6"
