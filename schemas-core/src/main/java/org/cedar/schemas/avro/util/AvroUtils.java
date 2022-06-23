@@ -116,7 +116,8 @@ public class AvroUtils {
   }
 
   public static Object coerceValueForSchema(Object value, Schema schema) {
-    log.debug("coercing value [" + value + "] for schema [" + schema.getFullName() + "]");
+    log.debug("coercing value [" + value + "] for schema [" + schema.getFullName() + "] for schema type [" +
+            schema.getType() + "]");
     switch(schema.getType()) {
       case RECORD:
         if (value instanceof Map) {
