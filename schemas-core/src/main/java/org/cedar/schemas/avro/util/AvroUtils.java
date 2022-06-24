@@ -165,6 +165,7 @@ public class AvroUtils {
         break;
 
       case UNION:
+        log.debug("Recursively trying to coerce the value into one of these schemas types: "+schema.getTypes());
         for (Schema type : schema.getTypes()) {
           try {
             return coerceValueForSchema(value, type);
