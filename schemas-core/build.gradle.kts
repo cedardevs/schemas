@@ -66,6 +66,16 @@ tasks {
     dependsOn(jar, sourceJar, javadocJar, testJar)
   }
 }
+tasks.test {
+  useJUnitPlatform()
+  testLogging {
+    events (org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED, org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED)//STANDARD_ERROR, STANDARD_OUT
+    exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+    showExceptions = true
+    showCauses = true
+    showStackTraces = true
+  }
+}
 
 publishing {
   publications {
