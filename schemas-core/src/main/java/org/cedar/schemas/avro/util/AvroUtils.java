@@ -99,13 +99,15 @@ public class AvroUtils {
 
   public static <T extends IndexedRecord> T mapToAvro(Map input, Class<T> avroClass) {
     if (input == null) { return null; }
-    log.debug("Transforming a map of type to Avro type [" + avroClass + "]");
+    log.debug("Transforming a type map to Avro type [" + avroClass + "]");
     try {
       T instance = avroClass.getDeclaredConstructor().newInstance();
       Schema schema = instance.getSchema();
       List<Schema.Field> fields = schema.getFields();
+      log.debug("Schema "+schema.getName()+" has fields "+fields);
       fields.forEach(f -> {
         Object value = input.containsKey(f.name()) ? input.get(f.name()) : f.defaultVal();
+        log.debug("Input "+(input.containsKey(f.name()) ? "contains" : "does NOT contain")+" field "+f.name());
         instance.put(f.pos(), coerceValueForSchema(value, f.schema()));
       });
       return instance;
