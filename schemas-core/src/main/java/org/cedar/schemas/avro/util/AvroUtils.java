@@ -278,7 +278,7 @@ public class AvroUtils {
         break;
     }
     throw new UnsupportedOperationException("Unable to coerce value [" + value + "] of type ["
-        + (value == null ? "null" : value.getClass()) + "] for schema [" + schema.getFullName() + "]");
+        + (value == null ? "null" : value.getClass()) + "] for schema [" + schema.getFullName() + "] of schema type ["+schema.getType());
   }
 
   public static <T extends IndexedRecord> Class<T> findAvroClass(String className) throws ClassNotFoundException {
