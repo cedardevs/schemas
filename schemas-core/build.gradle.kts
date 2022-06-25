@@ -30,6 +30,7 @@ dependencies {
   testImplementation("org.apache.kafka:kafka-clients:${Versions.KAFKA}:test")
   testImplementation("org.apache.kafka:kafka_2.12:${Versions.KAFKA}")
   testImplementation("org.apache.kafka:kafka_2.12:${Versions.KAFKA}:test")
+  testImplementation("io.confluent:kafka-schema-registry-client:${Versions.CONFLUENT}")
   testImplementation("io.confluent:kafka-schema-registry:${Versions.CONFLUENT}")
   testImplementation("io.confluent:kafka-schema-registry:${Versions.CONFLUENT}:tests")
   testImplementation("io.confluent:kafka-streams-avro-serde:${Versions.CONFLUENT}")
