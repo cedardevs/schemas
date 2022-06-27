@@ -104,12 +104,13 @@ public class AvroUtils {
       T instance = avroClass.getDeclaredConstructor().newInstance();
       Schema schema = instance.getSchema();
       List<Schema.Field> fields = schema.getFields();
-      log.debug("Schema "+schema.getName()+" has fields "+fields);
+      log.debug("Schema "+schema.getName()+" has fields "+fields.toArray());
       fields.forEach(f -> {
         Object value = input.containsKey(f.name()) ? input.get(f.name()) : f.defaultVal();
         log.debug("Input "+(input.containsKey(f.name()) ? "contains" : "does NOT contain")+" field "+f.name());
         instance.put(f.pos(), coerceValueForSchema(value, f.schema()));
       });
+      log.debug("Finished map to avro.");
       return instance;
     }
     catch (Exception e) {
@@ -278,7 +279,7 @@ public class AvroUtils {
         break;
     }
     throw new UnsupportedOperationException("Unable to coerce value [" + value + "] of type ["
-        + (value == null ? "null" : value.getClass()) + "] for schema [" + schema.getFullName() + "] of schema type ["+schema.getType());
+        + (value == null ? "null" : value.getClass()) + "] for schema [" + schema.getFullName() + "] of schema type ["+schema.getType()+"]");
   }
 
   public static <T extends IndexedRecord> Class<T> findAvroClass(String className) throws ClassNotFoundException {
