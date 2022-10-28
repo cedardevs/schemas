@@ -117,7 +117,9 @@ class ValidateGeometrySpec extends Specification {
     where:
     testCase                | value                                           | expected
     'Invalid Coordinate'    | buildGeoJson('Point', InvalidCoordinate )       | "Non-numeric Coordinate"
-    'Duplicated Rings'      | buildGeoJson('MultiPolygon', duplicateRings)    | 'Duplicate Rings'
+    // 'Duplicated Rings'      | buildGeoJson('MultiPolygon', duplicateRings)    | 'Duplicate Rings'
+    // Should be duplicate rings, but jts no longer validates duplicate rings
+    'Duplicated Rings'      | buildGeoJson('MultiPolygon', duplicateRings)    | 'Self-intersection'
     'Too Few Points'        | buildGeoJson('LineString', TooFewPoints)        | "Too few distinct points in geometry component"
     'Nested Shells'         | buildGeoJson('MultiPolygon', nestedShells)      | 'Nested shells'
     'Ring Not Closed'       | buildGeoJson('MultiPolygon', ringNotClosed)     | 'Points of LinearRing do not form a closed linestring'
@@ -165,4 +167,3 @@ class ValidateGeometrySpec extends Specification {
   }
 
 }
-
