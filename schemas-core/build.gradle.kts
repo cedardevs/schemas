@@ -97,11 +97,6 @@ avro {
   setCreateSetters("false")
 }
 
-tasks.generateAvroJava {
-  source("src/main/resources/avro")
-  setOutputDir(file("$buildDir/generated/java"))
-}
-
 sourceSets {
   main {
     java {
