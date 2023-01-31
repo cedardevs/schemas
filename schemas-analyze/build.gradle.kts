@@ -19,10 +19,12 @@ repositories {
 dependencies {
   implementation(project(":schemas-core"))
   implementation("org.apache.commons:commons-text:${Versions.COMMONS_TEXT}")
-  implementation("org.locationtech.jts.io:jts-io-common:1.16.1")
+  implementation("org.locationtech.jts.io:jts-io-common:1.19.0")
 
   testImplementation("org.slf4j:slf4j-simple:${Versions.SLF4J}")
   testImplementation(project(":schemas-parse"))
+  testImplementation("org.codehaus.groovy:groovy:${Versions.GROOVY}")
+  testImplementation("org.codehaus.groovy:groovy-xml:${Versions.GROOVY}")
   testImplementation("org.spockframework:spock-core:${Versions.SPOCK}")
 }
 

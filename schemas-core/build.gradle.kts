@@ -1,7 +1,7 @@
 plugins {
   groovy
   jacoco
-  id("com.commercehub.gradle.plugin.avro").version("0.99.99")
+  id("com.github.davidmc24.gradle.plugin.avro").version("1.5.0")
   `java-library`
   `maven-publish`
 }
@@ -14,16 +14,19 @@ java {
 }
 
 repositories {
+  gradlePluginPortal()
   mavenCentral()
   maven("https://www.jitpack.io")
   maven("https://packages.confluent.io/maven/")
 }
 
 dependencies {
-  api("org.apache.avro:avro:1.8.2")
+  api("org.apache.avro:avro:${Versions.AVRO}")
+  api("com.fasterxml.jackson.core:jackson-databind:2.13.4.2")
 
   testImplementation("org.slf4j:slf4j-simple:${Versions.SLF4J}")
   testImplementation("org.codehaus.groovy:groovy:${Versions.GROOVY}")
+  testImplementation("org.codehaus.groovy:groovy-json:${Versions.GROOVY}")
   testImplementation("org.spockframework:spock-core:${Versions.SPOCK}")
   testImplementation("org.apache.kafka:kafka-streams-test-utils:${Versions.KAFKA}")
   testImplementation("org.apache.kafka:kafka-clients:${Versions.KAFKA}")
@@ -34,7 +37,7 @@ dependencies {
   testImplementation("io.confluent:kafka-schema-registry:${Versions.CONFLUENT}")
   testImplementation("io.confluent:kafka-schema-registry:${Versions.CONFLUENT}:tests")
   testImplementation("io.confluent:kafka-streams-avro-serde:${Versions.CONFLUENT}")
-  testImplementation("com.github.everit-org.json-schema:org.everit.json.schema:1.9.2")
+  testImplementation("com.github.everit-org.json-schema:org.everit.json.schema:1.12.2")
   testImplementation("org.json:json:20180813")
 }
 
@@ -90,13 +93,8 @@ publishing {
 }
 
 avro {
-  fieldVisibility = "PRIVATE"
+  fieldVisibility.set("PRIVATE")
   setCreateSetters("false")
-}
-
-tasks.generateAvroJava {
-  source("src/main/resources/avro")
-  setOutputDir(file("$buildDir/generated/java"))
 }
 
 sourceSets {

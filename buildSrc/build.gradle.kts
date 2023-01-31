@@ -11,7 +11,8 @@ repositories {
 dependencies {
   implementation(kotlin("stdlib-jdk8"))
   implementation("com.github.fge:json-schema-avro:0.1.4")
-  implementation("org.apache.avro:avro:1.8.2")
+  api("com.fasterxml.jackson.core:jackson-databind:2.13.4.2")
+  api("org.apache.avro:avro:1.11.1")
   implementation(gradleApi())
 }
 
