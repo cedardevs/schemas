@@ -9,7 +9,7 @@ import org.apache.avro.io.Decoder;
 import org.apache.avro.io.DecoderFactory;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificFixed;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -99,15 +99,18 @@ public class AvroUtils {
 
   public static <T extends IndexedRecord> T mapToAvro(Map input, Class<T> avroClass) {
     if (input == null) { return null; }
-    log.debug("Transforming a map of type to Avro type [" + avroClass + "]");
+    log.debug("Transforming a type map to Avro type [" + avroClass + "]");
     try {
       T instance = avroClass.getDeclaredConstructor().newInstance();
       Schema schema = instance.getSchema();
       List<Schema.Field> fields = schema.getFields();
+      log.debug("Schema "+schema.getName()+" has fields "+fields.toArray());
       fields.forEach(f -> {
         Object value = input.containsKey(f.name()) ? input.get(f.name()) : f.defaultVal();
+        log.debug("Input "+(input.containsKey(f.name()) ? "contains" : "does NOT contain")+" field "+f.name());
         instance.put(f.pos(), coerceValueForSchema(value, f.schema()));
       });
+      log.debug("Finished map to avro.");
       return instance;
     }
     catch (Exception e) {
@@ -116,7 +119,8 @@ public class AvroUtils {
   }
 
   public static Object coerceValueForSchema(Object value, Schema schema) {
-    log.debug("coercing value [" + value + "] for schema [" + schema.getFullName() + "]");
+    log.debug("coercing value [" + value + "] for schema [" + schema.getFullName() + "] for schema type [" +
+            schema.getType() + "]");
     switch(schema.getType()) {
       case RECORD:
         if (value instanceof Map) {
@@ -164,6 +168,7 @@ public class AvroUtils {
         break;
 
       case UNION:
+        log.debug("Recursively trying to coerce the value into one of these schemas types: "+schema.getTypes());
         for (Schema type : schema.getTypes()) {
           try {
             return coerceValueForSchema(value, type);
@@ -274,7 +279,7 @@ public class AvroUtils {
         break;
     }
     throw new UnsupportedOperationException("Unable to coerce value [" + value + "] of type ["
-        + (value == null ? "null" : value.getClass()) + "] for schema [" + schema.getFullName() + "]");
+        + (value == null ? "null" : value.getClass()) + "] for schema [" + schema.getFullName() + "] of schema type ["+schema.getType()+"]");
   }
 
   public static <T extends IndexedRecord> Class<T> findAvroClass(String className) throws ClassNotFoundException {

@@ -1,7 +1,7 @@
 plugins {
   groovy
   jacoco
-  id("com.commercehub.gradle.plugin.avro").version("0.9.1")
+  id("com.github.davidmc24.gradle.plugin.avro").version("1.5.0")
   `java-library`
   `maven-publish`
 }
@@ -14,26 +14,30 @@ java {
 }
 
 repositories {
+  gradlePluginPortal()
   mavenCentral()
   maven("https://www.jitpack.io")
   maven("https://packages.confluent.io/maven/")
 }
 
 dependencies {
-  api("org.apache.avro:avro:1.8.2")
+  api("org.apache.avro:avro:${Versions.AVRO}")
+  api("com.fasterxml.jackson.core:jackson-databind:2.13.4.2")
 
-  testImplementation("org.slf4j:slf4j-simple:1.7.30")
-  testImplementation("org.codehaus.groovy:groovy:2.4.13")
-  testImplementation("org.spockframework:spock-core:1.1-groovy-2.4")
-  testImplementation("org.apache.kafka:kafka-streams-test-utils:2.3.0")
-  testImplementation("org.apache.kafka:kafka-clients:2.3.0")
-  testImplementation("org.apache.kafka:kafka-clients:2.3.0:test")
-  testImplementation("org.apache.kafka:kafka_2.12:2.3.0")
-  testImplementation("org.apache.kafka:kafka_2.12:2.3.0:test")
-  testImplementation("io.confluent:kafka-schema-registry:5.3.0")
-  testImplementation("io.confluent:kafka-schema-registry:5.3.0:tests")
-  testImplementation("io.confluent:kafka-streams-avro-serde:5.3.0")
-  testImplementation("com.github.everit-org.json-schema:org.everit.json.schema:1.9.2")
+  testImplementation("org.slf4j:slf4j-simple:${Versions.SLF4J}")
+  testImplementation("org.codehaus.groovy:groovy:${Versions.GROOVY}")
+  testImplementation("org.codehaus.groovy:groovy-json:${Versions.GROOVY}")
+  testImplementation("org.spockframework:spock-core:${Versions.SPOCK}")
+  testImplementation("org.apache.kafka:kafka-streams-test-utils:${Versions.KAFKA}")
+  testImplementation("org.apache.kafka:kafka-clients:${Versions.KAFKA}")
+  testImplementation("org.apache.kafka:kafka-clients:${Versions.KAFKA}:test")
+  testImplementation("org.apache.kafka:kafka_2.12:${Versions.KAFKA}")
+  testImplementation("org.apache.kafka:kafka_2.12:${Versions.KAFKA}:test")
+  testImplementation("io.confluent:kafka-schema-registry-client:${Versions.CONFLUENT}")
+  testImplementation("io.confluent:kafka-schema-registry:${Versions.CONFLUENT}")
+  testImplementation("io.confluent:kafka-schema-registry:${Versions.CONFLUENT}:tests")
+  testImplementation("io.confluent:kafka-streams-avro-serde:${Versions.CONFLUENT}")
+  testImplementation("com.github.everit-org.json-schema:org.everit.json.schema:1.12.2")
   testImplementation("org.json:json:20180813")
 }
 
@@ -66,6 +70,16 @@ tasks {
     dependsOn(jar, sourceJar, javadocJar, testJar)
   }
 }
+tasks.test {
+  useJUnitPlatform()
+  testLogging {
+    events (org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED, org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED)//STANDARD_ERROR, STANDARD_OUT
+    exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+    showExceptions = true
+    showCauses = true
+    showStackTraces = true
+  }
+}
 
 publishing {
   publications {
@@ -79,13 +93,8 @@ publishing {
 }
 
 avro {
-  fieldVisibility = "PRIVATE"
+  fieldVisibility.set("PRIVATE")
   setCreateSetters("false")
-}
-
-tasks.generateAvroJava {
-  source("src/main/resources/avro")
-  setOutputDir(file("$buildDir/generated/java"))
 }
 
 sourceSets {

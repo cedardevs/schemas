@@ -6,6 +6,7 @@ import org.cedar.schemas.avro.geojson.PolygonType
 import org.cedar.schemas.avro.geojson.MultiPolygonType
 import org.cedar.schemas.avro.psi.*
 import org.cedar.schemas.avro.util.AvroUtils
+import groovy.xml.XmlSlurper
 import org.xml.sax.SAXParseException
 import spock.lang.Specification
 import spock.lang.Unroll

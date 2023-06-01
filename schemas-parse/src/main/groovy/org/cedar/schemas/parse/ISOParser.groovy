@@ -1,7 +1,8 @@
 package org.cedar.schemas.parse
 
 import groovy.json.JsonOutput
-import groovy.util.slurpersupport.GPathResult
+import groovy.xml.slurpersupport.GPathResult
+import groovy.xml.XmlSlurper
 import org.apache.commons.text.StringEscapeUtils
 import org.cedar.schemas.avro.geojson.LineString
 import org.cedar.schemas.avro.geojson.Point

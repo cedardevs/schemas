@@ -18,12 +18,12 @@ repositories {
 
 dependencies {
   implementation(project(":schemas-core"))
-  implementation("org.apache.commons:commons-text:1.6")
-  implementation("org.codehaus.groovy:groovy-xml:2.4.16")
-  implementation("org.codehaus.groovy:groovy-json:2.4.16")
+  implementation("org.apache.commons:commons-text:${Versions.COMMONS_TEXT}")
+  implementation("org.codehaus.groovy:groovy-xml:${Versions.GROOVY}")
+  implementation("org.codehaus.groovy:groovy-json:${Versions.GROOVY}")
 
-  testImplementation("org.slf4j:slf4j-simple:1.7.30")
-  testImplementation("org.spockframework:spock-core:1.1-groovy-2.4")
+  testImplementation("org.slf4j:slf4j-simple:${Versions.SLF4J}")
+  testImplementation("org.spockframework:spock-core:${Versions.SPOCK}")
 }
 
 tasks {
@@ -42,6 +42,16 @@ tasks {
   }
   build {
     dependsOn(jar, sourceJar, javadocJar, testJar)
+  }
+}
+tasks.test {
+  useJUnitPlatform()
+  testLogging {
+    events (org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED, org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED)//STANDARD_ERROR, STANDARD_OUT
+    exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+    showExceptions = true
+    showCauses = true
+    showStackTraces = true
   }
 }
 
